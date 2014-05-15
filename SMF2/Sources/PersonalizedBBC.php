@@ -75,7 +75,7 @@ function PersonalizedBBC_load_permissions(&$permissionGroups, &$permissionList, 
 	$request = $smcFunc['db_query']('', '
 			SELECT name
 			FROM {db_prefix}personalized_bbc
-			ORDER BY name ASC'
+			ORDER BY LENGTH(name), name ASC'
 		);
 
 	while ($row = $smcFunc['db_fetch_assoc']($request))

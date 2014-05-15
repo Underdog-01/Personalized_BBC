@@ -14,7 +14,7 @@ SMF Version: 2.0.7+
 
 Developed for SMF forums c/o Underdog@webdevelop.comli.com
 Copyright 2014 Underdog@webdevelop.comli.com
-Distributed under the BY-ND 4.0 License ( http://creativecommons.org/licenses/by-nd/4.0/]CC )
+Distributed under the CC BY-ND 4.0 License ( http://creativecommons.org/licenses/by-nd/4.0/ )
 
 Features:
 

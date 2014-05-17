@@ -79,9 +79,8 @@ function PersonalizedBBC_load_permissions(&$permissionGroups, &$permissionList, 
 		);
 
 	while ($row = $smcFunc['db_fetch_assoc']($request))
-	{
 		$permNames[] = $row['name'];
-	}
+	
 	$smcFunc['db_free_result']($request);
 
 	foreach ($permNames as $permission)

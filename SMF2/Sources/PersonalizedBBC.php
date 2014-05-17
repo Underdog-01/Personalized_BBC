@@ -101,12 +101,15 @@ function PersonalizedBBC_load_permissions(&$permissionGroups, &$permissionList, 
 			)
 		);
 		*/
+	}
 
+	if (!empty($permNames))
+	{
 		$permissionGroups['membergroup']['simple'] += array(
-				'PersonalizedBBC_perms',
+			'PersonalizedBBC_perms',
 		);
 		$permissionGroups['membergroup']['classic'] += array(
-				'PersonalizedBBC_perms',
+			'PersonalizedBBC_perms',
 		);
 	}
 }

@@ -56,7 +56,7 @@ $txt['permissiongroup_PersonalizedBBC_perms'] = 'Personalized BBC';
 $txt['permissiongroup_simple_PersonalizedBBC_perms'] = 'Personalized BBC';
 $txt['permissionname_PersonalizedBBC_perm'] = 'BB Code: #@#$!';
 $txt['permissionhelp_PersonalizedBBC_perm'] = 'Allow this membergroup to use the #@#$! BB Code.';
-$txt['permissionname_PersonalizedBBC_perm'] = 'BBC: ';
+$txt['permissionname_PersonalizedBBC_perm'] = 'BBC: #@#$!';
 $txt['PersonalizedBBC_perms'] = 'Personalized BB Codes';
 
 // help text

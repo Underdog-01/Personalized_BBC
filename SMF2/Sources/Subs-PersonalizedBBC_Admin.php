@@ -108,20 +108,20 @@ function PersonalizedBBC_FileTypes($file = '')
 
 function PersonalizedBBC_SanitizeFileName($filename)
 {
-        $filename_raw = $filename;
-        $special_chars = array("?", "[", "]", "/", "\\", "=", "<", ">", ":", ";", ",", "'", "\"", "&", "$", "#", "*", "(", ")", "|", "~", "`", "!", "{", "}", chr(0));
-        $filename = str_replace($special_chars, '', $filename);
-        $filename = preg_replace('/[\s-]+/', '-', $filename);
-        $filename = trim($filename, '.-_');
+	$filename_raw = $filename;
+	$special_chars = array("?", "[", "]", "/", "\\", "=", "<", ">", ":", ";", ",", "'", "\"", "&", "$", "#", "*", "(", ")", "|", "~", "`", "!", "{", "}", chr(0));
+	$filename = str_replace($special_chars, '', $filename);
+	$filename = preg_replace('/[\s-]+/', '-', $filename);
+	$filename = trim($filename, '.-_');
 
-        $parts = explode('.', $filename);
+	$parts = explode('.', $filename);
 
-        if (count($parts) <= 2)
+	if (count($parts) <= 2)
 		return $filename;
 
-        $filename = array_shift($parts);
-        $extension = array_pop($parts);
-        $mimes = array('gif');
+	$filename = array_shift($parts);
+	$extension = array_pop($parts);
+	$mimes = array('gif');
 
 	foreach ((array)$parts as $part)
 	{
@@ -130,7 +130,7 @@ function PersonalizedBBC_SanitizeFileName($filename)
 		if (preg_match("/^[a-zA-Z]{2,5}\d?$/", $part))
 		{
 			$allowed = false;
-		        foreach ($mimes as $ext_preg => $mime_match)
+			foreach ($mimes as $ext_preg => $mime_match)
 			{
 				$ext_preg = '!^(' . $ext_preg . ')$!i';
 				if (preg_match($ext_preg, $part))
@@ -354,11 +354,11 @@ function PersonalizedBBC_pages($lang, $anchor, $link, $pages, $sort=false, $orde
 
 	if ($display['pages'] > 1)
 	{
-            $display['page'] =  '
+	    $display['page'] =  '
     <script type="text/javascript"><!-- // --><![CDATA[
-        function changeColor(s)
+	function changeColor(s)
 	{
-                document.getElementById("link"+s).style.color = "red";
+		document.getElementById("link"+s).style.color = "red";
 	}
 	function changeColorBack(s)
 	{
@@ -366,34 +366,34 @@ function PersonalizedBBC_pages($lang, $anchor, $link, $pages, $sort=false, $orde
 	}
     // ]]></script>
     <span style="text-align:center;position:relative;width:99%;display:inline-block;">
-        ' . $lang . '<br />';
+	' . $lang . '<br />';
 
-            while ($pageCount < (int)$display['pages']+1)
-            {
+	    while ($pageCount < (int)$display['pages']+1)
+	    {
 		$current_page = (int)$page+1;
 		$total = (int)$display['pages'];
 
 		if ($pageCount == 1 || $pageCount == $total || $pageCount == $current_page || $pageCount == $current_page+1 ||
 		    $pageCount == $current_page+2 || $pageCount == $current_page-1 || $pageCount == $current_page-2)
 		{
-                    if ((int)$pageCount == (int)$page+1)
+		    if ((int)$pageCount == (int)$page+1)
 			$display['page'] .= '
-        <a onclick="this.href=\'javascript: void(0)\';" onmouseout="changeColor('. $pageCount . ')" onmouseover="changeColorBack(' . $pageCount . ')" id="link' . $pageCount . '" style="color:red;text-decoration:none;" href="'. $link . ';current_page=' . $pageCount . ';' . $sort . $order . $anchor . '">[' . $pageCount . ']</a> ';
-                    else
+	<a onclick="this.href=\'javascript: void(0)\';" onmouseout="changeColor('. $pageCount . ')" onmouseover="changeColorBack(' . $pageCount . ')" id="link' . $pageCount . '" style="color:red;text-decoration:none;" href="'. $link . ';current_page=' . $pageCount . ';' . $sort . $order . $anchor . '">[' . $pageCount . ']</a> ';
+		    else
 			$display['page'] .= '
-        <a onmouseout="changeColorBack(' . $pageCount . ')" onmouseover="changeColor(' . $pageCount . ')" id="link' . $pageCount . '" style="color:blue;text-decoration:none;" href="' . $link . ';current_page=' . $pageCount . ';' . $sort . $order . $anchor . '">' . $pageCount . '</a> ';
+	<a onmouseout="changeColorBack(' . $pageCount . ')" onmouseover="changeColor(' . $pageCount . ')" id="link' . $pageCount . '" style="color:blue;text-decoration:none;" href="' . $link . ';current_page=' . $pageCount . ';' . $sort . $order . $anchor . '">' . $pageCount . '</a> ';
 		}
 		elseif ($pageCount < $current_page-2 && $pageCount > $current_page-6)
 			$display['page'] .= '
-        <a onmouseout="changeColorBack(' . $pageCount . ')" onmouseover="changeColor(' . $pageCount . ')" id="link' . $pageCount . '" style="color:blue;text-decoration:none;" href="' . $link . ';current_page=' . $pageCount . ';' . $sort . $order . $anchor . '">.</a> ';
+	<a onmouseout="changeColorBack(' . $pageCount . ')" onmouseover="changeColor(' . $pageCount . ')" id="link' . $pageCount . '" style="color:blue;text-decoration:none;" href="' . $link . ';current_page=' . $pageCount . ';' . $sort . $order . $anchor . '">.</a> ';
 		elseif ($pageCount > $current_page+2 && $pageCount < $current_page+6)
 			$display['page'] .= '
-        <a onmouseout="changeColorBack(' . $pageCount . ')" onmouseover="changeColor(' . $pageCount . ')" id="link' . $pageCount . '" style="color:blue;text-decoration:none;" href="' . $link . ';current_page=' . $pageCount . ';' . $sort . $order . $anchor . '">.</a> ';
+	<a onmouseout="changeColorBack(' . $pageCount . ')" onmouseover="changeColor(' . $pageCount . ')" id="link' . $pageCount . '" style="color:blue;text-decoration:none;" href="' . $link . ';current_page=' . $pageCount . ';' . $sort . $order . $anchor . '">.</a> ';
 
-                $pageCount++;
-            }
+		$pageCount++;
+	    }
 
-            $display['page'] .= '
+	    $display['page'] .= '
     </span>';
 	}
 

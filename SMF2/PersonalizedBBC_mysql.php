@@ -25,15 +25,7 @@ db_extend('packages');
 // Create table and columns if they do not exist
 $columns = array(
 	array(
-            'name' => 'name',
-	    'type' => 'varchar',
-	    'size' => 255,
-	    'null' => false,
-	    'unsigned' => true,
-	    'auto' => false,
-	),
-        array(
-            'name' => 'description',
+	    'name' => 'name',
 	    'type' => 'varchar',
 	    'size' => 255,
 	    'null' => false,
@@ -41,36 +33,44 @@ $columns = array(
 	    'auto' => false,
 	),
 	array(
-            'name' => 'code',
-	    'type' => 'text',
-	    'null' => false,
-	    'unsigned' => true,
-	    'auto' => false,
-	),
-	array(
-            'name' => 'image',
+	    'name' => 'description',
 	    'type' => 'varchar',
 	    'size' => 255,
 	    'null' => false,
 	    'unsigned' => true,
 	    'auto' => false,
 	),
-        array(
-            'name' => 'prior',
-	    'type' => 'text',
-	    'null' => false,
-	    'unsigned' => true,
-	    'auto' => false,
-	),
-        array(
-            'name' => 'after',
+	array(
+	    'name' => 'code',
 	    'type' => 'text',
 	    'null' => false,
 	    'unsigned' => true,
 	    'auto' => false,
 	),
 	array(
-            'name' => 'parse',
+	    'name' => 'image',
+	    'type' => 'varchar',
+	    'size' => 255,
+	    'null' => false,
+	    'unsigned' => true,
+	    'auto' => false,
+	),
+	array(
+	    'name' => 'prior',
+	    'type' => 'text',
+	    'null' => false,
+	    'unsigned' => true,
+	    'auto' => false,
+	),
+	array(
+	    'name' => 'after',
+	    'type' => 'text',
+	    'null' => false,
+	    'unsigned' => true,
+	    'auto' => false,
+	),
+	array(
+	    'name' => 'parse',
 	    'type' => 'int',
 	    'size' => 10,
 	    'null' => false,
@@ -79,7 +79,7 @@ $columns = array(
 	    'auto' => false,
 	),
 	array(
-            'name' => 'trim',
+	    'name' => 'trim',
 	    'type' => 'int',
 	    'size' => 10,
 	    'null' => false,
@@ -88,16 +88,7 @@ $columns = array(
 	    'auto' => false,
 	),
 	array(
-            'name' => 'type',
-	    'type' => 'int',
-	    'size' => 10,
-	    'null' => false,
-	    'default' => 0,
-	    'unsigned' => true,
-	    'auto' => false,
-	),
-        array(
-            'name' => 'block_lvl',
+	    'name' => 'type',
 	    'type' => 'int',
 	    'size' => 10,
 	    'null' => false,
@@ -106,7 +97,7 @@ $columns = array(
 	    'auto' => false,
 	),
 	array(
-            'name' => 'enable',
+	    'name' => 'block_lvl',
 	    'type' => 'int',
 	    'size' => 10,
 	    'null' => false,
@@ -114,21 +105,30 @@ $columns = array(
 	    'unsigned' => true,
 	    'auto' => false,
 	),
-        array(
-            'name' => 'display',
+	array(
+	    'name' => 'enable',
 	    'type' => 'int',
 	    'size' => 10,
 	    'null' => false,
 	    'default' => 0,
 	    'unsigned' => true,
 	    'auto' => false,
-        )
+	),
+	array(
+	    'name' => 'display',
+	    'type' => 'int',
+	    'size' => 10,
+	    'null' => false,
+	    'default' => 0,
+	    'unsigned' => true,
+	    'auto' => false,
+	)
 );
 $indexes = array(
-        array(
-            'type' => 'primary',
-            'columns' => array('name')
-        ),
+	array(
+	    'type' => 'primary',
+	    'columns' => array('name')
+	),
 );
 
 $smcFunc['db_create_table']('{db_prefix}personalized_bbc', $columns, $indexes, array(), 'ignore');
@@ -138,17 +138,17 @@ $smcFunc['db_create_table']('{db_prefix}personalized_bbc', $columns, $indexes, a
 foreach ($columns as $column => $data)
 {
     $smcFunc['db_add_column']('{db_prefix}personalized_bbc',
-        array(
-            'name' => $data['name'],
-            'type' => $data['type'],
-            'size' => !empty($data['size']) ? $data['size'] : '',
-            'unsigned' => $data['unsigned'],
-            'null' => $data['null'],
-            'auto' => $data['auto'],
-        ),
-        array(),
-        'ignore',
-        'fatal'
+	array(
+	    'name' => $data['name'],
+	    'type' => $data['type'],
+	    'size' => !empty($data['size']) ? $data['size'] : '',
+	    'unsigned' => $data['unsigned'],
+	    'null' => $data['null'],
+	    'auto' => $data['auto'],
+	),
+	array(),
+	'ignore',
+	'fatal'
     );
 }
 

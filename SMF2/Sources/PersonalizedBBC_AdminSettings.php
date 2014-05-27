@@ -340,10 +340,12 @@ function SettingsPersonalizedBBC()
 
 	// Set the $context for the display template
 	$context['settings_title'] = $txt['PersonalizedBBC_Settings'];
-	$context['post_url'] = $scripturl . '?action=admin;area=PersonalizedBBC;sa=personalizedBBC_Settings;' . $context['session_var'] . '=' . $context['session_id'] . ';save';
+	$context['post_url'] = $scripturl . '?action=admin;area=PersonalizedBBC;sa=personalizedBBC_Settings;current_page=' . ($context['current_page']+1) . ';' . $context['session_var'] . '=' . $context['session_id'] . ';save';
 	$context['personalizedBBC'] = PersonalizedBBC_pagination($context['personalizedBBC_list'], $scripturl . '?action=admin;area=PersonalizedBBC;', 10);
 	$context['PersonalizedBBC_display'] = PersonalizedBBC_pages($txt['PersonalizedBBC_page'], '#page_top', $scripturl . '?action=admin;area=PersonalizedBBC;', $context['current_pages']);
 	$context['sub_template'] = 'personalizedBBC_List';
+	$context['linktree'][] = array('url' => $scripturl . '?action=admin;area=PersonalizedBBC;current_page=' . ($context['current_page']+1) . ';' . $context['session_var'] . '=' . $context['session_id'] . ';#page_top', 'name' => $txt['PersonalizedBBC_tabtitle_list']);
+	$context['page_title'] = $txt['PersonalizedBBC_tabtitle_list'];
 
 	loadTemplate('PersonalizedBBC_Admin');
 }
@@ -434,6 +436,8 @@ function EntryPersonalizedBBC()
 	$context['settings_title'] = $txt['PersonalizedBBC_Settings'];
 	$context['post_url'] = $scripturl . '?action=admin;area=PersonalizedBBC;sa=personalizedBBC_Settings;' . $context['session_var'] . '=' . $context['session_id'] . ';save';
 	$context['sub_template'] = 'personalizedBBC_Edit';
+	$context['page_title'] = $txt['PersonalizedBBC_tabtitle_rev'];
+	$context['linktree'][] = array('url' => $scripturl . '?action=admin;area=PersonalizedBBC;sa=personalizedBBC_Entry;' . (!empty($context['current_name']) ? 'name=' . $context['current_name'] . ';' : '') . $context['session_var'] . '=' . $context['session_id'], 'name' =>$txt['PersonalizedBBC_tabtitle_rev']);
 
 	loadTemplate('PersonalizedBBC_Admin');
 }

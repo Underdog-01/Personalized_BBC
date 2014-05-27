@@ -89,7 +89,7 @@ function template_PersonalizedBBC_List()
 											', str_replace('#%^@!', $context['personalizedBBC'][$i]['name'], $txt['personalizedBBC_type_display'][$context['personalizedBBC'][$i]['type']]), '
 										</td>
 										<td class="windowbg" align="center">
-											<input type="checkbox" name="enable[', $context['personalizedBBC'][$i]['name'], ']" id="enable[', $context['personalizedBBC'][$i]['name'], ']" class="check"';
+											<input type="checkbox" name="enable[', $context['personalizedBBC'][$i]['name'], ']" id="enable_', $context['personalizedBBC'][$i]['name'], '" class="check"';
 
 		if (!empty($context['personalizedBBC'][$i]['enable']))
 			echo '	checked />';
@@ -100,7 +100,7 @@ function template_PersonalizedBBC_List()
 		echo '
 										</td>
 										<td class="windowbg" align="center">
-											<input type="checkbox" name="display[', $context['personalizedBBC'][$i]['name'], ']" id="display[', $context['personalizedBBC'][$i]['name'], ']" class="check"';
+											<input type="checkbox" name="display[', $context['personalizedBBC'][$i]['name'], ']" id="display_', $context['personalizedBBC'][$i]['name'], '" class="check"';
 
 		if (!empty($context['personalizedBBC'][$i]['display']))
 			echo ' checked />';
@@ -127,14 +127,14 @@ function template_PersonalizedBBC_List()
 										<td colspan="5"><hr /></td>
 									</tr>
 									<tr>
-										<td colspan="4">
-											<input type="submit" value="', $txt['personalizedBBC_submit'], '"', (!empty($context['save_disabled']) ? ' disabled="disabled"' : ''), ' onclick="check=confirmSubmit();if(!check){return false;}" />
-										</td>
-										<tr>
-										<td colspan="1" style="text-align:right;position:relative;vertical-align:top;">
-											<a href="' , $scripturl , '?action=admin;area=PersonalizedBBC;sa=personalizedBBC_Entry;' , $context['session_var'] , '=' , $context['session_id'] , ';"><img style="position:relative;top:-2.4em;" src="', $settings['default_theme_url'],'/images/admin/personalizedBBC_add.png" alt="' , $txt['PersonalizedBBC_add'], '" title="' , $txt['PersonalizedBBC_add'], '" /></a>
+										<td colspan="1" style="float:left;">
+											<a href="' , $scripturl , '?action=admin;area=PersonalizedBBC;sa=personalizedBBC_Entry;' , $context['session_var'] , '=' , $context['session_id'] , ';"><img style="position:relative;bottom:-2.05em;" src="', $settings['default_theme_url'],'/images/admin/personalizedBBC_add.png" alt="' , $txt['PersonalizedBBC_add'], '" title="' , $txt['PersonalizedBBC_add'], '" /></a>
 										</td>
 									</tr>
+									<tr>
+										<td colspan="4">
+											<input class="button_submit" type="submit" value="', $txt['personalizedBBC_submit'], '"', (!empty($context['save_disabled']) ? ' disabled="disabled"' : ''), ' onclick="check=confirmSubmit();if(!check){return false;}" />
+										</td>
 									</tr>
 								</table>
 							</td>
@@ -369,7 +369,7 @@ function template_PersonalizedBBC_Edit()
 									</tr>
 									<tr>
 										<td colspan="3">
-											<input type="submit" value="', $txt['personalizedBBC_submit'], '"', (!empty($context['save_disabled']) ? ' disabled="disabled"' : ''), ' />
+											<input class="button_submit" type="submit" value="', $txt['personalizedBBC_submit'], '"', (!empty($context['save_disabled']) ? ' disabled="disabled"' : ''), ' />
 										</td>
 									</tr>
 								</table>

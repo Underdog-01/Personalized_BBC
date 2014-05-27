@@ -17,9 +17,6 @@ if (!defined('SMF'))
 
 /*	This file handles all of the Personalized BBC integrated hooks
 
-	void function PersonalizedBBC_array_insert(&$input, $key, $insert, $where = 'before', $strict = false)
-		- General function to insert data into array
-
 	void function PersonalizedBBC_load_permissions(&$actionArray)
 		- Inserts necessary data into SMF permissions array
 
@@ -40,31 +37,6 @@ if (!defined('SMF'))
 		- Parses message body for restricted BBC tags
 */
 
-function PersonalizedBBC_array_insert(&$input, $key, $insert, $where = 'before', $strict = false)
-{
-	$position = array_search($key, array_keys($input), $strict);
-
-	// Key not found -> insert as last
-	if ($position === false)
-	{
-		$input = array_merge($input, $insert);
-		return;
-	}
-
-	if ($where === 'after')
-		$position += 1;
-
-	// Insert as first
-	if ($position === 0)
-		$input = array_merge($insert, $input);
-	else
-		$input = array_merge(
-			array_slice($input, 0, $position, true),
-			$insert,
-			array_slice($input, $position, null, true)
-		);
-}
-
 function PersonalizedBBC_load_permissions(&$permissionGroups, &$permissionList, &$leftPermissionGroups, &$hiddenPermissions, &$relabelPermissions)
 {
 	global $context, $smcFunc;
@@ -80,7 +52,7 @@ function PersonalizedBBC_load_permissions(&$permissionGroups, &$permissionList, 
 
 	while ($row = $smcFunc['db_fetch_assoc']($request))
 		$permNames[] = $row['name'];
-	
+
 	$smcFunc['db_free_result']($request);
 
 	foreach ($permNames as $permission)
@@ -91,15 +63,6 @@ function PersonalizedBBC_load_permissions(&$permissionGroups, &$permissionList, 
 		$permissionList['membergroup'] += array(
 				$BBC_Name => array(false, 'PersonalizedBBC_perms', 'PersonalizedBBC_perms'),
 		);
-
-		/*
-		$context['non_guest_permissions'] = array_merge(
-			$context['non_guest_permissions'],
-			array(
-				$BBC_Name,
-			)
-		);
-		*/
 	}
 
 	if (!empty($permNames))
@@ -115,27 +78,21 @@ function PersonalizedBBC_load_permissions(&$permissionGroups, &$permissionList, 
 
 function PersonalizedBBC_admin_areas(&$admin_areas)
 {
-	global $context, $modSettings, $scripturl, $txt;
+	global $txt;
 	loadLanguage('PersonalizedBBC');
 
-	PersonalizedBBC_array_insert($admin_areas, 'members',
-		array(
-			'PersonalizedBBC' => array(
-				'title' => $txt['PersonalizedBBC_tabtitle'],
-				'permission' => array('PersonalizedBBC_settings'),
-				'areas' => array(
-					'PersonalizedBBC' => array(
-						'label' => $txt['PersonalizedBBC_AdminSettings'],
-						'file' => 'PersonalizedBBC_Admin.php',
-						'function' => 'PersonalizedBBC_Admin',
-						'icon' => 'PersonalizedBBC_settings.png',
-						'permission' => allowedTo('admin_forum'),
-						'subsections' => array(),
-					),
-				),
-			),
-		)
+	$PersonalizedBBC['layout']['areas'] = array(
+		'PersonalizedBBC' => array(
+			'label' => $txt['PersonalizedBBC_tabtitle'],
+			'file' => 'PersonalizedBBC_Admin.php',
+			'function' => 'PersonalizedBBC_Admin',
+			'icon' => 'PersonalizedBBC_settings.png',
+			'permission' => allowedTo('admin_forum'),
+			'subsections' => array(),
+		),
 	);
+
+	$admin_areas = array_merge_recursive($admin_areas, $PersonalizedBBC);
 }
 
 function PersonalizedBBC_codes(&$codes)

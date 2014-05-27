@@ -13,8 +13,9 @@
 		<operation>
 			<search position="before"><![CDATA[	static $censor_vulgar = null, $censor_proper;]]></search>
 			<add><![CDATA[
+
 	// Remove any Personalized BBC where the user does not have permission to view/use it
-        $text = PersonalizedBBC_parser($text);]]></add>
+	$text = PersonalizedBBC_parser($text);]]></add>
 		</operation>
 	</file>
 </modification>

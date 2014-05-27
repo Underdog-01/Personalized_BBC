@@ -13,7 +13,7 @@
 
 		<!-- ####################      SMF2.0X        #################### -->
 
-	<install for="2.0 - 2.9.99">
+	<install for="2.0 - 2.0.99">
 		<readme parsebbc="true">SMF2/readme_PersonalizedBBC.txt</readme>
 		<require-dir name="SMF2/Sources" destination="$boarddir" />
 		<require-dir name="SMF2/Themes" destination="$boarddir" />
@@ -22,7 +22,7 @@
 		<redirect url="$scripturl?action=admin;area=PersonalizedBBC;" timeout="5000">SMF2/redirect.txt</redirect>
 	</install>
 
-	<uninstall for="2.0 - 2.9.99">
+	<uninstall for="2.0 - 2.0.99">
 		<readme parsebbc="true">SMF2/PersonalizedBBC_uninstall_readme.txt</readme>
 		<code>SMF2/PersonalizedBBC_uninstall.php</code>
 		<modification reverse="true">personalizedBBC_install.xml</modification>

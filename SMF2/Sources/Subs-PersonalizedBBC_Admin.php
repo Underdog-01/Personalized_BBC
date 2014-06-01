@@ -45,7 +45,7 @@ if (!defined('SMF'))
 		- Filters code/before/after inputs for specific characters such as unnecessary white spaces
 
 	void function PersonalizedBBC_load_membergroups()
-		- Queries existing membgroup data for bbc permission settings
+		- Queries existing membergroup data for bbc permission settings
 
 	void function PersonalizedBBC_images()
 		- Gathers gif icon file names from the ../Themes/default/images/bbc/personalizedBBC directory

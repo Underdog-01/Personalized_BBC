@@ -63,15 +63,12 @@ function PersonalizedBBC_Admin()
 	}
 
 	$subActions = array(
-			'personalizedBBC_Settings' => array('SettingsPersonalizedBBC'),
-			'personalizedBBC_Entry' => array('EntryPersonalizedBBC'),
-		);
+		'personalizedBBC_Settings' => array('SettingsPersonalizedBBC'),
+		'personalizedBBC_Entry' => array('EntryPersonalizedBBC'),
+	);
 
 	$_REQUEST['sa'] = isset($_REQUEST['sa']) && isset($subActions[$_REQUEST['sa']]) ? $_REQUEST['sa'] : 'personalizedBBC_Settings';
-
-	if (isset($subActions[$_REQUEST['sa']][1]))
-		isAllowedTo('admin_forum');
-
+	isAllowedTo('admin_forum');
 	$subActions[$_REQUEST['sa']][0]();
 }
 ?>

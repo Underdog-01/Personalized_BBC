@@ -24,10 +24,10 @@ if (!defined('SMF'))
 		- Loads Personalized BBC admin file
 
 	void function PersonalizedBBC_codes()
-		- Adda Personalized BBCs to the bbc array
+		- Adds Personalized BBCs to the bbc array
 
 	void function PersonalizedBBC_buttons()
-		- Adda Personalized BBCs to the message editor bbc array
+		- Adds Personalized BBCs to the message editor bbc array
 
 	void function PersonalizedBBC_load()
 		- Loads necessary language file

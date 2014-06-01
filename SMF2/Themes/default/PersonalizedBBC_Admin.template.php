@@ -132,7 +132,7 @@ function template_PersonalizedBBC_List()
 										</td>
 									</tr>
 									<tr>
-										<td colspan="4">
+										<td colspan="4" style="float:right;">
 											<input class="button_submit" type="submit" value="', $txt['personalizedBBC_submit'], '"', (!empty($context['save_disabled']) ? ' disabled="disabled"' : ''), ' onclick="check=confirmSubmit();if(!check){return false;}" />
 										</td>
 									</tr>

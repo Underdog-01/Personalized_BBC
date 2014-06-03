@@ -7,8 +7,8 @@
 */
 
 /*
- * Personalized BBC was developed for SMF forums c/o Underdog @ http://webdevelop.comli.com
- * Copyright 2014 underdog@webdevelop.comli.com
+ * Personalized BBC was developed for SMF forums c/o Underdog @ http://web-develop.ca
+ * Copyright 2014 underdog@web-develop.ca
  * Distributed under the CC BY-ND 4.0 License (http://creativecommons.org/licenses/by-nd/4.0/)
 */
 function template_PersonalizedBBC_Admin_above()

@@ -2,7 +2,8 @@
 
 Purpose and/or usage of this software package:
 
-The purpose of this application is to allow an administrator the option to add personalized BBCs to a SMF forum installation.  These BBC additions have individual permission settings to allow or restrict their usage and visibility.
+The purpose of this application is to allow an administrator the option to add personalized BBCs to a SMF forum installation.
+These BBC additions have individual permission settings to allow or restrict their usage and visibility.
 
 [hr]
 
@@ -16,14 +17,14 @@ Recommended minimal requirements:
 
 [hr]
 
-Developed for SMF forums c/o Underdog @ [url=http://webdevelop.comli.com]webdevelop.comli.com[/url]
-Copyright 2014 Underdog@webdevelop.comli.com
+Developed for SMF forums c/o Underdog @ [url=http://web-develop.ca]web-develop.ca[/url]
+Copyright 2014 Underdog@web-develop.ca
 Distributed under the [url=http://creativecommons.org/licenses/by-nd/4.0/]CC BY-ND 4.0 License[/url]
 
 If you commend this software package and/or any other contributions that underdog@webdevelop.comli.com develops for the SMF community,
 please feel free to make a donation to paypal using the image/link provided below. Thank you for opting to use this software package.
 
-[url=http://webdevelop.comli.com/index.php?page=underdog_donation][img]https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif[/img][/url]
+[url=http://web-develop.ca/index.php?page=underdog_donation][img]https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif[/img][/url]
 
 [hr]
 

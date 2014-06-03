@@ -7,8 +7,8 @@
 */
 
 /*
- * Personalized BBC was developed for SMF forums c/o Underdog @ http://webdevelop.comli.com
- * Copyright 2014 underdog@webdevelop.comli.com
+ * Personalized BBC was developed for SMF forums c/o Underdog @ http://web-develop.ca
+ * Copyright 2014 underdog@web-develop.ca
  * Distributed under the CC BY-ND 4.0 License (http://creativecommons.org/licenses/by-nd/4.0/)
 */
 
@@ -282,7 +282,7 @@ function PersonalizedBBC_pagination($content, $redirect, $count = 10)
 {
 	/* PHP pagination - max 7 visible integers and 6 periods (all links) - current page encircled with square brackets
 	 * This php pagination code was developed by Underdog copyright 2013, 2014
-	 * http://webdevelop.comli.com
+	 * http://web-develop.ca
 	 * Licensed under the GNU Public License: http://www.gnu.org/licenses/gpl.html
 	*/
 
@@ -342,7 +342,7 @@ function PersonalizedBBC_pages($lang, $anchor, $link, $pages, $sort=false, $orde
 {
 	/* PHP pagination - max 7 visible integers and 6 periods (all links) - current page encircled with square brackets
 	 * This php pagination code was developed by Underdog copyright 2013, 2014
-	 * http://webdevelop.comli.com
+	 * http://web-develop.ca
 	 * Licensed under the GNU Public License: http://www.gnu.org/licenses/gpl.html
 	*/
 	global $context;

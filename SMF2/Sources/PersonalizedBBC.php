@@ -39,7 +39,7 @@ if (!defined('SMF'))
 
 function PersonalizedBBC_load_permissions(&$permissionGroups, &$permissionList, &$leftPermissionGroups, &$hiddenPermissions, &$relabelPermissions)
 {
-	global $context, $smcFunc;
+	global $smcFunc;
 	loadLanguage('PersonalizedBBC');
 	$permNames = array();
 	$key = 0;
@@ -161,7 +161,7 @@ function PersonalizedBBC_codes(&$codes)
 
 function PersonalizedBBC_buttons(&$bbc_buttons)
 {
-	global $context, $smcFunc, $txt;
+	global $smcFunc, $txt;
 	loadLanguage('PersonalizedBBC');
 	$datums = array();
 	$key = 0;

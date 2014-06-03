@@ -19,7 +19,7 @@ elseif (!defined('SMF'))
     die('<b>Error:</b> Cannot install - please verify you put this in the same place as SMF\'s index.php.');
 
 /*  This file is for mysql setup */
-global $smcFunc, $scripturl, $sourcedir;
+global $smcFunc;
 db_extend('packages');
 
 // Create table and columns if they do not exist

@@ -352,7 +352,7 @@ function SettingsPersonalizedBBC()
 
 function EntryPersonalizedBBC()
 {
-	global $txt, $scripturl, $context, $smcFunc, $sourcedir;
+	global $txt, $scripturl, $context, $smcFunc;
 
 	if (!allowedTo('admin_forum'))
 		fatal_lang_error('PersonalizedBBC_ErrorMessage',false);

@@ -252,7 +252,7 @@ function PersonalizedBBC_buttons(&$bbc_buttons)
 
 function PersonalizedBBC_load()
 {
-	global $smcFunc, $txt, $helptxt, $personalized_BBC;
+	global $smcFunc, $txt, $personalized_BBC;
 	loadLanguage('PersonalizedBBC');
 	$personalized_BBC = array();
 	$key = 0;

@@ -25,7 +25,7 @@ if (!defined('SMF'))
 
 function PersonalizedBBC_Admin()
 {
-	global $scripturl, $txt, $context, $sourcedir, $settings, $modSettings, $smcFunc;
+	global $txt, $context, $sourcedir, $smcFunc;
 
 	if (version_compare(phpversion(), '5.3.0', '<'))
 		fatal_error(str_replace('#@#$!', phpversion(), $txt['PersonalizedBBC_PHP_ErrorMessage']), false);

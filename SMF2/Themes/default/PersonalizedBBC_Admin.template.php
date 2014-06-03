@@ -13,7 +13,7 @@
 */
 function template_PersonalizedBBC_Admin_above()
 {
-	global $context, $settings, $options, $txt, $scripturl;
+	global $txt;
 
 	// Create the tabs for the template
 	echo '
@@ -32,7 +32,7 @@ function template_PersonalizedBBC_Admin_above()
 // Personalized BBC settings list
 function template_PersonalizedBBC_List()
 {
-	global $txt, $scripturl, $context, $settings, $sc, $modSettings, $smcFunc;
+	global $txt, $scripturl, $context, $settings;
 
 	echo '
 				<script type="text/javascript"><!-- // --><![CDATA[
@@ -147,7 +147,7 @@ function template_PersonalizedBBC_List()
 // Personalized BBC revision
 function template_PersonalizedBBC_Edit()
 {
-	global $txt, $scripturl, $context, $settings, $sc, $modSettings, $smcFunc, $helptxt;
+	global $txt, $scripturl, $context, $settings;
 
 	echo '
 				<form action="', $context['post_url'], '" method="post" accept-charset="', $context['character_set'], '">
@@ -417,8 +417,6 @@ function template_PersonalizedBBC_Edit()
 
 function template_PersonalizedBBC_Admin_below()
 {
-	global $context, $settings, $options, $txt, $scripturl;
-
 	echo '
 			</div>
 			<span class="botslice"><span></span></span>

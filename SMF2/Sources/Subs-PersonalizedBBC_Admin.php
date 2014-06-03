@@ -345,7 +345,7 @@ function PersonalizedBBC_pages($lang, $anchor, $link, $pages, $sort=false, $orde
 	 * http://webdevelop.comli.com
 	 * Licensed under the GNU Public License: http://www.gnu.org/licenses/gpl.html
 	*/
-	global $context, $txt, $scripturl;
+	global $context;
 
 	$pageCount = 1;
 	$display = array('page' => false, 'pages' => '0');

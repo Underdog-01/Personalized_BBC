@@ -8,7 +8,7 @@
 <modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
 	<id>underdog:PersonalizedBBC</id>
 	<name>Personalized BBC</name>
-	<version>1.0</version>
+	<version>1.1</version>
 	<file name="$sourcedir/Load.php">
 		<operation>
 			<search position="before"><![CDATA[	static $censor_vulgar = null, $censor_proper;]]></search>

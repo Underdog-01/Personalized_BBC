@@ -2,7 +2,7 @@
 /*
 	<id>underdog:PersonalizedBBC</id>
 	<name>Personalized BBC</name>
-	<version>1.0</version>
+	<version>1.1</version>
 	<type>modification</type>
 */
 
@@ -72,5 +72,5 @@ $helptxt['personalizedBBC_tagTrim'] = 'Select how any whitespace will be trimmed
 $helptxt['personalizedBBC_tagBlockLvl'] = 'Opt whether a block level display will be implemented.';
 $helptxt['personalizedBBC_tagCode'] = 'The HTML to be used for the BBC.<br />ie. &lt;tag&gt;{content}&lt;/tag&gt; or &lt;tag alt={option}&gt;{content}&lt;/tag&gt;';
 $helptxt['personalizedBBC_tagImage'] = 'Select the image to be used for this BBC.  Default images are included with this modification, however custom images can be added to the following directory: ../Themes/default/images/bbc/PersonalizedBBC. Only gif file types are acceptable.';
-$helptxt['personalizedBBC_membergroups'] = 'The membergroups that are enabled/checked will have permission to use and view this BB Code. The unchecked/disabled membergroups will not be able to use this BB Code nor will they be able to view any content contained within them.';
+$helptxt['personalizedBBC_membergroups'] = 'The membergroup permission settings allow control over viewing and usage.<br /><br />[Viewing]<br />Membergroups that are enabled/checked will have permission to view this BB Code within posts. The unchecked/disabled membergroups will not be able to view this BB Code content.<br /><br />[Usage]<br />Membergroups that are enabled/checked will have permission to use this BB Code within posts. The unchecked/disabled membergroups will not be able to use this BB Code & it will be parsed from their post prior to saving to the database.';
 ?>

@@ -12,8 +12,8 @@ Server:  PHP 5.3+
 Browser: HTML5 capability
 SMF Version: 2.0.7+
 
-Developed for SMF forums c/o Underdog@webdevelop.comli.com
-Copyright 2014 Underdog@webdevelop.comli.com
+Developed for SMF forums c/o Underdog@web-develop.ca
+Copyright 2014 Underdog@web-develop.ca
 Distributed under the CC BY-ND 4.0 License ( http://creativecommons.org/licenses/by-nd/4.0/ )
 
 Features:

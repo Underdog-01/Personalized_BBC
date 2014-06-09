@@ -39,6 +39,14 @@ Features:
 
 Changelog:
 
+[Version 1.1]
++ separate view & usage permission settings
+! removed smcFunc escape/unescape
+! natural sorting of Personalized BBC's for admin list and permissions
+! checks against existing SMF default BBC's
+! fixed deletion of first entry issue
+! fixed check-all in admin template
+
 [Version 1.0]
 + Initial release
 [hr]

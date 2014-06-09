@@ -57,6 +57,9 @@ if (!defined('SMF'))
 	void function PersonalizedBBC_pages($lang, $anchor, $link, $pages, $sort, $order)
 		- Second tier of custom pagination routine
 		- Sets pages and links for the display template
+
+	void function PersonalizedBBC_array_value_recursive($key, $arr)
+		- returns array of existing SMF default BBC's
 */
 
 function createPersonalizedBBC_setting($tableName, $columnName, $value, $name)
@@ -399,4 +402,19 @@ function PersonalizedBBC_pages($lang, $anchor, $link, $pages, $sort=false, $orde
 
 	return $display;
 }
+
+function PersonalizedBBC_array_value_recursive($key, $arr)
+{
+	$val = array('a', 'nobbc');
+	array_walk_recursive($arr,
+		function($v, $k) use($key, &$val)
+		{
+			if($k == $key && preg_match("#^[a-z0-9]+$#i", $v) == 1)
+				array_push($val, $v);
+		}
+	);
+
+	return $val;
+}
+
 ?>

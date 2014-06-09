@@ -14,8 +14,17 @@
 			<search position="before"><![CDATA[	static $censor_vulgar = null, $censor_proper;]]></search>
 			<add><![CDATA[
 
-	// Remove any Personalized BBC where the user does not have permission to view/use it
-	$text = PersonalizedBBC_parser($text);]]></add>
+	// Remove any Personalized BBC where the user does not have permission to view it
+	$text = PersonalizedBBC_parser($text, 'view');]]></add>
+		</operation>
+	</file>
+	<file name="$sourcedir/Subs-Post.php">
+		<operation>
+			<search position="after"><![CDATA[	// You won't believe this - but too many periods upsets apache it seems!]]></search>
+			<add><![CDATA[	// Remove any Personalized BBC where the user does not have permission to use it
+	$message = PersonalizedBBC_parser($message, 'use');
+
+]]></add>
 		</operation>
 	</file>
 </modification>

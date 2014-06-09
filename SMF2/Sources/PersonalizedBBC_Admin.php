@@ -51,14 +51,18 @@ function PersonalizedBBC_Admin()
 		elseif ($context['current_name'])
 			$context['personalizedBBC'][$context['current_name']][$setting_type] = $_REQUEST[$setting_type];
 	}
-	if (!empty($_POST['membergroups']) && is_array($_POST['membergroups']))
+
+	foreach (array('view', 'use') as $intent)
 	{
-		foreach ($_POST['membergroups'] as $id => $value)
+		if (!empty($_POST['membergroups_' . $intent]) && is_array($_POST['membergroups_' . $intent]))
 		{
-			if ($value == 1)
-				$context['personalizedBBC_membergroups'][$id] = 1;
-			elseif (isset($value))
-				$context['personalizedBBC_membergroups'][$id] = 0;
+			foreach ($_POST['membergroups_' . $intent] as $id => $value)
+			{
+				if ($value == 1)
+					$context['personalizedBBC_membergroups_' . $intent][$id] = 1;
+				elseif (isset($value))
+					$context['personalizedBBC_membergroups_' . $intent][$id] = 0;
+			}
 		}
 	}
 

@@ -47,7 +47,7 @@ function PersonalizedBBC_load_permissions(&$permissionGroups, &$permissionList, 
 	$request = $smcFunc['db_query']('', '
 			SELECT name
 			FROM {db_prefix}personalized_bbc
-			ORDER BY LENGTH(name), name ASC'
+			ORDER BY name'
 		);
 
 	while ($row = $smcFunc['db_fetch_assoc']($request))
@@ -55,13 +55,18 @@ function PersonalizedBBC_load_permissions(&$permissionGroups, &$permissionList, 
 
 	$smcFunc['db_free_result']($request);
 
+	// Sort the list
+	natsort($permNames);
+
 	foreach ($permNames as $permission)
 	{
 		$key++;
-		$BBC_Name = !empty($permission) ? $smcFunc['strtolower'](trim('personalized_bbc_' . $permission)) : 'personalized_bbc_' . (string)$key;
+		$BBC_Name_View = !empty($permission) ? $smcFunc['strtolower'](trim('personalized_bbc_' . $permission . '_view')) : 'personalized_bbc_' . (string)$key . '_view';
+		$BBC_Name_Use = !empty($permission) ? $smcFunc['strtolower'](trim('personalized_bbc_' . $permission . '_use')) : 'personalized_bbc_' . (string)$key . '_use';
 
 		$permissionList['membergroup'] += array(
-				$BBC_Name => array(false, 'PersonalizedBBC_perms', 'PersonalizedBBC_perms'),
+				$BBC_Name_View => array(false, 'PersonalizedBBC_perms', 'PersonalizedBBC_perms'),
+				$BBC_Name_Use => array(false, 'PersonalizedBBC_perms', 'PersonalizedBBC_perms'),
 		);
 	}
 
@@ -104,14 +109,14 @@ function PersonalizedBBC_codes(&$codes)
 	$request = $smcFunc['db_query']('', '
 			SELECT name, description, image, code, prior, after, parse, trim, type, block_lvl, enable, display
 			FROM {db_prefix}personalized_bbc
-			ORDER BY LENGTH(name), name ASC'
+			ORDER BY name'
 		);
 
 	while ($row = $smcFunc['db_fetch_assoc']($request))
 	{
 		$key++;
 		$tag = !empty($row['name']) ? $smcFunc['strtolower'](trim($row['name'])) : 'personalized_bbc_' . (string)$key;
-		if (!empty($row['enable']) && !empty($row['code']) && allowedTo('personalized_bbc_' . $tag))
+		if (!empty($row['enable']) && !empty($row['code']) && allowedTo('personalized_bbc_' . $tag . '_use'))
 		{
 			$parsed = !empty($row['parse']) ? (int)$row['parse'] : 0;
 			$tagType = !empty($row['type']) ? (int)$row['type'] : 0;
@@ -145,9 +150,9 @@ function PersonalizedBBC_codes(&$codes)
 
 			$codes[] = array(
 				'tag' => $tag,
-				'content' => empty($parsed) ? $smcFunc['db_unescape_string']($row['code']) : '',
-				'before' => !empty($parsed) && !empty($row['prior']) ? $smcFunc['db_unescape_string']($row['prior']) : '',
-				'after' => !empty($parsed) && !empty($row['after']) ? $smcFunc['db_unescape_string']($row['after']) : '',
+				'content' => empty($parsed) ? $row['code'] : '',
+				'before' => !empty($parsed) && !empty($row['prior']) ? $row['prior'] : '',
+				'after' => !empty($parsed) && !empty($row['after']) ? $row['after'] : '',
 				'trim' => $trim,
 				'type' => !empty($type) ? $type : null,
 				'block_level' => !empty($row['block_lvl']) ? true : false,
@@ -170,15 +175,15 @@ function PersonalizedBBC_buttons(&$bbc_buttons)
 			SELECT name, description, image, code, prior, after, parse, trim, type, block_lvl, enable, display
 			FROM {db_prefix}personalized_bbc
 			WHERE display = {int:display}
-			ORDER BY LENGTH(name), name ASC',
+			ORDER BY name',
 			array('display' => 1)
 		);
 
 	while ($row = $smcFunc['db_fetch_assoc']($request))
 	{
 		$key++;
-		$name = !empty($row['name']) ? trim($smcFunc['db_unescape_string']($row['name'])) : 'personalized_bbc_' . (string)$key;
-		if (!empty($row['enable']) && !empty($row['code']) && allowedTo('personalized_bbc_' . $name))
+		$name = !empty($row['name']) ? trim($row['name']) : 'personalized_bbc_' . (string)$key;
+		if (!empty($row['enable']) && !empty($row['code']) && allowedTo('personalized_bbc_' . $name . '_use'))
 		{
 			$parsed = !empty($row['parse']) ? (int)$row['parse'] : 0;
 			$tagType = !empty($row['type']) ? (int)$row['type'] : 0;
@@ -212,9 +217,9 @@ function PersonalizedBBC_buttons(&$bbc_buttons)
 			$datums[] = array(
 				'name' => $name,
 				'description' => !empty($row['description']) ? $row['description'] : $name,
-				'code' => empty($parsed) ? $smcFunc['db_unescape_string']($row['code']) : '',
-				'before' => !empty($parsed) && !empty($row['prior']) ? $smcFunc['db_unescape_string']($row['prior']) : '',
-				'after' => !empty($parsed) && !empty($row['after']) ? $smcFunc['db_unescape_string']($row['after']) : '',
+				'code' => empty($parsed) ? $row['code'] : '',
+				'before' => !empty($parsed) && !empty($row['prior']) ? $row['prior'] : '',
+				'after' => !empty($parsed) && !empty($row['after']) ? $row['after'] : '',
 				'image' => !empty($row['image']) ? str_replace('.gif', '', $row['image']) : trim($name),
 				'show' => !empty($row['display']) ? true : false,
 				'enable' => !empty($row['enable']) ? true : false,
@@ -223,7 +228,6 @@ function PersonalizedBBC_buttons(&$bbc_buttons)
 		}
 	}
 	$smcFunc['db_free_result']($request);
-
 
 	if (!empty($bbc_codes))
 		$bbc_buttons[2][] = array();
@@ -266,7 +270,7 @@ function PersonalizedBBC_load()
 
 	while ($row = $smcFunc['db_fetch_assoc']($request))
 	{
-		$personalized_BBC[] = array('name' => $smcFunc['db_unescape_string']($row['name']), 'type' => (!empty($row['type']) ? (int)$row['type'] : 0));
+		$personalized_BBC[] = array('name' => $row['name'], 'type' => (!empty($row['type']) ? (int)$row['type'] : 0));
 	}
 	$smcFunc['db_free_result']($request);
 
@@ -275,27 +279,35 @@ function PersonalizedBBC_load()
 		$key++;
 		$permission = $bbc['name'];
 		$BBC_Name = !empty($permission) ? $smcFunc['strtolower'](trim('personalized_bbc_' . $permission)) : 'personalized_bbc_' . (string)$key;
-		$txt['permissionname_' . $BBC_Name] = trim(str_replace('#@#$!', $permission, $txt['permissionname_PersonalizedBBC_perm']));
-		$txt['permissionhelp_' . $BBC_Name] = trim(str_replace('#@#$!', $permission, $txt['permissionhelp_PersonalizedBBC_perm']));
+		$txt['permissionname_' . $BBC_Name . '_view'] = trim(str_replace('#@#$!', $permission, $txt['permissionname_PersonalizedBBC_perm_view']));
+		$txt['permissionhelp_' . $BBC_Name . '_view'] = trim(str_replace('#@#$!', $permission, $txt['permissionhelp_PersonalizedBBC_perm_view']));
+		$txt['permissionname_' . $BBC_Name . '_use'] = trim(str_replace('#@#$!', $permission, $txt['permissionname_PersonalizedBBC_perm_use']));
+		$txt['permissionhelp_' . $BBC_Name . '_use'] = trim(str_replace('#@#$!', $permission, $txt['permissionhelp_PersonalizedBBC_perm_use']));
 	}
 }
 
-function PersonalizedBBC_parser($text)
+function PersonalizedBBC_parser($content, $intent = 'view')
 {
-	global $personalized_BBC;
+	global $personalized_BBC, $topic, $context;
 	$personalized_BBC = !empty($personalized_BBC) ? $personalized_BBC : array();
 
 	foreach ($personalized_BBC as $parseBBC)
 	{
-		if (!allowedTo('personalized_bbc_' . $parseBBC['name']))
+		if ((isset($_REQUEST['msg']) && !empty($topic) && $intent === 'view') && allowedTo('personalized_bbc_' . $parseBBC['name'] . '_use') && empty($context['PersonalizedBBC_parser']))
+		{
+			$context['PersonalizedBBC_parser'] = 'init';
+			return $content;
+		}
+
+		if (!allowedTo('personalized_bbc_' . $parseBBC['name'] . '_' . $intent))
 		{
 			if ((!empty($parseBBC['type'])) && (int)$parseBBC['type'] == 3)
-				$text = preg_replace("~\[" . $parseBBC['name'] . "\].*?(?=\<br( />)|\\n|\\r)~mi", "", $text);
+				$content = preg_replace("~\[" . $parseBBC['name'] . "\].*?(?=\<br( />)|\\n|\\r)~mi", "", $content);
 			else
-				$text = preg_replace(array("~\[" . $parseBBC['name'] . "\](.*?)\[\/" . $parseBBC['name'] . "\]~i", "~\[" . $parseBBC['name'] . "=(.*?)\](.*?)\[\/" . $parseBBC['name'] . "\]~i"), array('', ''), $text);
+				$content = preg_replace(array("~\[" . $parseBBC['name'] . "\](.*?)\[\/" . $parseBBC['name'] . "\]~i", "~\[" . $parseBBC['name'] . "=(.*?)\](.*?)\[\/" . $parseBBC['name'] . "\]~i"), array('', ''), $content);
 		}
 	}
 
-	return $text;
+	return $content;
 }
 ?>

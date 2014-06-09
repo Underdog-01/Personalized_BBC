@@ -37,7 +37,9 @@ $txt['personalizedBBC_allow'] = 'Allow';
 $txt['personalizedBBC_deny'] = 'Deny';
 $txt['personalizedBBC_submit'] = 'Submit';
 $txt['personalizedBBC_image'] = 'BBC Icon';
-$txt['personalizedBBC_membergroups'] = 'Membergroup Usage';
+$txt['personalizedBBC_membergroups'] = 'Membergroup Permissions';
+$txt['personalizedBBC_membergroups_view'] = 'Viewing';
+$txt['personalizedBBC_membergroups_use'] = 'Usage';
 $txt['personalizedBBC_membergroups_check'] = 'Check/Uncheck All';
 $txt['PersonalizedBBC_page'] = 'Page';
 
@@ -50,13 +52,15 @@ $txt['personalizedBBC_trim_options'] = array('none', 'inside', 'outside', 'both'
 // error message
 $txt['PersonalizedBBC_ErrorMessage'] = 'You do not have permission to access the Personalized BBC Admin section.';
 $txt['PersonalizedBBC_PHP_ErrorMessage'] = 'Your PHP version is too old, please upgrade to a newer version.<br />Your current version is #@#$! whereas this plugin requires a minimum version of 5.3.0';
+$txt['PersonalizedBBC_DuplicateErrorMessage'] = '<span class="error">Warning:</span> This BBC already exists within the SMF defaults, please opt another BBC tag name.';
 
 // permissions
 $txt['permissiongroup_PersonalizedBBC_perms'] = 'Personalized BBC';
 $txt['permissiongroup_simple_PersonalizedBBC_perms'] = 'Personalized BBC';
-$txt['permissionname_PersonalizedBBC_perm'] = 'BB Code: #@#$!';
-$txt['permissionhelp_PersonalizedBBC_perm'] = 'Allow this membergroup to use the #@#$! BB Code.';
-$txt['permissionname_PersonalizedBBC_perm'] = 'BBC: #@#$!';
+$txt['permissionname_PersonalizedBBC_perm_view'] = 'View BB Code: #@#$!';
+$txt['permissionname_PersonalizedBBC_perm_use'] = 'Use BB Code: #@#$!';
+$txt['permissionhelp_PersonalizedBBC_perm_view'] = 'Allow this membergroup to view the #@#$! BB Code.';
+$txt['permissionhelp_PersonalizedBBC_perm_use'] = 'Allow this membergroup to use the #@#$! BB Code.';
 $txt['PersonalizedBBC_perms'] = 'Personalized BB Codes';
 
 // help text

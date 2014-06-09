@@ -166,6 +166,13 @@ function template_PersonalizedBBC_Edit()
 									</tr>
 								</table>
 								<table border="0" cellspacing="0" cellpadding="4" width="100%">
+									', (!empty($_SESSION['personalizedBBC_duplicate_error']) ? '
+									<tr>
+										<td width="2%">&nbsp;</td>
+										<td colspan="2" style="width:90%;">
+											' . $txt['PersonalizedBBC_DuplicateErrorMessage'] . '
+										</td>
+									</tr>' : ''), '
 									<tr>
 										<td width="2%">
 											<a href="',$scripturl,'?action=helpadmin;help=personalizedBBC_tagHelp" onclick="return reqWin(this.href);" style="text-decoration:none;">
@@ -331,37 +338,57 @@ function template_PersonalizedBBC_Edit()
 									<tr>
 										<td colspan="3"><hr /></td>
 									</tr>
+								</table>
+								<table>
 									<tr>
 										<td style="width:2%;">
 											<a href="',$scripturl,'?action=helpadmin;help=personalizedBBC_membergroups" onclick="return reqWin(this.href);" style="text-decoration:none;">
 												<img style="vertical-align:middle;position:relative;bottom:1px;width:12px;height:12px;" src="'.$settings['default_theme_url'].'/images/admin/personalizedBBC-help.gif" alt="?" />
 											</a>
 										</td>
-										<td width="20%" colspan="2">
-											', $txt['personalizedBBC_membergroups'], '
+										<td colspan="3" style="float:left;">
+											&nbsp;&nbsp;', $txt['personalizedBBC_membergroups'], '
+										</td>
+									</tr>
+									<tr>
+										<td colpsan="4">&nbsp;</td>
+									</tr>
+									<tr>
+										<td>&nbsp;</td>
+										<td colspan="2" class="titlebg">
+											', $txt['personalizedBBC_membergroups_view'], '
+										</td>
+										<td class="titlebg">
+											', $txt['personalizedBBC_membergroups_use'], '
 										</td>
 									</tr>';
 	foreach ($context['PersonalizedBBC_Membergroups'] as $gpId => $group)
 	{
 		echo '
 									<tr>
-										<td colspan="2">&nbsp;</td>
+										<td>&nbsp;</td>
+										<td colspan="2">
+											<input class="checkbox_view" type="checkbox" name="membergroups_view[', $gpId, ']" value="1"', (!empty($context['personalizedBBC']['permissions_view'][$gpId]['add_deny']) ? ' checked="checked"' : ''),' />
+											<span style="left:1em;bottom:0.2em;position:relative;">', $group, '</span>
+										</td>
 										<td>
-											<input class="checkbox" type="checkbox" name="membergroups[', $gpId, ']" value="1"', (!empty($context['personalizedBBC']['permissions'][$gpId]['add_deny']) ? ' checked="checked"' : ''),' />
+											<input class="checkbox_use" type="checkbox" name="membergroups_use[', $gpId, ']" value="1"', (!empty($context['personalizedBBC']['permissions_use'][$gpId]['add_deny']) ? ' checked="checked"' : ''),' />
 											<span style="left:1em;bottom:0.2em;position:relative;">', $group, '</span>
 										</td>
 									</tr>';
 	}
 	echo '
 									<tr>
-										<td colspan="2">&nbsp;</td>
-										<td>
-											<input type="checkbox" id="membergroup_check" name="membergroup_check" onclick="checkToggle();return true;" value="1" />
+										<td>&nbsp;</td>
+										<td colspan="2">
+											<input type="checkbox" id="membergroup_check" name="membergroup_view_check" onclick="checkToggle(\'view\');return true;" value="1" />
 											<span style="left:1em;bottom:0.2em;position:relative;">', $txt['personalizedBBC_membergroups_check'], '</span>
 										</td>
-									</tr>';
-
-	echo '
+										<td>
+											<input type="checkbox" id="membergroup_check" name="membergroup_use_check" onclick="checkToggle(\'use\');return true;" value="1" />
+											<span style="left:1em;bottom:0.2em;position:relative;">', $txt['personalizedBBC_membergroups_check'], '</span>
+										</td>
+									</tr>
 								</table>
 								<table border="0" cellspacing="0" cellpadding="4" width="100%">
 									<tr>
@@ -399,17 +426,17 @@ function template_PersonalizedBBC_Edit()
 						    myimage.style = "height:0px;width:0px;";
 						}
 					}
-					function checkToggle()
+					function checkToggle(intent)
 					{
-						var toggle = document.getElementById("membergroup_check");
-						var field = document.getElementsByClassName("checkbox");
+						var toggle = document.getElementsByName("membergroup_" + intent);
+						var field = document.getElementsByClassName("checkbox_" + intent);
 
 						for (i = 0; i < field.length; i++)
 						{
-							if (toggle.checked == false)
-								field[i].checked = false;
-							else
+							if (field[i].checked == false)
 								field[i].checked = true;
+							else
+								field[i].checked = false;
 						}
 					}
 				// ]]></script>';

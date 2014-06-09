@@ -325,7 +325,7 @@ function SettingsPersonalizedBBC()
 	}
 
 	// Gather data from configurations stored in the Personalized BBC settings table
-	list($context['personalizedBBC_list'], $context['personalizedBBC']) = array(array(), array());
+	list($context['personalizedBBC_list'], $context['personalizedBBC'], $temp) = array(array(), array(), array());
 	$result = $smcFunc['db_query']('', "
 		SELECT *
 		FROM {db_prefix}personalized_bbc

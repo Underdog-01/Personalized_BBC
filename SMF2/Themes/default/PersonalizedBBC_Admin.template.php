@@ -381,11 +381,11 @@ function template_PersonalizedBBC_Edit()
 									<tr>
 										<td>&nbsp;</td>
 										<td colspan="2">
-											<input type="checkbox" id="membergroup_check" name="membergroup_view_check" onclick="checkToggle(\'view\');return true;" value="1" />
+											<input type="checkbox" id="membergroup_check_view" name="membergroup_view_check" onclick="checkToggle(\'view\');return true;" value="1" />
 											<span style="left:1em;bottom:0.2em;position:relative;">', $txt['personalizedBBC_membergroups_check'], '</span>
 										</td>
 										<td>
-											<input type="checkbox" id="membergroup_check" name="membergroup_use_check" onclick="checkToggle(\'use\');return true;" value="1" />
+											<input type="checkbox" id="membergroup_check_use" name="membergroup_use_check" onclick="checkToggle(\'use\');return true;" value="1" />
 											<span style="left:1em;bottom:0.2em;position:relative;">', $txt['personalizedBBC_membergroups_check'], '</span>
 										</td>
 									</tr>
@@ -430,13 +430,14 @@ function template_PersonalizedBBC_Edit()
 					{
 						var toggle = document.getElementsByName("membergroup_" + intent);
 						var field = document.getElementsByClassName("checkbox_" + intent);
+						var checksall = document.getElementById("membergroup_check_" + intent);
 
 						for (i = 0; i < field.length; i++)
 						{
-							if (field[i].checked == false)
-								field[i].checked = true;
-							else
+							if (checksall.checked == false)
 								field[i].checked = false;
+							else
+								field[i].checked = true;
 						}
 					}
 				// ]]></script>';

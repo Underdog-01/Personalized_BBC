@@ -325,7 +325,7 @@ function SettingsPersonalizedBBC()
 	}
 
 	// Gather data from configurations stored in the Personalized BBC settings table
-	list($context['personalizedBBC_list'], $context['personalizedBBC'], $temp) = array(array(), array(), array());
+	list($context['personalizedBBC_list'], $context['personalizedBBC']) = array(array(), array());
 	$result = $smcFunc['db_query']('', "
 		SELECT *
 		FROM {db_prefix}personalized_bbc
@@ -371,11 +371,15 @@ function SettingsPersonalizedBBC()
 	$smcFunc['db_free_result']($result);
 
 	// Sort the list
-	foreach ($temp as $key => $data)
-		$new[] = $key;
-	natsort($new);
-	foreach ($new as $key)
-		$context['personalizedBBC_list'][$key] = $temp[$key];
+	if (!empty($temp))
+	{
+		foreach ($temp as $key => $data)
+			$new[] = $key;
+		natsort($new);
+		foreach ($new as $key)
+			$context['personalizedBBC_list'][$key] = $temp[$key];
+
+	}
 
 	// Set the $context for the display template
 	$context['settings_title'] = $txt['PersonalizedBBC_Settings'];

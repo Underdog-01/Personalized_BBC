@@ -2,7 +2,7 @@
 /*
 	<id>underdog:PersonalizedBBC</id>
 	<name>Personalized BBC</name>
-	<version>1.1</version>
+	<version>1.2</version>
 	<type>modification</type>
 */
 
@@ -173,6 +173,13 @@ function template_PersonalizedBBC_Edit()
 											' . $txt['PersonalizedBBC_DuplicateErrorMessage'] . '
 										</td>
 									</tr>' : ''), '
+									', (!empty($_SESSION['personalizedBBC_length_error']) ? '
+									<tr>
+										<td width="2%">&nbsp;</td>
+										<td colspan="2" style="width:90%;">
+											' . $txt['PersonalizedBBC_LengthErrorMessage'] . '
+										</td>
+									</tr>' : ''), '
 									<tr>
 										<td width="2%">
 											<a href="',$scripturl,'?action=helpadmin;help=personalizedBBC_tagHelp" onclick="return reqWin(this.href);" style="text-decoration:none;">
@@ -316,10 +323,7 @@ function template_PersonalizedBBC_Edit()
 											', $txt['personalizedBBC_image'], '
 										</td>
 										<td class="centertext" style="top:0.5em;;position:relative;">
-											<select name="image[', $context['personalizedBBC']['current_name'], ']" id="opt" onchange="show_image()" style="display:block;position:relative;">
-												<option value="', $context['PersonalizedBBC_Images'][0], '"', ($context['personalizedBBC']['image'] === $context['PersonalizedBBC_Images'][0] ? ' selected="selected"' : ''), '>
-												', $context['PersonalizedBBC_Images'][0], '
-												</option>';
+											<select name="image[', $context['personalizedBBC']['current_name'], ']" id="opt" onchange="show_image()" style="display:block;position:relative;">';
 
 	// Get all images for the dropdown list
 	foreach ($context['PersonalizedBBC_Images'] as $image)

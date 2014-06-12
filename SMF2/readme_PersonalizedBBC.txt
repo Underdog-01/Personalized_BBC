@@ -39,6 +39,14 @@ Features:
 
 Changelog:
 
+[Version 1.2]
+! fixed images list within template and added natsort
+! fixed issues regarding some inputs within templates
+! fixed regex regarding permission disabled closed tags
+! ensure bbc name variable(s) are lowercase
+! max bbc name of 35 characters in length
+! installer adjusts permission column within permissions table to 60 character max (mod-var_bbc-name_ilk)
+
 [Version 1.1]
 + separate view & usage permission settings
 ! removed smcFunc escape/unescape

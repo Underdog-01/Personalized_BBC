@@ -2,7 +2,7 @@
 /*
 	<id>underdog:PersonalizedBBC</id>
 	<name>Personalized BBC</name>
-	<version>1.1</version>
+	<version>1.2</version>
 	<type>modification</type>
 */
 
@@ -49,7 +49,7 @@ function PersonalizedBBC_Admin()
 			foreach ($_REQUEST[$setting_type] as $id => $data)
 				$context['personalizedBBC'][$id][$setting_type] = $data;
 		elseif ($context['current_name'])
-			$context['personalizedBBC'][$context['current_name']][$setting_type] = $_REQUEST[$setting_type];
+			$context['personalizedBBC'][$context['current_name']][$setting_type] = $_REQUEST[$setting_type][0];
 	}
 
 	foreach (array('view', 'use') as $intent)

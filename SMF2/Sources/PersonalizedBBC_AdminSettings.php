@@ -2,7 +2,7 @@
 /*
 	<id>underdog:PersonalizedBBC</id>
 	<name>Personalized BBC</name>
-	<version>1.1</version>
+	<version>1.2</version>
 	<type>modification</type>
 */
 
@@ -38,7 +38,7 @@ function SettingsPersonalizedBBC()
 		fatal_lang_error('PersonalizedBBC_ErrorMessage',false);
 
 	$context['robot_no_index'] = true;
-	$_SESSION['personalizedBBC_duplicate_error'] = false;
+	list($_SESSION['personalizedBBC_duplicate_error'], $_SESSION['personalizedBBC_length_error']) = array(false, false);
 	$listArray = array('enable', 'display', 'delete');
 	$context['personalizedBBC_membergroups_view'] = !empty($context['personalizedBBC_membergroups_view']) ? $context['personalizedBBC_membergroups_view'] : array();
 	$context['personalizedBBC_membergroups_use'] = !empty($context['personalizedBBC_membergroups_use']) ? $context['personalizedBBC_membergroups_use'] : array();
@@ -53,7 +53,7 @@ function SettingsPersonalizedBBC()
 			'after' => array('code', true, 'after'),
 			'parse' => array('int', true, 'parse'),
 			'trim' => array('int', true, 'trim'),
-			'type' => array('int', true, 'type'),
+			'type' => array('enable_int', true, 'type'),
 			'block_lvl' => array('int', true, 'block_lvl'),
 			'enable' => array('checkbox', true, 'enable'),
 			'display' => array('checkbox', true, 'display'),
@@ -70,12 +70,15 @@ function SettingsPersonalizedBBC()
 		foreach ($bbcTags as $thisName => $context['personalizedBBC'])
 		{
 			$name = !empty($context['current_name']) ? cleanPersonalizedBBC_String($context['current_name']) : (!empty($context['personalizedBBC']['name']) ? cleanPersonalizedBBC_String($context['personalizedBBC']['name']) : cleanPersonalizedBBC_String($context['personalizedBBC']['current_name']));
-			$context['current_name'] = !empty($context['current_name']) ? $context['current_name'] : $name;
-			$type = !empty($context['personalizedBBC']['type']) ? $context['personalizedBBC']['type'] : '';
-			$trim = !empty($context['personalizedBBC']['trim']) ? (int)$context['personalizedBBC']['trim'] : 0;
-			$parse = !empty($context['personalizedBBC']['parse']) ? $context['personalizedBBC']['parse'] : '';
+			list($thisName, $name, $checkName) = array($smcFunc['strtolower'](trim($thisName)), $smcFunc['strtolower']($name), false);
+			$context['current_name'] = !empty($context['current_name']) ? $smcFunc['strtolower'](trim($context['current_name'])) : $name;
+			$type = isset($context['personalizedBBC']['type']) ? $context['personalizedBBC']['type'] : '';
+			$trim = isset($context['personalizedBBC']['trim']) ? (int)$context['personalizedBBC']['trim'] : 0;
+			$parse = isset($context['personalizedBBC']['parse']) ? $context['personalizedBBC']['parse'] : '';
+			$block_lvl = !empty($context['personalizedBBC']['block_lvl']) ? 1 : 0;
 			$context['personalizedBBC']['code'] = !empty($context['personalizedBBC']['code']) ? $context['personalizedBBC']['code'] : '';
-			$checkName = false;
+			foreach ($listArray as $comm)
+				$$comm = isset($context['personalizedBBC'][$comm]) ? 1 : 0;
 
 			// check if bbc exists within defaults
 			create_control_richedit(array('id'=>'1', 'value' => 'gather_data'));
@@ -83,7 +86,14 @@ function SettingsPersonalizedBBC()
 			if (in_array($name, $checkBBC))
 			{
 				$_SESSION['personalizedBBC_duplicate_error'] = true;
-				redirectexit($scripturl . '?action=admin;area=PersonalizedBBC;sa=personalizedBBC_Entry;');
+				redirectexit($scripturl . '?action=admin;area=PersonalizedBBC;sa=personalizedBBC_Entry;name=' . $name);
+			}
+
+			if (strlen($name) > 35)
+			{
+				$_SESSION['personalizedBBC_length_error'] = true;
+				$name = substr($thisName, 0, 35);
+				redirectexit($scripturl . '?action=admin;area=PersonalizedBBC;sa=personalizedBBC_Entry;name=' . $name);
 			}
 
 			// $1, $2 and/or $3 entered in the input must be changed to HTML entity
@@ -146,7 +156,7 @@ function SettingsPersonalizedBBC()
 				{
 					if (in_array($column, $listArray) && !empty($context['personalizedBBC']['list']))
 					{
-						$context['personalizedBBC'][$column] = !empty($context['personalizedBBC'][$column]) ? true : false;
+						$context['personalizedBBC'][$column] = isset($$column) ? $$column : 0;
 						continue;
 					}
 					elseif (!empty($context['personalizedBBC']['list']))
@@ -155,7 +165,6 @@ function SettingsPersonalizedBBC()
 						continue;
 
 					$context['personalizedBBC'][$column] = !empty($val[$column]) && !isset($context['personalizedBBC'][$column]) ? $val[$column] : (isset($context['personalizedBBC'][$column]) ? $context['personalizedBBC'][$column] : '');
-					$context['personalizedBBC']['block_lvl'] = !empty($context['personalizedBBC']['block_lvl']) ? $context['personalizedBBC']['block_lvl'] : 0;
 					$context['personalizedBBC']['delete'] = 0;
 				}
 			}
@@ -227,12 +236,11 @@ function SettingsPersonalizedBBC()
 							array('perm' => 'personalized_bbc_' . $thisName . '_use')
 						);
 
-
 						$context['current_name'] = $context['personalizedBBC']['name'];
 					}
 				}
 
-				if (empty($context['personalizedBBC'][$key]))
+				if (!isset($context['personalizedBBC'][$key]))
 					continue;
 
 				$value = $key === 'name' ? cleanPersonalizedBBC_String(trim($context['personalizedBBC'][$key])) : $context['personalizedBBC'][$key];
@@ -244,7 +252,7 @@ function SettingsPersonalizedBBC()
 						continue 2;
 					case 'int':
 						$val = (int)$value > 0 ? (int)$value : ($value === 'on' ? 1 : 0);
-
+						$val = isset($$data[2]) ? (int)$$data[2] : $val;
 						if ($name)
 							$request = $smcFunc['db_query']('', "
 								UPDATE {db_prefix}personalized_bbc
@@ -262,7 +270,7 @@ function SettingsPersonalizedBBC()
 									SET type = {int:val}
 									WHERE name = {string:name}
 									LIMIT 1",
-									array('val' => (int)$val, 'name' => $name)
+									array('val' => (int)$type, 'name' => $name)
 								);
 						continue 2;
 					case 'file':
@@ -276,13 +284,14 @@ function SettingsPersonalizedBBC()
 						continue 2;
 					case 'checkbox':
 						$val = !empty($context['personalizedBBC'][$key]) ? 1 : 0;
+
 						if (!empty($context['personalizedBBC']['current_name']))
 							$request = $smcFunc['db_query']('', "
 								UPDATE {db_prefix}personalized_bbc
 								SET {raw:key} = {int:val}
 								WHERE name = {string:name}
 								LIMIT 1",
-								array('key' => $key, 'val' => $val, 'name' => $context['personalizedBBC']['current_name'])
+								array('key' => $key, 'val' => (int)$val, 'name' => $context['personalizedBBC']['current_name'])
 							);
 						continue 2;
 					case 'del':

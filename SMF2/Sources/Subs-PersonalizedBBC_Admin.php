@@ -2,7 +2,7 @@
 /*
 	<id>underdog:PersonalizedBBC</id>
 	<name>Personalized BBC</name>
-	<version>1.1</version>
+	<version>1.2</version>
 	<type>modification</type>
 */
 
@@ -259,7 +259,7 @@ function PersonalizedBBC_load_membergroups()
 function PersonalizedBBC_images()
 {
 	global $settings;
-	list($imagesetlist, $count) = array(array('0' => 'no_image.gif'), 0);
+	$imagesetlist = array();
 
 	if (is_dir($settings['default_theme_dir'] . '/images/bbc/personalizedBBC'))
 		$imagesDir = @opendir($settings['default_theme_dir'] . '/images/bbc/personalizedBBC');
@@ -269,16 +269,14 @@ function PersonalizedBBC_images()
 	{
 		while (($file = readdir($imagesDir)) !== false)
 		{
-			if (preg_match('#\.(?:gif)$#', $file))
-			{
-				$imagesetlist[$count] = $file;
-				$count++;
-			}
+			if (preg_match('#\.(?:gif)$#', $file) && $file !== 'no_image.gif')
+				$imagesetlist[] = $file;
 		}
 		closedir($imagesDir);
 	}
 
-	return $imagesetlist;
+	natsort($imagesetlist);
+	return array_merge(array('no_image.gif'), $imagesetlist);
 }
 
 function PersonalizedBBC_pagination($content, $redirect, $count = 10)

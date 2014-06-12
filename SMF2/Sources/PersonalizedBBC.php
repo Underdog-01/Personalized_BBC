@@ -2,7 +2,7 @@
 /*
 	<id>underdog:PersonalizedBBC</id>
 	<name>Personalized BBC</name>
-	<version>1.1</version>
+	<version>1.2</version>
 	<type>modification</type>
 */
 
@@ -302,7 +302,7 @@ function PersonalizedBBC_parser($content, $intent = 'view')
 		if (!allowedTo('personalized_bbc_' . $parseBBC['name'] . '_' . $intent))
 		{
 			if ((!empty($parseBBC['type'])) && (int)$parseBBC['type'] == 3)
-				$content = preg_replace("~\[" . $parseBBC['name'] . "\].*?(?=\<br( />)|\\n|\\r)~mi", "", $content);
+				$content = preg_replace("~\[" . $parseBBC['name'] . "\](.*?(<br( />)|\Z))~i", "", $content);
 			else
 				$content = preg_replace(array("~\[" . $parseBBC['name'] . "\](.*?)\[\/" . $parseBBC['name'] . "\]~i", "~\[" . $parseBBC['name'] . "=(.*?)\](.*?)\[\/" . $parseBBC['name'] . "\]~i"), array('', ''), $content);
 		}

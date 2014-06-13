@@ -2,7 +2,7 @@
 /*
 	<id>underdog:PersonalizedBBC</id>
 	<name>Personalized BBC</name>
-	<version>1.2</version>
+	<version>1.3</version>
 	<type>modification</type>
 */
 
@@ -65,8 +65,8 @@ function PersonalizedBBC_load_permissions(&$permissionGroups, &$permissionList, 
 		$BBC_Name_Use = !empty($permission) ? $smcFunc['strtolower'](trim('personalized_bbc_' . $permission . '_use')) : 'personalized_bbc_' . (string)$key . '_use';
 
 		$permissionList['membergroup'] += array(
-				$BBC_Name_View => array(false, 'PersonalizedBBC_perms', 'PersonalizedBBC_perms'),
-				$BBC_Name_Use => array(false, 'PersonalizedBBC_perms', 'PersonalizedBBC_perms'),
+			$BBC_Name_View => array(false, 'PersonalizedBBC_perms', 'PersonalizedBBC_perms'),
+			$BBC_Name_Use => array(false, 'PersonalizedBBC_perms', 'PersonalizedBBC_perms'),
 		);
 	}
 

@@ -2,7 +2,7 @@
 /*
 	<id>underdog:PersonalizedBBC</id>
 	<name>Personalized BBC</name>
-	<version>1.2</version>
+	<version>1.3</version>
 	<type>modification</type>
 */
 
@@ -38,7 +38,7 @@ function SettingsPersonalizedBBC()
 		fatal_lang_error('PersonalizedBBC_ErrorMessage',false);
 
 	$context['robot_no_index'] = true;
-	list($_SESSION['personalizedBBC_duplicate_error'], $_SESSION['personalizedBBC_length_error']) = array(false, false);
+	list($_SESSION['personalizedBBC_duplicate_error'], $_SESSION['personalizedBBC_length_error'], $_SESSION['personalizedBBC_illegal_error']) = array(false, false, false);
 	$listArray = array('enable', 'display', 'delete');
 	$context['personalizedBBC_membergroups_view'] = !empty($context['personalizedBBC_membergroups_view']) ? $context['personalizedBBC_membergroups_view'] : array();
 	$context['personalizedBBC_membergroups_use'] = !empty($context['personalizedBBC_membergroups_use']) ? $context['personalizedBBC_membergroups_use'] : array();
@@ -72,6 +72,7 @@ function SettingsPersonalizedBBC()
 			$name = !empty($context['current_name']) ? cleanPersonalizedBBC_String($context['current_name']) : (!empty($context['personalizedBBC']['name']) ? cleanPersonalizedBBC_String($context['personalizedBBC']['name']) : cleanPersonalizedBBC_String($context['personalizedBBC']['current_name']));
 			list($thisName, $name, $checkName) = array($smcFunc['strtolower'](trim($thisName)), $smcFunc['strtolower']($name), false);
 			$context['current_name'] = !empty($context['current_name']) ? $smcFunc['strtolower'](trim($context['current_name'])) : $name;
+			$filterName = preg_replace("#[a-zA-Z0-9_ ]#", '', $context['current_name']);
 			$type = isset($context['personalizedBBC']['type']) ? $context['personalizedBBC']['type'] : '';
 			$trim = isset($context['personalizedBBC']['trim']) ? (int)$context['personalizedBBC']['trim'] : 0;
 			$parse = isset($context['personalizedBBC']['parse']) ? $context['personalizedBBC']['parse'] : '';
@@ -83,6 +84,7 @@ function SettingsPersonalizedBBC()
 			// check if bbc exists within defaults
 			create_control_richedit(array('id'=>'1', 'value' => 'gather_data'));
 			$checkBBC = PersonalizedBBC_array_value_recursive('code', $context['bbc_tags']);
+
 			if (in_array($name, $checkBBC))
 			{
 				$_SESSION['personalizedBBC_duplicate_error'] = true;
@@ -93,6 +95,12 @@ function SettingsPersonalizedBBC()
 			{
 				$_SESSION['personalizedBBC_length_error'] = true;
 				$name = substr($thisName, 0, 35);
+				redirectexit($scripturl . '?action=admin;area=PersonalizedBBC;sa=personalizedBBC_Entry;name=' . $name);
+			}
+
+			if ($filterName)
+			{
+				$_SESSION['personalizedBBC_illegal_error'] = true;
 				redirectexit($scripturl . '?action=admin;area=PersonalizedBBC;sa=personalizedBBC_Entry;name=' . $name);
 			}
 

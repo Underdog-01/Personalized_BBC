@@ -2,7 +2,7 @@
 /*
 	<id>underdog:PersonalizedBBC</id>
 	<name>Personalized BBC</name>
-	<version>1.2</version>
+	<version>1.3</version>
 	<type>modification</type>
 */
 
@@ -403,7 +403,35 @@ function PersonalizedBBC_pages($lang, $anchor, $link, $pages, $sort=false, $orde
 
 function PersonalizedBBC_array_value_recursive($key, $arr)
 {
-	$val = array('a', 'nobbc');
+	$val = array(
+		'abbr',
+		'acronym',
+		'anchor',
+		'bdo',
+		'black',
+		'blue',
+		'br',
+		'color',
+		'font',
+		'green',
+		'html',
+		'iurl',
+		'li',
+		'ltr',
+		'me',
+		'nobbc',
+		'o',
+		'php',
+		'red',
+		'rtl',
+		'size',
+		'tr',
+		'td',
+		'time',
+		'white',
+		'x'
+	);
+
 	array_walk_recursive($arr,
 		function($v, $k) use($key, &$val)
 		{

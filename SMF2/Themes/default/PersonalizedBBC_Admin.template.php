@@ -2,7 +2,7 @@
 /*
 	<id>underdog:PersonalizedBBC</id>
 	<name>Personalized BBC</name>
-	<version>1.2</version>
+	<version>1.3</version>
 	<type>modification</type>
 */
 
@@ -178,6 +178,13 @@ function template_PersonalizedBBC_Edit()
 										<td width="2%">&nbsp;</td>
 										<td colspan="2" style="width:90%;">
 											' . $txt['PersonalizedBBC_LengthErrorMessage'] . '
+										</td>
+									</tr>' : ''), '
+									', (!empty($_SESSION['personalizedBBC_illegal_error']) ? '
+									<tr>
+										<td width="2%">&nbsp;</td>
+										<td colspan="2" style="width:90%;">
+											' . $txt['PersonalizedBBC_IllegalErrorMessage'] . '
 										</td>
 									</tr>' : ''), '
 									<tr>

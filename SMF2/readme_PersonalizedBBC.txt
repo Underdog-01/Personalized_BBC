@@ -39,6 +39,10 @@ Features:
 
 Changelog:
 
+[Version 1.3]
++ relays error message for characters not allowed in BBC names
+! fixed existing bbc check to include BBC's not contained within $context['bbc_tags']
+
 [Version 1.2]
 ! fixed images list within template and added natsort
 ! fixed issues regarding some inputs within templates

@@ -26,23 +26,23 @@ Changelog:
 
 [Version 1.3]
 + relays error message for characters not allowed in BBC names
-! fixed existing bbc check to include BBC's not contained within $context['bbc_tags']
++ fixed existing bbc check to include BBC's not contained within $context['bbc_tags']
 
 [Version 1.2]
-! fixed images list within template and added natsort
-! fixed issues regarding some inputs within templates
-! fixed regex regarding permission disabled closed tags
-! ensure bbc name variable(s) are lowercase
-! max bbc name of 35 characters in length
-! installer adjusts permission column within permissions table to 60 character max (mod-var_bbc-name_ilk)
++ fixed images list within template and added natsort
++ fixed issues regarding some inputs within templates
++ fixed regex regarding permission disabled closed tags
++ ensure bbc name variable(s) are lowercase
++ max bbc name of 35 characters in length
++ installer adjusts permission column within permissions table to 60 character max (mod-var_bbc-name_ilk)
 
 [Version 1.1]
 + separate view & usage permission settings
-! removed smcFunc escape/unescape
-! natural sorting of Personalized BBC's for admin list and permissions
-! checks against existing SMF default BBC's
-! fixed deletion of first entry issue
-! fixed check-all in admin template
++ removed smcFunc escape/unescape
++ natural sorting of Personalized BBC's for admin list and permissions
++ checks against existing SMF default BBC's
++ fixed deletion of first entry issue
++ fixed check-all in admin template
 
 [Version 1.0]
 + Initial release

@@ -2,7 +2,7 @@
 /*
 	<id>underdog:PersonalizedBBC</id>
 	<name>Personalized BBC</name>
-	<version>1.3</version>
+	<version>1.4</version>
 	<type>modification</type>
 */
 
@@ -153,14 +153,14 @@ foreach ($columns as $column => $data)
 }
 
 /* Adjust max characters of the permission column to 60 (if currently less than)    */
-/* Maximum bbc name will be 35 chars (-3 of actual allowed)                         */
+/* Maximum bbc name will be 25 chars (-3 of actual allowed)                         */
 $permissionLength = $smcFunc['db_list_columns'] ('{db_prefix}permissions', 'detail');
-if ((!empty($permissionLength)) && (int)$permissionLength['permission']['size'] < 60)
+if ((!empty($permissionLength)) && (int)$permissionLength['permission']['size'] < 50)
 {
     $column_info = array(
 	'name' => 'permission',
 	'type' => 'varchar',
-	'size' => 60,
+	'size' => 50,
 	'null' => false,
 	'unsigned' => true,
 	'auto' => false,

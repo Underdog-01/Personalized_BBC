@@ -39,6 +39,11 @@ Features:
 
 Changelog:
 
+[Version 1.4]
+! changed routine for gathering SMF default BBC's
+! max allowed BBC tag name length now 25 characters (due to display template)
+! removed unnecessary filter_var() usage (regex sanitizes this variable)
+
 [Version 1.3]
 + relays error message for characters not allowed in BBC names
 ! fixed existing bbc check to include BBC's not contained within $context['bbc_tags']

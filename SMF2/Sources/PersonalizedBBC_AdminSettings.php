@@ -2,7 +2,7 @@
 /*
 	<id>underdog:PersonalizedBBC</id>
 	<name>Personalized BBC</name>
-	<version>1.3</version>
+	<version>1.4</version>
 	<type>modification</type>
 */
 
@@ -82,8 +82,7 @@ function SettingsPersonalizedBBC()
 				$$comm = isset($context['personalizedBBC'][$comm]) ? 1 : 0;
 
 			// check if bbc exists within defaults
-			create_control_richedit(array('id'=>'1', 'value' => 'gather_data'));
-			$checkBBC = PersonalizedBBC_array_value_recursive('code', $context['bbc_tags']);
+			$checkBBC = PersonalizedBBC_checkDefaults();
 
 			if (in_array($name, $checkBBC))
 			{
@@ -91,10 +90,10 @@ function SettingsPersonalizedBBC()
 				redirectexit($scripturl . '?action=admin;area=PersonalizedBBC;sa=personalizedBBC_Entry;name=' . $name);
 			}
 
-			if (strlen($name) > 35)
+			if (strlen($name) > 25)
 			{
 				$_SESSION['personalizedBBC_length_error'] = true;
-				$name = substr($thisName, 0, 35);
+				$name = substr($thisName, 0, 25);
 				redirectexit($scripturl . '?action=admin;area=PersonalizedBBC;sa=personalizedBBC_Entry;name=' . $name);
 			}
 
@@ -255,8 +254,7 @@ function SettingsPersonalizedBBC()
 				switch ($data[0])
 				{
 					case 'string':
-						$val = filter_var($value, FILTER_SANITIZE_STRING);
-						createPersonalizedBBC_setting('personalized_bbc', $key, $val, $name);
+						createPersonalizedBBC_setting('personalized_bbc', $key, $value, $name);
 						continue 2;
 					case 'int':
 						$val = (int)$value > 0 ? (int)$value : ($value === 'on' ? 1 : 0);

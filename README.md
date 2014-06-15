@@ -8,7 +8,7 @@ The purpose of this application is to allow an administrator the option to add p
 Recommended minimal requirements:
 
 Server:  PHP 5.3+
-         MYSQL 5.0+ using MyISAM or InnoDB engine
+	 MYSQL 5.0+ using MyISAM or InnoDB engine
 Browser: HTML5 capability
 SMF Version: 2.0.7+
 
@@ -23,6 +23,11 @@ Features:
 
 
 Changelog:
+
+[Version 1.4]
++ changed routine for gathering SMF default BBC's
++ max allowed BBC tag name length now 25 characters (due to display template)
++ removed unnecessary filter_var() usage (regex sanitizes this variable)
 
 [Version 1.3]
 + relays error message for characters not allowed in BBC names

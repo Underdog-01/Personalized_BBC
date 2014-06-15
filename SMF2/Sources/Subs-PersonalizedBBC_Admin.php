@@ -2,7 +2,7 @@
 /*
 	<id>underdog:PersonalizedBBC</id>
 	<name>Personalized BBC</name>
-	<version>1.3</version>
+	<version>1.4</version>
 	<type>modification</type>
 */
 
@@ -58,7 +58,7 @@ if (!defined('SMF'))
 		- Second tier of custom pagination routine
 		- Sets pages and links for the display template
 
-	void function PersonalizedBBC_array_value_recursive($key, $arr)
+	void function PersonalizedBBC_checkDefaults()
 		- returns array of existing SMF default BBC's
 */
 
@@ -401,45 +401,18 @@ function PersonalizedBBC_pages($lang, $anchor, $link, $pages, $sort=false, $orde
 	return $display;
 }
 
-function PersonalizedBBC_array_value_recursive($key, $arr)
+function PersonalizedBBC_checkDefaults()
 {
-	$val = array(
-		'abbr',
-		'acronym',
-		'anchor',
-		'bdo',
-		'black',
-		'blue',
-		'br',
-		'color',
-		'font',
-		'green',
-		'html',
-		'iurl',
-		'li',
-		'ltr',
-		'me',
-		'nobbc',
-		'o',
-		'php',
-		'red',
-		'rtl',
-		'size',
-		'tr',
-		'td',
-		'time',
-		'white',
-		'x'
-	);
+	global $modSettings;
 
-	array_walk_recursive($arr,
-		function($v, $k) use($key, &$val)
-		{
-			if($k == $key && preg_match("#^[a-z0-9]+$#i", $v) == 1)
-				array_push($val, $v);
-		}
-	);
+	$val = array('kissy', 'chrissy');
+	$enabledBBC = parse_bbc(false);
+	$disabledBBC = !empty($modSettings['disabledBBC']) ? explode(',', $modSettings['disabledBBC']) : array();
 
+	foreach ($enabledBBC as $bbc => $x)
+		$val[] = $enabledBBC[$bbc]['tag'];
+
+	$val = array_merge($val, $disabledBBC);
 	return $val;
 }
 

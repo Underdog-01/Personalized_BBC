@@ -2,7 +2,7 @@
 /*
 	<id>underdog:PersonalizedBBC</id>
 	<name>Personalized BBC</name>
-	<version>1.2</version>
+	<version>1.4</version>
 	<type>modification</type>
 */
 
@@ -53,7 +53,7 @@ $txt['personalizedBBC_trim_options'] = array('none', 'inside', 'outside', 'both'
 $txt['PersonalizedBBC_ErrorMessage'] = 'You do not have permission to access the Personalized BBC Admin section.';
 $txt['PersonalizedBBC_PHP_ErrorMessage'] = 'Your PHP version is too old, please upgrade to a newer version.<br />Your current version is #@#$! whereas this plugin requires a minimum version of 5.3.0';
 $txt['PersonalizedBBC_DuplicateErrorMessage'] = '<span class="error">Warning:</span> This BBC already exists within the SMF defaults, please opt another BBC tag name.';
-$txt['PersonalizedBBC_LengthErrorMessage'] = '<span class="error">Warning:</span> The maximmum length of each BBC tag name can not exceed 35 characters.';
+$txt['PersonalizedBBC_LengthErrorMessage'] = '<span class="error">Warning:</span> The maximmum length of each BBC tag name can not exceed 25 characters.';
 $txt['PersonalizedBBC_IllegalErrorMessage'] = '<span class="error">Warning:</span> Only letters, numbers and underscores are permitted within BBC tag names.';
 
 // permissions

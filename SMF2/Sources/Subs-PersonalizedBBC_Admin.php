@@ -418,7 +418,7 @@ function PersonalizedBBC_checkDefaults()
 		$val[] = $enabledBBC[$bbc]['tag'];
 
 	$val = array_merge($val, $disabledBBC);
-	$val = array_diff($val, $personalized_bbc);
+	$val = array_diff($val, $personalizedBBC);
 	return $val;
 }
 ?>

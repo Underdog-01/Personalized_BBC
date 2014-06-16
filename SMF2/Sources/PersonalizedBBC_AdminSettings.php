@@ -31,8 +31,6 @@ if (!defined('SMF'))
 function SettingsPersonalizedBBC()
 {
 	global $txt, $scripturl, $context, $smcFunc, $sourcedir;
-	require_once($sourcedir . '/ManagePermissions.php');
-	require_once($sourcedir . '/Subs-Editor.php');
 
 	if (!allowedTo('admin_forum'))
 		fatal_lang_error('PersonalizedBBC_ErrorMessage',false);

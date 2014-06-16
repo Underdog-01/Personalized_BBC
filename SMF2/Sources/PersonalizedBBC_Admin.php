@@ -54,7 +54,7 @@ function PersonalizedBBC_Admin()
 
 	foreach (array('view', 'use') as $intent)
 	{
-		if (!empty($_POST['membergroups_' . $intent]) && is_array($_POST['membergroups_' . $intent]))
+		if (isset($_POST['membergroups_' . $intent]) && is_array($_POST['membergroups_' . $intent]))
 		{
 			foreach ($_POST['membergroups_' . $intent] as $id => $value)
 			{

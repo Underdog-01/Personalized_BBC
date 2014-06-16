@@ -87,7 +87,7 @@ function SettingsPersonalizedBBC()
 			if (in_array($name, $checkBBC))
 			{
 				$_SESSION['personalizedBBC_duplicate_error'] = true;
-				redirectexit($scripturl . '?action=admin;area=PersonalizedBBC;sa=personalizedBBC_Entry;name=' . $name);
+				redirectexit($scripturl . '?action=admin;area=PersonalizedBBC;sa=personalizedBBC_Entry;name=' . $thisName);
 			}
 
 			if (strlen($name) > 25)
@@ -326,16 +326,41 @@ function SettingsPersonalizedBBC()
 		}
 
 		// Adjust membergroup permissions
+		$perms = array();
 		foreach (array('view', 'use') as $intent)
 		{
 			foreach ($context['personalizedBBC_membergroups_' . $intent] as $group => $value)
 			{
 				$value = isset($value) ? $value : (isset($context['personalizedBBC']['permissions_' . $intent][$group]['add_deny']) ? $context['personalizedBBC']['permissions_' . $intent][$group]['add_deny'] : null);
-				$value = !isset($value) ? '' : ($value == 1 ? 'on' : 'deny');
-				$_POST['personalized_bbc_' . $name . '_' . $intent][$group] = $value;
+				$value = !isset($value) ? '' : ($value == 1 ? 1 : 0);
+				$perms[] = array('group' => $group, 'name' => 'personalized_bbc_' . $name . '_' . $intent, 'value' => $value);
 			}
-			if (!empty($name))
-				save_inline_permissions(array('personalized_bbc_' . $name . '_' . $intent));
+		}
+		if (!empty($name))
+		{
+			$smcFunc['db_query']('', '
+				DELETE FROM {db_prefix}permissions
+				WHERE permission LIKE {string:perm}',
+				array('perm' => 'personalized_bbc_' . $name . '_view')
+			);
+			$smcFunc['db_query']('', '
+				DELETE FROM {db_prefix}permissions
+				WHERE permission LIKE {string:perm}',
+				array('perm' => 'personalized_bbc_' . $name . '_use')
+			);
+			foreach ($perms as $perm)
+			{
+				$smcFunc['db_insert']('replace',
+					'{db_prefix}permissions',
+					array(
+						'id_group' => 'int', 'permission' => 'string', 'add_deny' => 'int',
+					),
+					array(
+						$perm['group'], $perm['name'], $perm['value'],
+					),
+					array('id_group', 'permission')
+				);
+			}
 		}
 	}
 

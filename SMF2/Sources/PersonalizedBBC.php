@@ -39,7 +39,7 @@ if (!defined('SMF'))
 
 function PersonalizedBBC_load_permissions(&$permissionGroups, &$permissionList, &$leftPermissionGroups, &$hiddenPermissions, &$relabelPermissions)
 {
-	global $smcFunc;
+	global $smcFunc, $modSettings;
 	loadLanguage('PersonalizedBBC');
 	$permNames = array();
 	$key = 0;
@@ -70,14 +70,22 @@ function PersonalizedBBC_load_permissions(&$permissionGroups, &$permissionList, 
 		);
 	}
 
-	if (!empty($permNames))
+	// SMF 2.1.X behavior will differ
+	$version = $modSettings['smfVersion'];
+	if (preg_match('/\d+(?:\.\d+)+/', $modSettings['smfVersion'], $matches))
+		$version = $matches[0];
+
+	if ($version !== '2.1' && version_compare($version, '2.1.0', '<'))
 	{
-		$permissionGroups['membergroup']['simple'] += array(
-			'PersonalizedBBC_perms',
-		);
-		$permissionGroups['membergroup']['classic'] += array(
-			'PersonalizedBBC_perms',
-		);
+		if (!empty($permNames))
+		{
+			$permissionGroups['membergroup']['simple'] += array(
+				'PersonalizedBBC_perms',
+			);
+			$permissionGroups['membergroup']['classic'] += array(
+				'PersonalizedBBC_perms',
+			);
+		}
 	}
 }
 

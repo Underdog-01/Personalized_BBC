@@ -403,29 +403,22 @@ function PersonalizedBBC_pages($lang, $anchor, $link, $pages, $sort=false, $orde
 
 function PersonalizedBBC_checkDefaults()
 {
-	global $modSettings, $smcFunc;
+	global $modSettings, $smcFunc, $personalized_BBC;
 
 	$val = array('kissy', 'chrissy');
+	$personalized_BBC = !empty($personalized_BBC) ? $personalized_BBC : array();
 	$personalizedBBC = array();
 	$enabledBBC = parse_bbc(false);
 	$disabledBBC = !empty($modSettings['disabledBBC']) ? explode(',', $modSettings['disabledBBC']) : array();
 
-	$result = $smcFunc['db_query']('', "
-		SELECT name
-		FROM {db_prefix}personalized_bbc
-		ORDER BY name"
-	);
-
-	while ($val = $smcFunc['db_fetch_assoc']($result))
-		$personalizedBBC[] = $val['name'];
-
-	$smcFunc['db_free_result']($result);
+	foreach ($personalized_BBC as $pbbc)
+		$personalizedBBC[] = $pbbc['name'];
 
 	foreach ($enabledBBC as $bbc => $x)
 		$val[] = $enabledBBC[$bbc]['tag'];
 
 	$val = array_merge($val, $disabledBBC);
-	$val = array_diff($val, $personalizedBBC);
+	$val = array_diff($val, $personalized_bbc);
 	return $val;
 }
 ?>

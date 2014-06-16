@@ -30,7 +30,7 @@ if (!defined('SMF'))
 
 function SettingsPersonalizedBBC()
 {
-	global $txt, $scripturl, $context, $smcFunc, $sourcedir;
+	global $txt, $scripturl, $context, $smcFunc;
 
 	if (!allowedTo('admin_forum'))
 		fatal_lang_error('PersonalizedBBC_ErrorMessage',false);
@@ -70,7 +70,7 @@ function SettingsPersonalizedBBC()
 			$name = !empty($context['current_name']) ? cleanPersonalizedBBC_String($context['current_name']) : (!empty($context['personalizedBBC']['name']) ? cleanPersonalizedBBC_String($context['personalizedBBC']['name']) : cleanPersonalizedBBC_String($context['personalizedBBC']['current_name']));
 			list($thisName, $name, $checkName) = array($smcFunc['strtolower'](trim($thisName)), $smcFunc['strtolower']($name), false);
 			$context['current_name'] = !empty($context['current_name']) ? $smcFunc['strtolower'](trim($context['current_name'])) : $name;
-			$filterName = preg_replace("#[a-zA-Z0-9_ ]#", '', $context['current_name']);
+			$filterName = preg_replace("#[a-zA-Z0-9_ ]#", '', (!empty($context['personalizedBBC']['name']) ? $context['personalizedBBC']['name'] : ''));
 			$type = isset($context['personalizedBBC']['type']) ? $context['personalizedBBC']['type'] : '';
 			$trim = isset($context['personalizedBBC']['trim']) ? (int)$context['personalizedBBC']['trim'] : 0;
 			$parse = isset($context['personalizedBBC']['parse']) ? $context['personalizedBBC']['parse'] : '';
@@ -98,6 +98,7 @@ function SettingsPersonalizedBBC()
 			if ($filterName)
 			{
 				$_SESSION['personalizedBBC_illegal_error'] = true;
+				$context['personalizedBBC']['name'] = $name;
 				redirectexit($scripturl . '?action=admin;area=PersonalizedBBC;sa=personalizedBBC_Entry;name=' . $name);
 			}
 

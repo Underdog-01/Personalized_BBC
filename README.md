@@ -33,13 +33,13 @@ Changelog:
 
 [Version 1.4]
 + added [Important Notation] to this readme
-! changed routine for gathering SMF default BBC's
-! changed routine for adjusting permissions
-! max allowed BBC tag name length now 25 characters (due to display template)
-! removed unnecessary filter_var() usage (regex sanitizes this variable)
-! installer now includes admin icon for all custom themes
-! fixed source filenames withing uninstall xml
-! fixed editing of same BBC tag name from last update
++ changed routine for gathering SMF default BBC's
++ changed routine for adjusting permissions
++ max allowed BBC tag name length now 25 characters (due to display template)
++ removed unnecessary filter_var() usage (regex sanitizes this variable)
++ installer now includes admin icon for all custom themes
++ fixed source filenames withing uninstall xml
++ fixed editing of same BBC tag name from last update
 
 [Version 1.3]
 + relays error message for characters not allowed in BBC names

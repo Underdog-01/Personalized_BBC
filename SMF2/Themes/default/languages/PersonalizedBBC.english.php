@@ -2,7 +2,7 @@
 /*
 	<id>underdog:PersonalizedBBC</id>
 	<name>Personalized BBC</name>
-	<version>1.4</version>
+	<version>1.5</version>
 	<type>modification</type>
 */
 
@@ -73,6 +73,6 @@ $helptxt['personalizedBBC_tagParse'] = 'Select the type of parsing to be used wh
 $helptxt['personalizedBBC_tagTrim'] = 'Select how any whitespace will be trimmed from the BB Code text output.<br /><br />This option will edit your bbc code when saved within admin.<br /><br />none: Will not trim your code.<br /><br />inside: Trim any whitespace between HTML tags.<br /><br />outside: Trim any whitespace outside any HTML tags.<br /><br />both: Trim all whitespace.';
 $helptxt['personalizedBBC_tagBlockLvl'] = 'Opt whether a block level display will be implemented.';
 $helptxt['personalizedBBC_tagCode'] = 'The HTML to be used for the BBC.<br />ie. &lt;tag&gt;{content}&lt;/tag&gt; or &lt;tag alt={option}&gt;{content}&lt;/tag&gt;';
-$helptxt['personalizedBBC_tagImage'] = 'Select the image to be used for this BBC.  Default images are included with this modification, however custom images can be added to the following directory: ../Themes/default/images/bbc/PersonalizedBBC. Only gif file types are acceptable.';
+$helptxt['personalizedBBC_tagImage'] = 'Select the image to be used for this BBC.  Default images are included with this modification, however custom images can be added to the following directory: ../Themes/default/images/bbc/PersonalizedBBC. Only &@!%@ file types are acceptable.';
 $helptxt['personalizedBBC_membergroups'] = 'The membergroup permission settings allow control over viewing and usage.<br /><br />[Viewing]<br />Membergroups that are enabled/checked will have permission to view this BB Code within posts. The unchecked/disabled membergroups will not be able to view this BB Code content.<br /><br />[Usage]<br />Membergroups that are enabled/checked will have permission to use this BB Code within posts. The unchecked/disabled membergroups will not be able to use this BB Code & it will be parsed from their post prior to saving to the database.';
 ?>

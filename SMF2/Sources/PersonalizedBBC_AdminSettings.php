@@ -2,7 +2,7 @@
 /*
 	<id>underdog:PersonalizedBBC</id>
 	<name>Personalized BBC</name>
-	<version>1.4</version>
+	<version>1.5</version>
 	<type>modification</type>
 */
 
@@ -203,7 +203,6 @@ function SettingsPersonalizedBBC()
 					array($name, '', '', '', '', '', 0, 0, 0, 0, 1, 1),
 					array('name')
 				);
-				$type = 2;
 			}
 
 			foreach ($setting_types as $key => $data)
@@ -434,7 +433,7 @@ function SettingsPersonalizedBBC()
 
 function EntryPersonalizedBBC()
 {
-	global $txt, $scripturl, $context, $smcFunc;
+	global $txt, $scripturl, $context, $smcFunc, $modSettings;
 
 	if (!allowedTo('admin_forum'))
 		fatal_lang_error('PersonalizedBBC_ErrorMessage',false);
@@ -443,6 +442,7 @@ function EntryPersonalizedBBC()
 	$context['current_name'] = !empty($_REQUEST['name']) ? $smcFunc['strtolower'](trim($_REQUEST['name'])) : '';
 	$context['PersonalizedBBC_Images'] = PersonalizedBBC_images();
 	$setting_types = array('name', 'description', 'code', 'image', 'prior', 'after', 'parse', 'trim', 'type', 'block_lvl', 'enable', 'display', 'delete', 'current_name');
+	$imageType = version_compare((!empty($modSettings['smfVersion']) ? substr($modSettings['smfVersion'], 0, 3) : '2.0'), '2.1', '<') ? '.gif' : '.png';
 
 	foreach ($setting_types as $setting_type)
 		$context['personalizedBBC'][$setting_type] = '';
@@ -459,7 +459,7 @@ function EntryPersonalizedBBC()
 		);
 		while ($val = $smcFunc['db_fetch_assoc']($result))
 		{
-			$val['image'] = !empty($val['image']) ? str_replace(array('personalizedBBC/', '.gif'), '', $val['image']) . '.gif' : $context['PersonalizedBBC_Images'][0];
+			$val['image'] = !empty($val['image']) ? str_replace(array('personalizedBBC/', $imageType), '', $val['image']) . $imageType : $context['PersonalizedBBC_Images'][0];
 
 			foreach ($setting_types as $setting_type)
 				$context['personalizedBBC'][$setting_type] = isset($val[$setting_type]) ? $val[$setting_type] : '';

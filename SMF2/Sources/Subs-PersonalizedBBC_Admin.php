@@ -2,7 +2,7 @@
 /*
 	<id>underdog:PersonalizedBBC</id>
 	<name>Personalized BBC</name>
-	<version>1.4</version>
+	<version>1.5</version>
 	<type>modification</type>
 */
 
@@ -22,10 +22,10 @@ if (!defined('SMF'))
 
 	void function PersonalizedBBC_CheckImage($imageArray)
 		- Ensures the bbc image file is transferred to the appropriate theme directory
-		- Failure defaults to: bbc-name.gif
+		- Failure defaults to: bbc-name(.gif/.png)
 
 	void function PersonalizedBBC_FileTypes($file)
-		- Ensures the bbc image file type is gif
+		- Ensures the bbc image file type is gif for SMF 2.0.X or png for SMF 2.1.X
 		- This function may only be necessary where one enters file names via phpmyadmin or the like
 
 	void function PersonalizedBBC_SanitizeFileName($filename)
@@ -48,7 +48,7 @@ if (!defined('SMF'))
 		- Queries existing membergroup data for bbc permission settings
 
 	void function PersonalizedBBC_images()
-		- Gathers gif icon file names from the ../Themes/default/images/bbc/personalizedBBC directory
+		- Gathers gif/png icon file names from the ../Themes/default/images/bbc/personalizedBBC directory
 
 	void function PersonalizedBBC_pagination($content, $count)
 		- First tier of custom pagination routine
@@ -80,11 +80,12 @@ function createPersonalizedBBC_setting($tableName, $columnName, $value, $name)
 	);
 }
 
-function PersonalizedBBC_CheckImage($image = array('bbc' => 'bbc.gif'))
+function PersonalizedBBC_CheckImage($image = array('bbc' => 'bbc'))
 {
-	global $settings;
+	global $settings, $modSettings;
 
 	$key = key($image);
+	$imageType = version_compare((!empty($modSettings['smfVersion']) ? substr($modSettings['smfVersion'], 0, 3) : '2.0'), '2.1', '<') ? '.gif' : '.png';
 	$file = PersonalizedBBC_SanitizeFileName($image[$key]);
 
 	if (PersonalizedBBC_FileTypes($file) && @file_exists($settings['theme_dir'] . '/images/bbc/personalizedBBC/' . $file))
@@ -97,13 +98,16 @@ function PersonalizedBBC_CheckImage($image = array('bbc' => 'bbc.gif'))
 			return 'personalizedBBC/' . $file;
 	}
 
-	return $key . '.gif';
+	return $key . $imageType;
 }
 
-// Check for valid file type (gif only)
+// Check for valid file type (gif/png only)
 function PersonalizedBBC_FileTypes($file = '')
 {
-	if (strripos($file, '.gif') !== false)
+	global $modSettings;
+	$imageType = version_compare((!empty($modSettings['smfVersion']) ? substr($modSettings['smfVersion'], 0, 3) : '2.0'), '2.1', '<') ? 'gif' : 'png';
+
+	if (strripos($file, $imageType) !== false)
 		return true;
 
 	return false;
@@ -111,6 +115,9 @@ function PersonalizedBBC_FileTypes($file = '')
 
 function PersonalizedBBC_SanitizeFileName($filename)
 {
+	global $modSettings;
+
+	$imageType = version_compare((!empty($modSettings['smfVersion']) ? substr($modSettings['smfVersion'], 0, 3) : '2.0'), '2.1', '<') ? 'gif' : 'png';
 	$filename_raw = $filename;
 	$special_chars = array("?", "[", "]", "/", "\\", "=", "<", ">", ":", ";", ",", "'", "\"", "&", "$", "#", "*", "(", ")", "|", "~", "`", "!", "{", "}", chr(0));
 	$filename = str_replace($special_chars, '', $filename);
@@ -124,7 +131,7 @@ function PersonalizedBBC_SanitizeFileName($filename)
 
 	$filename = array_shift($parts);
 	$extension = array_pop($parts);
-	$mimes = array('gif');
+	$mimes = array($imageType);
 
 	foreach ((array)$parts as $part)
 	{
@@ -258,8 +265,9 @@ function PersonalizedBBC_load_membergroups()
 
 function PersonalizedBBC_images()
 {
-	global $settings;
+	global $settings, $modSettings;
 	$imagesetlist = array();
+	$imageType = version_compare((!empty($modSettings['smfVersion']) ? substr($modSettings['smfVersion'], 0, 3) : '2.0'), '2.1', '<') ? 'gif' : 'png';
 
 	if (is_dir($settings['default_theme_dir'] . '/images/bbc/personalizedBBC'))
 		$imagesDir = @opendir($settings['default_theme_dir'] . '/images/bbc/personalizedBBC');
@@ -269,14 +277,14 @@ function PersonalizedBBC_images()
 	{
 		while (($file = readdir($imagesDir)) !== false)
 		{
-			if (preg_match('#\.(?:gif)$#', $file) && $file !== 'no_image.gif')
+			if (preg_match('#\.(?:' . $imageType . ')$#', $file) && $file !== 'no_image.' . $imageType)
 				$imagesetlist[] = $file;
 		}
 		closedir($imagesDir);
 	}
 
 	natsort($imagesetlist);
-	return array_merge(array('no_image.gif'), $imagesetlist);
+	return array_merge(array('no_image.' . $imageType), $imagesetlist);
 }
 
 function PersonalizedBBC_pagination($content, $redirect, $count = 10)

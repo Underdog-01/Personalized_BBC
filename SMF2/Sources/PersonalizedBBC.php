@@ -2,7 +2,7 @@
 /*
 	<id>underdog:PersonalizedBBC</id>
 	<name>Personalized BBC</name>
-	<version>1.4</version>
+	<version>1.5</version>
 	<type>modification</type>
 */
 
@@ -94,7 +94,7 @@ function PersonalizedBBC_admin_areas(&$admin_areas)
 	global $txt;
 	loadLanguage('PersonalizedBBC');
 
-	$PersonalizedBBC['layout']['areas'] = array(
+	$PersonalizedBBC = array(
 		'PersonalizedBBC' => array(
 			'label' => $txt['PersonalizedBBC_tabtitle'],
 			'file' => 'PersonalizedBBC_Admin.php',
@@ -105,7 +105,7 @@ function PersonalizedBBC_admin_areas(&$admin_areas)
 		),
 	);
 
-	$admin_areas = array_merge_recursive($admin_areas, $PersonalizedBBC);
+	$admin_areas['layout']['areas'] += $PersonalizedBBC;
 }
 
 function PersonalizedBBC_codes(&$codes)
@@ -174,10 +174,11 @@ function PersonalizedBBC_codes(&$codes)
 
 function PersonalizedBBC_buttons(&$bbc_buttons)
 {
-	global $smcFunc, $txt;
+	global $smcFunc, $txt, $settings, $modSettings;
 	loadLanguage('PersonalizedBBC');
 	$datums = array();
 	$key = 0;
+	$imageType = version_compare((!empty($modSettings['smfVersion']) ? substr($modSettings['smfVersion'], 0, 3) : '2.0'), '2.1', '<') ? 'gif' : 'png';
 
 	$request = $smcFunc['db_query']('', '
 			SELECT name, description, image, code, prior, after, parse, trim, type, block_lvl, enable, display
@@ -228,7 +229,7 @@ function PersonalizedBBC_buttons(&$bbc_buttons)
 				'code' => empty($parsed) ? $row['code'] : '',
 				'before' => !empty($parsed) && !empty($row['prior']) ? $row['prior'] : '',
 				'after' => !empty($parsed) && !empty($row['after']) ? $row['after'] : '',
-				'image' => !empty($row['image']) ? str_replace('.gif', '', $row['image']) : trim($name),
+				'image' => !empty($row['image']) ? str_replace('.' . $imageType, '', $row['image']) : trim($name),
 				'show' => !empty($row['display']) ? true : false,
 				'enable' => !empty($row['enable']) ? true : false,
 				'type' => $type,
@@ -237,8 +238,8 @@ function PersonalizedBBC_buttons(&$bbc_buttons)
 	}
 	$smcFunc['db_free_result']($request);
 
-	if (!empty($bbc_codes))
-		$bbc_buttons[2][] = array();
+	if (!empty($datums))
+		$bbc_buttons[1][] = '<img src="' . $settings['images_url']. '/bbc/divider.' . $imageType . '" alt="|" style="margin: 0 3px 0 3px;">';
 
 	foreach ($datums as $datum)
 	{
@@ -251,9 +252,9 @@ function PersonalizedBBC_buttons(&$bbc_buttons)
 			else
 				$before = '[' . $datum['name'] . ']';
 
-			$bbc_buttons[2][] = array(
+			$bbc_buttons[1][] = array(
 					'image' => $datum['image'],
-					'code' => $datum['code'],
+					'code' => $datum['name'],
 					'description' => $datum['description'],
 					'before' => $before,
 					'after' => ($datum['type'] !== 'closed' ? '[/' . $datum['name'] . ']' : ''),
@@ -264,11 +265,13 @@ function PersonalizedBBC_buttons(&$bbc_buttons)
 
 function PersonalizedBBC_load()
 {
-	global $smcFunc, $txt, $personalized_BBC;
+	global $smcFunc, $txt, $helptxt, $modSettings, $personalized_BBC;
 	loadLanguage('PersonalizedBBC');
 	$personalized_BBC = array();
 	$key = 0;
+	$imageType = version_compare((!empty($modSettings['smfVersion']) ? substr($modSettings['smfVersion'], 0, 3) : '2.0'), '2.1', '<') ? 'gif' : 'png';
 
+	$helptxt['personalizedBBC_tagImage'] = str_replace('&@!%@', $imageType, $helptxt['personalizedBBC_tagImage']);
 	// BB Code permissions are varying
 	$request = $smcFunc['db_query']('', '
 			SELECT name, type
@@ -310,7 +313,7 @@ function PersonalizedBBC_parser($content, $intent = 'view')
 		if (!allowedTo('personalized_bbc_' . $parseBBC['name'] . '_' . $intent))
 		{
 			if ((!empty($parseBBC['type'])) && (int)$parseBBC['type'] == 3)
-				$content = preg_replace("~\[" . $parseBBC['name'] . "\](.*?(<br( />)|\Z))~i", "", $content);
+				$content = preg_replace("~\[" . $parseBBC['name'] . "\](.*?(<br( />)|<br>|\Z))~i", "", $content);
 			else
 				$content = preg_replace(array("~\[" . $parseBBC['name'] . "\](.*?)\[\/" . $parseBBC['name'] . "\]~i", "~\[" . $parseBBC['name'] . "=(.*?)\](.*?)\[\/" . $parseBBC['name'] . "\]~i"), array('', ''), $content);
 		}

@@ -5,7 +5,7 @@ Purpose and/or usage of this software package:
 The purpose of this application is to allow an administrator the option to add personalized BBCs to a SMF forum installation.
 These BBC additions have individual permission settings to allow or restrict their usage and visibility.
 
-[color=red]Important Notation][/color]:
+[color=red]Important Notation[/color]:
   This modification will only hide Personalized BBC content to specified membergroups when it is installed.
   Prior to using the SMF Large Upgrade Package it is advised to put your forum in maintenance mode
   until you are able to reinstall this modification.
@@ -46,6 +46,13 @@ Features:
 [hr]
 
 Changelog:
+
+[Version 1.5]
++ added SMF 2.1 support
++ includes png bbc icons for SMF 2.1 support
+! fixed BBC button hook routine
+! various language and file changes for SMF 2.1 compatibility
+! changed regex for closed tags regarding HTML5 compatibility
 
 [Version 1.4]
 + added [Important Notation] to this readme

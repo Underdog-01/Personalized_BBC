@@ -8,12 +8,12 @@
 <package-info xmlns="http://www.simplemachines.org/xml/package-info" xmlns:smf="http://www.simplemachines.org/">
 	<id>underdog:PersonalizedBBC</id>
 	<name>Personalized BBC</name>
-	<version>1.4</version>
+	<version>1.5</version>
 	<type>modification</type>
 
-	<!-- ####################      SMF 2.0.X      #################### -->
+	<!-- ####################      SMF 2.0.X     #################### -->
 
-	<install for="2.0 - 2.0.99">
+	<install for="2.0 - 2.0.98">
 		<readme parsebbc="true">SMF2/readme_PersonalizedBBC.txt</readme>
 		<require-dir name="SMF2/Sources" destination="$boarddir" />
 		<require-dir name="SMF2/Themes" destination="$boarddir" />
@@ -23,7 +23,7 @@
 		<redirect url="$scripturl?action=admin;area=PersonalizedBBC;" timeout="5000">SMF2/redirect.txt</redirect>
 	</install>
 
-	<uninstall for="2.0 - 2.0.99">
+	<uninstall for="2.0 - 2.0.98">
 		<readme parsebbc="true">SMF2/PersonalizedBBC_uninstall_readme.txt</readme>
 		<code>SMF2/PersonalizedBBC_uninstall.php</code>
 		<modification reverse="true">personalizedBBC_install.xml</modification>
@@ -37,6 +37,37 @@
 		<remove-file name="$imagesdir/admin/personalizedBBC-help.gif" />
 		<remove-file name="$imagesdir/admin/personalizedBBC_add.png" />
 		<remove-file error="skip" name="$imagesdir/admin/PersonalizedBBC_Settings.png" />
+		<remove-dir name="$imagesdir/bbc/personalizedBBC" />
+	</uninstall>
+
+	<!-- ####################      SMF 2.1.X     #################### -->
+
+	<install for="2.0.99 - 2.1.99">
+		<readme parsebbc="true">SMF2/readme_PersonalizedBBC.txt</readme>
+		<require-dir name="SMF2/Sources" destination="$boarddir" />
+		<require-dir name="SMF2.1/Themes" destination="$boarddir" />
+		<require-dir name="SMF2.1/Themes/default/images/admin/big" destination="$imagesdir/admin" />
+		<require-file name="SMF2.1/Themes/default/images/admin/PersonalizedBBC_settings.png" destination="$imagesdir/admin" />
+		<database>SMF2/PersonalizedBBC_mysql.php</database>
+		<modification format="xml" type="file">personalizedBBC_install.xml</modification>
+		<redirect url="$scripturl?action=admin;area=PersonalizedBBC;" timeout="5000">SMF2/redirect.txt</redirect>
+	</install>
+
+	<uninstall for="2.0.99 - 2.1.99">
+		<readme parsebbc="true">SMF2/PersonalizedBBC_uninstall_readme.txt</readme>
+		<code>SMF2/PersonalizedBBC_uninstall.php</code>
+		<modification reverse="true">personalizedBBC_install.xml</modification>
+		<remove-file name="$sourcedir/PersonalizedBBC.php" />
+		<remove-file name="$sourcedir/PersonalizedBBC_AdminSettings.php" />
+		<remove-file name="$sourcedir/PersonalizedBBC_Admin.php" />
+		<remove-file name="$themedir/PersonalizedBBC_Admin.template.php" />
+		<remove-file name="$languagedir/PersonalizedBBC.english.php" />
+		<remove-file name="$languagedir/PersonalizedBBC.english-utf8.php" />
+		<remove-file name="$imagesdir/admin/PersonalizedBBC_settings.png" />
+		<remove-file name="$imagesdir/admin/personalizedBBC-help.gif" />
+		<remove-file name="$imagesdir/admin/personalizedBBC_add.png" />
+		<remove-file error="skip" name="$imagesdir/admin/PersonalizedBBC_Settings.png" />
+		<remove-file error="skip" name="$imagesdir/admin/big/PersonalizedBBC_settings.png" />
 		<remove-dir name="$imagesdir/bbc/personalizedBBC" />
 	</uninstall>
 </package-info>

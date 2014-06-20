@@ -1,4 +1,4 @@
-[font=impact][size=18pt][color=teal][SMF 2.0.X] Personalized BBC[/color][/size][/font]
+[font=impact][size=18pt][color=teal][SMF 2.0.X] / [SMF 2.1.X] Personalized BBC[/color][/size][/font]
 
 Purpose and/or usage of this software package:
 
@@ -50,7 +50,9 @@ Changelog:
 [Version 1.5]
 + added SMF 2.1 support
 + includes png bbc icons for SMF 2.1 support
++ added override option for existing SMF default BBC tags
 ! fixed BBC button hook routine
+! fixed BBC type setting for newly created tag
 ! various language and file changes for SMF 2.1 compatibility
 ! changed regex for closed tags regarding HTML5 compatibility
 

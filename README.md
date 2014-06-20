@@ -11,7 +11,7 @@ The purpose of this application is to allow an administrator the option to add p
   Failing to follow that procedure will allow all membergroups with appropriate board permissions
   to view all those BBC's that were normally hidden.
   The same applies when uninstalling this modification.
-  
+
 Recommended minimal requirements:
 
 Server:  PHP 5.3+
@@ -34,7 +34,9 @@ Changelog:
 [Version 1.5]
 + added SMF 2.1 support
 + includes png bbc icons for SMF 2.1 support
++ added override option for existing SMF default BBC tags
 + fixed BBC button hook routine
++ fixed BBC type setting for newly created tag
 + various language and file changes for SMF 2.1 compatibility
 + changed regex for closed tags regarding HTML5 compatibility
 

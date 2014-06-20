@@ -198,6 +198,10 @@ function template_PersonalizedBBC_Edit()
 										</td>
 										<td width="70%">
 											<input type="text" size="50" name="name[', $context['current_name'],']" value="', $context['current_name'] ,'" />
+											<span style="float:right;">
+												<span style="position:relative;bottom:3px;">', $txt['PersonalizedBBC_Override'], '&nbsp;</span>
+												<input type="checkbox" name="override" value="1" />
+											</span>
 										</td>
 									</tr>
 									<tr>

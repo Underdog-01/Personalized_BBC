@@ -67,7 +67,7 @@ function SettingsPersonalizedBBC()
 		$_SESSION['personalizedBBC_skip'] = false;
 		foreach ($bbcTags as $thisName => $context['personalizedBBC'])
 		{
-			$name = !empty($context['current_name']) ? cleanPersonalizedBBC_String($context['current_name']) : (!empty($context['personalizedBBC']['name']) ? cleanPersonalizedBBC_String($context['personalizedBBC']['name']) : cleanPersonalizedBBC_String($context['personalizedBBC']['current_name']));
+			$name = $smcFunc['strtolower'](!empty($context['current_name']) ? cleanPersonalizedBBC_String($context['current_name']) : (!empty($context['personalizedBBC']['name']) ? cleanPersonalizedBBC_String($context['personalizedBBC']['name']) : cleanPersonalizedBBC_String($context['personalizedBBC']['current_name'])));
 			list($thisName, $name, $checkName) = array($smcFunc['strtolower'](trim($thisName)), $smcFunc['strtolower']($name), false);
 			$context['current_name'] = !empty($context['current_name']) ? $smcFunc['strtolower'](trim($context['current_name'])) : $name;
 			$filterName = preg_replace("#[a-zA-Z0-9_ ]#", '', (!empty($context['personalizedBBC']['name']) ? $context['personalizedBBC']['name'] : ''));
@@ -82,7 +82,7 @@ function SettingsPersonalizedBBC()
 			// check if bbc exists within defaults
 			$checkBBC = PersonalizedBBC_checkDefaults();
 
-			if (in_array($name, $checkBBC))
+			if (in_array($name, $checkBBC) && empty($context['PersonalizedBBC_override']))
 			{
 				$_SESSION['personalizedBBC_duplicate_error'] = true;
 				redirectexit($scripturl . '?action=admin;area=PersonalizedBBC;sa=personalizedBBC_Entry;name=' . $thisName);

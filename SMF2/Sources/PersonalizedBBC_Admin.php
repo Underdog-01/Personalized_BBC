@@ -40,6 +40,7 @@ function PersonalizedBBC_Admin()
 	$context['current_name'] = (!empty($_REQUEST['name'])) && !is_array($_REQUEST['name']) ? $smcFunc['strtolower'](trim(cleanPersonalizedBBC_String($_REQUEST['name']))) : '';
 	$context['current_page'] = !empty($context['current_page']) ? (int)$context['current_page'] : 1;
 	$context['current_page'] = (!empty($_REQUEST['current_page']) ? (int)$_REQUEST['current_page'] : $context['current_page']) -1;
+	$context['PersonalizedBBC_override'] = !empty($_REQUEST['override']) ? $_REQUEST['override'] : '';
 
 	foreach ($personalizedBBC_settings as $setting_type)
 	{

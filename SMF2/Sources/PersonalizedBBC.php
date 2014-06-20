@@ -255,6 +255,7 @@ function PersonalizedBBC_buttons(&$bbc_buttons)
 			$bbc_buttons[1][] = array(
 					'image' => $datum['image'],
 					'code' => $datum['name'],
+					'html' => $datum['code'],
 					'description' => $datum['description'],
 					'before' => $before,
 					'after' => ($datum['type'] !== 'closed' ? '[/' . $datum['name'] . ']' : ''),

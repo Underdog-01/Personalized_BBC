@@ -42,6 +42,7 @@ $txt['personalizedBBC_membergroups_view'] = 'Viewing';
 $txt['personalizedBBC_membergroups_use'] = 'Usage';
 $txt['personalizedBBC_membergroups_check'] = 'Check/Uncheck All';
 $txt['PersonalizedBBC_page'] = 'Page';
+$txt['PersonalizedBBC_Override'] = 'Override:';
 
 // drop-down options
 $txt['personalizedBBC_type_options'] = array('[tag]content[/tag]', '[tag=option]content[/tag]', '[tag=option1,option2]content[/tag]', '[tag]');
@@ -66,7 +67,7 @@ $txt['permissionhelp_PersonalizedBBC_perm_use'] = 'Allow this membergroup to use
 $txt['PersonalizedBBC_perms'] = 'Personalized BB Codes';
 
 // help text
-$helptxt['personalizedBBC_tagHelp'] = 'The designation of the BBC tag. This input is restrictive whereas only letters, numbers and underscores are allowed. Spaces entered within this input will be converted to underscores.';
+$helptxt['personalizedBBC_tagHelp'] = 'The designation of the BBC tag. This input is restrictive whereas only letters, numbers and underscores are allowed. Spaces entered within this input will be converted to underscores and all text will be converted to lowercase.<br /><br />Normally when the BBC tag name already exists within SMF\'s defaults you will receive a warning and will not be able to save the tag. An override checkbox is provided which when anabled/checked will circumvent the warning and allow you to save the tag. Your new BBC tag will override any existing SMF default tag when used.<br /><br />Entering BBC tag names that exist within the Personalized BBC list will always overwrite said tag.';
 $helptxt['personalizedBBC_tagDescription'] = 'The description of the BBC tag. This will be displayed to users when they hover over this BB Code.';
 $helptxt['personalizedBBC_tagType'] = 'Select the BBC type that will be used whereas the type descriptions are fairly self explanatory.<br /><br />Multiple instances of {content} within your code will most likely require the "no parsing" option.<br /><br />Switching between "parsing" and "no parsing" may have undesired effects on the code that was inputted, therefore one should verify the code is correct if that option has been changed.<hr /><hr />Closed BBC tags will automatically be set with no parsing.';
 $helptxt['personalizedBBC_tagParse'] = 'Select the type of parsing to be used which will determine this BB Code\'s behavior.<br /><br />no parsing: User input between tags will be ignored (Only HTML entered in code setting will be displayed).<br /><br />{content} only: {content} will be replaced by what a user enters between bbc tags.<br /><br />{content} and {option}: {content} will be replaced by what a user enters between bbc tags. {option} will be replaced by what a user enters after `=` within an initial bbc tag.';

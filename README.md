@@ -1,4 +1,4 @@
-SMF 2.0x - Personalized BBC
+Personalized BBC
 
 Purpose and/or usage of this software package:
 
@@ -17,7 +17,7 @@ Recommended minimal requirements:
 Server:  PHP 5.3+
 	 MYSQL 5.0+ using MyISAM or InnoDB engine
 Browser: HTML5 capability
-SMF Version: 2.0.7+
+SMF Version: 2.0.X - 2.1.X
 
 Developed for SMF forums c/o Underdog@web-develop.ca
 Copyright 2014 Underdog@web-develop.ca

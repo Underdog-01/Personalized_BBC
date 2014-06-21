@@ -1,4 +1,4 @@
-[font=impact][size=18pt][color=teal][SMF 2.0.X] / [SMF 2.1.X] Personalized BBC[/color][/size][/font]
+[font=impact][size=18pt][color=teal]Personalized BBC[/color][/size][/font]
 
 Purpose and/or usage of this software package:
 
@@ -20,7 +20,7 @@ Recommended minimal requirements:
 [tr][td]Server: [/td][td]PHP 5.3+[/td][/tr]
 [tr][td] [/td][td]MYSQL 5.0+ using MyISAM or InnoDB engine[/td][/tr]
 [tr][td]Browser: [/td][td]HTML5 capability[/td][/tr]
-[tr][td]SMF Version: [/td][td]2.0.7+[/td][/tr]
+[tr][td]SMF Version: [/td][td]2.0.X - 2.1.X[/td][/tr]
 [/table]
 
 [hr]

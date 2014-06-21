@@ -53,6 +53,7 @@ function SettingsPersonalizedBBC()
 			'trim' => array('int', true, 'trim'),
 			'type' => array('enable_int', true, 'type'),
 			'block_lvl' => array('int', true, 'block_lvl'),
+			'view_source' => array('int', true, 'view_source'),
 			'enable' => array('checkbox', true, 'enable'),
 			'display' => array('checkbox', true, 'display'),
 			'delete' => array('del', false, 'del'),
@@ -75,6 +76,7 @@ function SettingsPersonalizedBBC()
 			$trim = isset($context['personalizedBBC']['trim']) ? (int)$context['personalizedBBC']['trim'] : 0;
 			$parse = isset($context['personalizedBBC']['parse']) ? $context['personalizedBBC']['parse'] : '';
 			$block_lvl = !empty($context['personalizedBBC']['block_lvl']) ? 1 : 0;
+			$view_source = !empty($context['personalizedBBC']['view_source']) ? 1 : 0;
 			$context['personalizedBBC']['code'] = !empty($context['personalizedBBC']['code']) ? $context['personalizedBBC']['code'] : '';
 			foreach ($listArray as $comm)
 				$$comm = isset($context['personalizedBBC'][$comm]) ? 1 : 0;
@@ -199,8 +201,8 @@ function SettingsPersonalizedBBC()
 			{
 				$request = $smcFunc['db_insert']('insert', "
 					{db_prefix}personalized_bbc",
-					array('name' => 'string', 'code' => 'string', 'description' => 'string', 'image' => 'string', 'prior' => 'string', 'after' => 'string', 'parse' => 'int', 'trim' => 'int', 'type' => 'int', 'block_lvl' => 'int', 'enable' => 'int', 'display' => 'int'),
-					array($name, '', '', '', '', '', 0, 0, 0, 0, 1, 1),
+					array('name' => 'string', 'code' => 'string', 'description' => 'string', 'image' => 'string', 'prior' => 'string', 'after' => 'string', 'parse' => 'int', 'trim' => 'int', 'type' => 'int', 'block_lvl' => 'int', 'enable' => 'int', 'display' => 'int', 'view_source' => 'int'),
+					array($name, '', '', '', '', '', 0, 0, 0, 0, 1, 1, 0),
 					array('name')
 				);
 			}
@@ -441,7 +443,7 @@ function EntryPersonalizedBBC()
 	$context['robot_no_index'] = true;
 	$context['current_name'] = !empty($_REQUEST['name']) ? $smcFunc['strtolower'](trim($_REQUEST['name'])) : '';
 	$context['PersonalizedBBC_Images'] = PersonalizedBBC_images();
-	$setting_types = array('name', 'description', 'code', 'image', 'prior', 'after', 'parse', 'trim', 'type', 'block_lvl', 'enable', 'display', 'delete', 'current_name');
+	$setting_types = array('name', 'description', 'code', 'image', 'prior', 'after', 'parse', 'trim', 'type', 'block_lvl', 'enable', 'display', 'delete', 'current_name', 'view_source');
 	$imageType = version_compare((!empty($modSettings['smfVersion']) ? substr($modSettings['smfVersion'], 0, 3) : '2.0'), '2.1', '<') ? '.gif' : '.png';
 
 	foreach ($setting_types as $setting_type)

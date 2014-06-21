@@ -179,9 +179,10 @@ function PersonalizedBBC_buttons(&$bbc_buttons)
 	$datums = array();
 	$key = 0;
 	$imageType = version_compare((!empty($modSettings['smfVersion']) ? substr($modSettings['smfVersion'], 0, 3) : '2.0'), '2.1', '<') ? 'gif' : 'png';
+	$lvl = $imageType === 'gif' ? 2 : 1;
 
 	$request = $smcFunc['db_query']('', '
-			SELECT name, description, image, code, prior, after, parse, trim, type, block_lvl, enable, display
+			SELECT name, description, image, code, prior, after, parse, trim, type, block_lvl, enable, display, view_source
 			FROM {db_prefix}personalized_bbc
 			WHERE display = {int:display}
 			ORDER BY name',
@@ -233,13 +234,11 @@ function PersonalizedBBC_buttons(&$bbc_buttons)
 				'show' => !empty($row['display']) ? true : false,
 				'enable' => !empty($row['enable']) ? true : false,
 				'type' => $type,
+				'view_source' => !empty($row['view_source']) ? true : false,
 			);
 		}
 	}
 	$smcFunc['db_free_result']($request);
-
-	if (!empty($datums))
-		$bbc_buttons[1][] = '<img src="' . $settings['images_url']. '/bbc/divider.' . $imageType . '" alt="|" style="margin: 0 3px 0 3px;">';
 
 	foreach ($datums as $datum)
 	{
@@ -252,10 +251,10 @@ function PersonalizedBBC_buttons(&$bbc_buttons)
 			else
 				$before = '[' . $datum['name'] . ']';
 
-			$bbc_buttons[1][] = array(
+			$bbc_buttons[$lvl][] = array(
 					'image' => $datum['image'],
 					'code' => $datum['name'],
-					'html' => $datum['code'],
+					'html' => !empty($datum['view_source']) ? $datum['code'] : '',
 					'description' => $datum['description'],
 					'before' => $before,
 					'after' => ($datum['type'] !== 'closed' ? '[/' . $datum['name'] . ']' : ''),
@@ -281,9 +280,8 @@ function PersonalizedBBC_load()
 		);
 
 	while ($row = $smcFunc['db_fetch_assoc']($request))
-	{
-		$personalized_BBC[] = array('name' => $row['name'], 'type' => (!empty($row['type']) ? (int)$row['type'] : 0));
-	}
+		$personalized_BBC[] = array('name' => $smcFunc['strtolower']($row['name']), 'type' => (!empty($row['type']) ? (int)$row['type'] : 0));
+
 	$smcFunc['db_free_result']($request);
 
 	foreach ($personalized_BBC as $bbc)

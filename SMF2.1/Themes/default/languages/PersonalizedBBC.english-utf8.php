@@ -43,6 +43,7 @@ $txt['personalizedBBC_membergroups_use'] = 'Usage';
 $txt['personalizedBBC_membergroups_check'] = 'Check/Uncheck All';
 $txt['PersonalizedBBC_page'] = 'Page';
 $txt['PersonalizedBBC_Override'] = 'Override:';
+$txt['personalizedBBC_viewSource'] = 'View Source';
 
 // drop-down options
 $txt['personalizedBBC_type_options'] = array('[tag]content[/tag]', '[tag=option]content[/tag]', '[tag=option1,option2]content[/tag]', '[tag]');
@@ -76,4 +77,5 @@ $helptxt['personalizedBBC_tagBlockLvl'] = 'Opt whether a block level display wil
 $helptxt['personalizedBBC_tagCode'] = 'The HTML to be used for the BBC.<br />ie. &lt;tag&gt;{content}&lt;/tag&gt; or &lt;tag alt={option}&gt;{content}&lt;/tag&gt;';
 $helptxt['personalizedBBC_tagImage'] = 'Select the image to be used for this BBC.  Default images are included with this modification, however custom images can be added to the following directory: ../Themes/default/images/bbc/PersonalizedBBC. Only &@!%@ file types are acceptable.';
 $helptxt['personalizedBBC_membergroups'] = 'The membergroup permission settings allow control over viewing and usage.<br /><br />[Viewing]<br />Membergroups that are enabled/checked will have permission to view this BB Code within posts. The unchecked/disabled membergroups will not be able to view this BB Code content.<br /><br />[Usage]<br />Membergroups that are enabled/checked will have permission to use this BB Code within posts. The unchecked/disabled membergroups will not be able to use this BB Code & it will be parsed from their post prior to saving to the database.';
+$helptxt['personalizedBBC_tagViewSource'] = 'Opt whether the user will have the option to view the source code of the BBC when the WYSIWYG editor is enabled.';
 ?>

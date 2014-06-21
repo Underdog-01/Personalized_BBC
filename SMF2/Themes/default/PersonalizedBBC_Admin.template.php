@@ -189,8 +189,8 @@ function template_PersonalizedBBC_Edit()
 									</tr>' : ''), '
 									<tr>
 										<td width="2%">
-											<a href="',$scripturl,'?action=helpadmin;help=personalizedBBC_tagHelp" onclick="return reqWin(this.href);" style="text-decoration:none;">
-												<img style="vertical-align:middle;position:relative;bottom:1px;width:12px;height:12px;" src="'.$settings['default_theme_url'].'/images/admin/personalizedBBC-help.gif" alt="?" />
+											<a href="', $scripturl, '?action=helpadmin;help=personalizedBBC_tagHelp" onclick="return reqWin(this.href);" style="text-decoration:none;">
+												<img style="vertical-align:middle;position:relative;bottom:1px;width:12px;height:12px;" src="' . $settings['default_theme_url'] . '/images/admin/personalizedBBC-help.gif" alt="?" />
 											</a>
 										</td>
 										<td width="20%">
@@ -206,8 +206,8 @@ function template_PersonalizedBBC_Edit()
 									</tr>
 									<tr>
 										<td width="2%">
-											<a href="',$scripturl,'?action=helpadmin;help=personalizedBBC_tagDescription" onclick="return reqWin(this.href);" style="text-decoration:none;">
-												<img style="vertical-align:middle;position:relative;bottom:1px;width:12px;height:12px;" src="'.$settings['default_theme_url'].'/images/admin/personalizedBBC-help.gif" alt="?" />
+											<a href="', $scripturl, '?action=helpadmin;help=personalizedBBC_tagDescription" onclick="return reqWin(this.href);" style="text-decoration:none;">
+												<img style="vertical-align:middle;position:relative;bottom:1px;width:12px;height:12px;" src="' . $settings['default_theme_url'] . '/images/admin/personalizedBBC-help.gif" alt="?" />
 											</a>
 										</td>
 										<td width="20%">
@@ -222,8 +222,8 @@ function template_PersonalizedBBC_Edit()
 									</tr>
 									<tr>
 										<td width="2%">
-											<a href="',$scripturl,'?action=helpadmin;help=personalizedBBC_tagType" onclick="return reqWin(this.href);" style="text-decoration:none;">
-												<img style="vertical-align:middle;position:relative;bottom:1px;width:12px;height:12px;" src="'.$settings['default_theme_url'].'/images/admin/personalizedBBC-help.gif" alt="?" />
+											<a href="', $scripturl, '?action=helpadmin;help=personalizedBBC_tagType" onclick="return reqWin(this.href);" style="text-decoration:none;">
+												<img style="vertical-align:middle;position:relative;bottom:1px;width:12px;height:12px;" src="' . $settings['default_theme_url'] . '/images/admin/personalizedBBC-help.gif" alt="?" />
 											</a>
 										</td>
 										<td width="20%">
@@ -248,8 +248,8 @@ function template_PersonalizedBBC_Edit()
 									</tr>
 									<tr>
 										<td width="2%">
-											<a href="',$scripturl,'?action=helpadmin;help=personalizedBBC_tagParse" onclick="return reqWin(this.href);" style="text-decoration:none;">
-												<img style="vertical-align:middle;position:relative;bottom:1px;width:12px;height:12px;" src="'.$settings['default_theme_url'].'/images/admin/personalizedBBC-help.gif" alt="?" />
+											<a href="', $scripturl, '?action=helpadmin;help=personalizedBBC_tagParse" onclick="return reqWin(this.href);" style="text-decoration:none;">
+												<img style="vertical-align:middle;position:relative;bottom:1px;width:12px;height:12px;" src="' . $settings['default_theme_url'] . '/images/admin/personalizedBBC-help.gif" alt="?" />
 											</a>
 										</td>
 										<td width="20%">
@@ -271,8 +271,8 @@ function template_PersonalizedBBC_Edit()
 									</tr>
 									<tr>
 										<td width="2%">
-											<a href="',$scripturl,'?action=helpadmin;help=personalizedBBC_tagTrim" onclick="return reqWin(this.href);" style="text-decoration:none;">
-												<img style="vertical-align:middle;position:relative;bottom:1px;width:12px;height:12px;" src="'.$settings['default_theme_url'].'/images/admin/personalizedBBC-help.gif" alt="?" />
+											<a href="', $scripturl, '?action=helpadmin;help=personalizedBBC_tagTrim" onclick="return reqWin(this.href);" style="text-decoration:none;">
+												<img style="vertical-align:middle;position:relative;bottom:1px;width:12px;height:12px;" src="' . $settings['default_theme_url'] . '/images/admin/personalizedBBC-help.gif" alt="?" />
 											</a>
 										</td>
 										<td width="20%">
@@ -297,8 +297,8 @@ function template_PersonalizedBBC_Edit()
 									</tr>
 									<tr>
 										<td width="2%">
-											<a href="',$scripturl,'?action=helpadmin;help=personalizedBBC_tagBlockLvl" onclick="return reqWin(this.href);" style="text-decoration:none;">
-												<img style="vertical-align:middle;position:relative;bottom:1px;width:12px;height:12px;" src="'.$settings['default_theme_url'].'/images/admin/personalizedBBC-help.gif" alt="?" />
+											<a href="', $scripturl, '?action=helpadmin;help=personalizedBBC_tagBlockLvl" onclick="return reqWin(this.href);" style="text-decoration:none;">
+												<img style="vertical-align:middle;position:relative;bottom:1px;width:12px;height:12px;" src="' . $settings['default_theme_url'] . '/images/admin/personalizedBBC-help.gif" alt="?" />
 											</a>
 										</td>
 										<td width="20%">
@@ -308,13 +308,26 @@ function template_PersonalizedBBC_Edit()
 											<input type="checkbox" name="block_lvl[', $context['personalizedBBC']['current_name'],']" value="1"', (!empty($context['personalizedBBC']['block_lvl']) ? ' checked="checked"' : ''),' />
 										</td>
 									</tr>
+									<tr style="visbility: hidden;display: none;">
+										<td width="2%">
+											<a href="', $scripturl, '?action=helpadmin;help=personalizedBBC_tagViewSource" onclick="return reqWin(this.href);" style="text-decoration:none;">
+												<img style="vertical-align:middle;position:relative;bottom:1px;width:12px;height:12px;" src="' . $settings['default_theme_url'] . '/images/admin/personalizedBBC-help.gif" alt="?" />
+											</a>
+										</td>
+										<td width="20%">
+											', $txt['personalizedBBC_viewSource'], '
+										</td>
+										<td width="70%">
+											<input type="checkbox" name="view_source[', $context['personalizedBBC']['current_name'],']" value="1"', (!empty($context['personalizedBBC']['view_source']) ? ' checked="checked"' : ''),' />
+										</td>
+									</tr>
 									<tr>
 										<td colspan="3"><hr /></td>
 									</tr>
 									<tr>
 										<td width="2%">
-											<a href="',$scripturl,'?action=helpadmin;help=personalizedBBC_tagCode" onclick="return reqWin(this.href);" style="text-decoration:none;">
-												<img style="vertical-align:middle;position:relative;bottom:1px;width:12px;height:12px;" src="'.$settings['default_theme_url'].'/images/admin/personalizedBBC-help.gif" alt="?" />
+											<a href="', $scripturl, '?action=helpadmin;help=personalizedBBC_tagCode" onclick="return reqWin(this.href);" style="text-decoration:none;">
+												<img style="vertical-align:middle;position:relative;bottom:1px;width:12px;height:12px;" src="' . $settings['default_theme_url'] . '/images/admin/personalizedBBC-help.gif" alt="?" />
 											</a>
 										</td>
 										<td width="20%">
@@ -326,8 +339,8 @@ function template_PersonalizedBBC_Edit()
 									</tr>
 									<tr>
 										<td style="width:2%;">
-											<a href="',$scripturl,'?action=helpadmin;help=personalizedBBC_tagImage" onclick="return reqWin(this.href);" style="text-decoration:none;">
-												<img style="vertical-align:middle;position:relative;bottom:1px;width:12px;height:12px;" src="'.$settings['default_theme_url'].'/images/admin/personalizedBBC-help.gif" alt="?" />
+											<a href="', $scripturl, '?action=helpadmin;help=personalizedBBC_tagImage" onclick="return reqWin(this.href);" style="text-decoration:none;">
+												<img style="vertical-align:middle;position:relative;bottom:1px;width:12px;height:12px;" src="' . $settings['default_theme_url'] . '/images/admin/personalizedBBC-help.gif" alt="?" />
 											</a>
 										</td>
 										<td width="20%">
@@ -357,8 +370,8 @@ function template_PersonalizedBBC_Edit()
 								<table>
 									<tr>
 										<td style="width:2%;">
-											<a href="',$scripturl,'?action=helpadmin;help=personalizedBBC_membergroups" onclick="return reqWin(this.href);" style="text-decoration:none;">
-												<img style="vertical-align:middle;position:relative;bottom:1px;width:12px;height:12px;" src="'.$settings['default_theme_url'].'/images/admin/personalizedBBC-help.gif" alt="?" />
+											<a href="', $scripturl, '?action=helpadmin;help=personalizedBBC_membergroups" onclick="return reqWin(this.href);" style="text-decoration:none;">
+												<img style="vertical-align:middle;position:relative;bottom:1px;width:12px;height:12px;" src="' . $settings['default_theme_url'] . '/images/admin/personalizedBBC-help.gif" alt="?" />
 											</a>
 										</td>
 										<td colspan="3" style="float:left;">

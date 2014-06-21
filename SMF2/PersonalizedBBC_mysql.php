@@ -122,6 +122,15 @@ $columns = array(
 	    'default' => 0,
 	    'unsigned' => true,
 	    'auto' => false,
+	),
+	array(
+	    'name' => 'view_source',
+	    'type' => 'int',
+	    'size' => 10,
+	    'null' => false,
+	    'default' => 0,
+	    'unsigned' => true,
+	    'auto' => false,
 	)
 );
 $indexes = array(
@@ -152,7 +161,7 @@ foreach ($columns as $column => $data)
     );
 }
 
-/* Adjust max characters of the permission column to 60 (if currently less than)    */
+/* Adjust max characters of the permission column to 50 (if currently less than)    */
 /* Maximum bbc name will be 25 chars (-3 of actual allowed)                         */
 $permissionLength = $smcFunc['db_list_columns'] ('{db_prefix}permissions', 'detail');
 if ((!empty($permissionLength)) && (int)$permissionLength['permission']['size'] < 50)

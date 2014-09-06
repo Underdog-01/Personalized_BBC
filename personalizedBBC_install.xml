@@ -8,7 +8,7 @@
 <modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
 	<id>underdog:PersonalizedBBC</id>
 	<name>Personalized BBC</name>
-	<version>1.5</version>
+	<version>1.6</version>
 	<file name="$sourcedir/Load.php">
 		<operation>
 			<search position="before"><![CDATA[	static $censor_vulgar = null, $censor_proper;]]></search>
@@ -23,6 +23,15 @@
 			<search position="after"><![CDATA[	// You won't believe this - but too many periods upsets apache it seems!]]></search>
 			<add><![CDATA[	// Remove any Personalized BBC where the user does not have permission to use it
 	$message = PersonalizedBBC_parser($message, 'use');
+
+]]></add>
+		</operation>
+	</file>
+	<file name="$sourcedir/Subs.php">
+		<operation>
+			<search position="after"><![CDATA[	// Never show smileys for wireless clients.  More bytes, can't see it anyway :P.]]></search>
+			<add><![CDATA[	// Remove any Personalized BBC where the user does not have permission to view it
+	$message = PersonalizedBBC_redact($message);
 
 ]]></add>
 		</operation>

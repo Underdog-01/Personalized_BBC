@@ -31,6 +31,13 @@ Features:
 
 Changelog:
 
+[Version 1.6]
++ mod now filters restricted bbcodes outside of posts/pm's
++ added option to allow filtering of Url entered within code input (option to conform to RFC 3986 standards)
++ added IMDb and TMDb icons
++ clean_cache() function implemented for permission changes to immediately take affect
++ use of un_htmlspecialchars() function for adding BBCode HTML (HTML within bbc will not function properly without this method being implemented)
+
 [Version 1.5]
 + added SMF 2.1 support
 + includes png bbc icons for SMF 2.1 support

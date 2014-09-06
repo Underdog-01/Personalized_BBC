@@ -2,7 +2,7 @@
 /*
 	<id>underdog:PersonalizedBBC</id>
 	<name>Personalized BBC</name>
-	<version>1.5</version>
+	<version>1.6</version>
 	<type>modification</type>
 */
 
@@ -35,6 +35,9 @@ if (!defined('SMF'))
 
 	void function PersonalizedBBC_parser($text)
 		- Parses message body for restricted BBC tags
+
+	void function PersonalizedBBC_redact($string)
+		- Parses string for BBCodes being used outside of posts/pm's
 */
 
 function PersonalizedBBC_load_permissions(&$permissionGroups, &$permissionList, &$leftPermissionGroups, &$hiddenPermissions, &$relabelPermissions)
@@ -158,9 +161,9 @@ function PersonalizedBBC_codes(&$codes)
 
 			$codes[] = array(
 				'tag' => $tag,
-				'content' => empty($parsed) ? $row['code'] : '',
-				'before' => !empty($parsed) && !empty($row['prior']) ? $row['prior'] : '',
-				'after' => !empty($parsed) && !empty($row['after']) ? $row['after'] : '',
+				'content' => empty($parsed) ? un_htmlspecialchars($row['code']) : '',
+				'before' => !empty($parsed) && !empty($row['prior']) ? un_htmlspecialchars($row['prior']) : '',
+				'after' => !empty($parsed) && !empty($row['after']) ? un_htmlspecialchars($row['after']) : '',
 				'trim' => $trim,
 				'type' => !empty($type) ? $type : null,
 				'block_level' => !empty($row['block_lvl']) ? true : false,
@@ -227,13 +230,14 @@ function PersonalizedBBC_buttons(&$bbc_buttons)
 			$datums[] = array(
 				'name' => $name,
 				'description' => !empty($row['description']) ? $row['description'] : $name,
-				'code' => empty($parsed) ? $row['code'] : '',
-				'before' => !empty($parsed) && !empty($row['prior']) ? $row['prior'] : '',
-				'after' => !empty($parsed) && !empty($row['after']) ? $row['after'] : '',
+				'code' => un_htmlspecialchars($row['code']),
+				'before' => !empty($row['prior']) ? $row['prior'] : '',
+				'after' => !empty($row['after']) ? $row['after'] : '',
 				'image' => !empty($row['image']) ? str_replace('.' . $imageType, '', $row['image']) : trim($name),
 				'show' => !empty($row['display']) ? true : false,
 				'enable' => !empty($row['enable']) ? true : false,
 				'type' => $type,
+				'block_lvl' => !empty($row['block_lvl']) ? true : false,
 				'view_source' => !empty($row['view_source']) ? true : false,
 			);
 		}
@@ -256,6 +260,8 @@ function PersonalizedBBC_buttons(&$bbc_buttons)
 					'code' => $datum['name'],
 					'html' => !empty($datum['view_source']) ? $datum['code'] : '',
 					'description' => $datum['description'],
+					'block_lvl' => $datum['block_lvl'],
+					'allowed_children' => !empty($datum['allowed_children']) ? $datum['allowed_children'] : 'null',
 					'before' => $before,
 					'after' => ($datum['type'] !== 'closed' ? '[/' . $datum['name'] . ']' : ''),
 			);
@@ -319,5 +325,23 @@ function PersonalizedBBC_parser($content, $intent = 'view')
 	}
 
 	return $content;
+}
+
+function PersonalizedBBC_redact($string)
+{
+	global $personalized_BBC;
+
+	foreach ($personalized_BBC as $parseBBC)
+	{
+		if (!allowedTo('personalized_bbc_' . $parseBBC['name'] . '_view'))
+		{
+			if ((!empty($parseBBC['type'])) && (int)$parseBBC['type'] == 3)
+				$string = preg_replace("~\[" . $parseBBC['name'] . "\](.*?(<br( />)|<br>|\Z))~i", "", $string);
+			else
+				$string = preg_replace(array("~\[" . $parseBBC['name'] . "\](.*?)\[\/" . $parseBBC['name'] . "\]~i", "~\[" . $parseBBC['name'] . "=(.*?)\](.*?)\[\/" . $parseBBC['name'] . "\]~i"), array('', ''), $string);
+		}
+	}
+
+	return $string;
 }
 ?>

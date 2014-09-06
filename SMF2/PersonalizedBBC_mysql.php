@@ -2,7 +2,7 @@
 /*
 	<id>underdog:PersonalizedBBC</id>
 	<name>Personalized BBC</name>
-	<version>1.5</version>
+	<version>1.6</version>
 	<type>modification</type>
 */
 
@@ -131,6 +131,15 @@ $columns = array(
 	    'default' => 0,
 	    'unsigned' => true,
 	    'auto' => false,
+	),
+	array(
+	    'name' => 'url_fix',
+	    'type' => 'varchar',
+	    'size' => 255,
+	    'null' => false,
+	    'unsigned' => true,
+	    'auto' => false,
+            'default' => "rfc0",
 	)
 );
 $indexes = array(

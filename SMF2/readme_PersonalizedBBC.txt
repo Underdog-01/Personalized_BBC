@@ -29,7 +29,7 @@ Developed for SMF forums c/o Underdog @ [url=http://web-develop.ca]web-develop.c
 Copyright 2014 Underdog@web-develop.ca
 Distributed under the [url=http://creativecommons.org/licenses/by-nd/4.0/]CC BY-ND 4.0 License[/url]
 
-If you commend this software package and/or any other contributions that underdog@webdevelop.comli.com develops for the SMF community,
+If you commend this software package and/or any other contributions that underdog@web-develop.ca develops for the SMF community,
 please feel free to make a donation to paypal using the image/link provided below. Thank you for opting to use this software package.
 
 [url=http://web-develop.ca/index.php?page=underdog_donation][img]https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif[/img][/url]
@@ -46,6 +46,13 @@ Features:
 [hr]
 
 Changelog:
+
+[Version 1.6]
++ mod now filters restricted bbcodes outside of posts/pm's
++ added option to allow filtering of Url entered within code input (option to conform to [url=http://www.ietf.org/rfc/rfc3986.txt]RFC 3986[/url] standards)
++ added IMDb and TMDb icons
+! clean_cache() function implemented for permission changes to immediately take affect
+! use of un_htmlspecialchars() function for adding BBCode HTML (HTML within bbc will not function properly without this method being implemented)
 
 [Version 1.5]
 + added SMF 2.1 support

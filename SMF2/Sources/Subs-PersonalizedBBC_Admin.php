@@ -2,7 +2,7 @@
 /*
 	<id>underdog:PersonalizedBBC</id>
 	<name>Personalized BBC</name>
-	<version>1.5</version>
+	<version>1.6</version>
 	<type>modification</type>
 */
 
@@ -43,6 +43,9 @@ if (!defined('SMF'))
 
 	void function cleanPersonalizedBBC_Code($string)
 		- Filters code/before/after inputs for specific characters such as unnecessary white spaces
+
+	void function cleanPersonalizedBBC_Url($string = false)
+		- filters URL's from code input for optional RFC compliance
 
 	void function PersonalizedBBC_load_membergroups()
 		- Queries existing membergroup data for bbc permission settings
@@ -236,6 +239,213 @@ function cleanPersonalizedBBC_Code($string = false, $trim = 0)
 	return $string;
 }
 
+function cleanPersonalizedBBC_Url($type, $parse, $rfc, $string = false)
+{
+	// fix entities for possible url's within the input
+	global $smcFunc, $context;
+
+	if (empty($string))
+		return '';
+
+	$matches[0] = array();
+	$utf8 = !empty($context['utf8']) ? 'UTF-8' : '';
+	$type = !empty($type) ? $type : 'encode';
+	$parse = !empty($parse) ? $parse : '';
+	$rfc = (!empty($rfc)) && $rfc == 'rfc3986x' ? 'rfc3986x' : 'rfc3986';
+
+	preg_match_all('~https?://\S+~', $string, $matches);
+	foreach ($matches[0] as $key => $match)
+	{
+		$fixedUrl = $type === 'encode' ? $smcFunc['htmltrim'](PersonalizedBBC_uri($match, $rfc), ENT_NOQUOTES, $utf8) : $smcFunc['htmltrim'](PersonalizedBBC_rev_uri($match, $rfc), ENT_NOQUOTES, $utf8);
+		if ($match !== $fixedUrl)
+		{
+			$fixedUrl = preg_replace(array('~%7Bcontent%7D~', '~%7Boption%7D~', '~%7Boption1%7D~', '~%7Boption2%7D~'), array('{content}', '{option}', '{option1}', '{option2}'), $fixedUrl);
+
+			if ($parse !== 'prior')
+			{
+				if (substr($match, -2, 1) === '"' && substr($fixedUrl, -3) === '%2C')
+					$fixedUrl = rtrim($fixedUrl, '%2C') . '"' . substr($match, -1);
+				elseif (substr($fixedUrl, -3) === '%2C')
+					$fixedUrl = rtrim($fixedUrl, '%2C') . '"';
+			}
+
+			$string = str_replace($match, $fixedUrl, $string);
+		}
+	}
+
+	return $string;
+}
+
+function PersonalizedBBC_rev_uri($url, $rfc)
+{
+	global $smcFunc;
+	if ($rfc === 'rfc3986')
+	{
+		$parts = explode('/', $url);
+		$oldParts = explode('?', $parts[count($parts)-1], 2);
+		$oldPart = count($oldParts) > 1 ? rawurldecode($oldParts[0]) . '?' . urldecode($oldParts[1]) : urldecode($oldParts[0]);
+
+		$newParts = array_pop($parts);
+		$parts[count($parts)] = $oldPart;
+		$newUrl = !empty($parts) ? implode('/', $parts) : $url;
+
+		return $newUrl;
+	}
+	elseif ($rfc === 'rfc3986x')
+	{
+		$uparts = parse_url($url);
+		$scheme = array_key_exists('scheme', $uparts) ? $uparts['scheme'] : '';
+		$pass = array_key_exists('pass', $uparts) ? $uparts['pass']  : '';
+		$user = array_key_exists('user', $uparts) ? $uparts['user']  : '';
+		$port = array_key_exists('port', $uparts) ? $uparts['port']  : '';
+		$host = array_key_exists('host', $uparts) ? $uparts['host']  : '';
+		$path = array_key_exists('path', $uparts) ? $uparts['path']  : '';
+		$query = array_key_exists('query', $uparts) ? $uparts['query']  : '';
+		$fragment = array_key_exists('fragment', $uparts) ? $uparts['fragment']  : '';
+
+		if (!empty($scheme))
+			$scheme .= '://';
+
+		if (!empty($pass) && !empty($user))
+		{
+			$user = rawurldecode($user) . ':';
+			$pass = rawurldecode($pass) . '@';
+		}
+		elseif (!empty($user))
+			$user .= '@';
+
+		if (!empty($port) && !empty($host))
+			$host .= ':';
+
+		if (!empty($path))
+		{
+			$arr = preg_split("/([\/;=])/", $path, -1, PREG_SPLIT_DELIM_CAPTURE);
+			$path = "";
+			foreach($arr as $var)
+			{
+				switch($var)
+				{
+					case "/":
+					case ";":
+					case "=":
+						$path .= $var;
+						break;
+					default:
+						$path .= rawurldecode($var);
+				}
+			}
+
+			// legacy patch
+			$path = str_replace("/%7E","/~", $path);
+		}
+
+		if (!empty($query))
+		{
+			$arr = preg_split("/([&=])/", $query, -1, PREG_SPLIT_DELIM_CAPTURE);
+			$query = "?";
+			foreach($arr as $var)
+			{
+				if ("&" == $var || "=" == $var)
+					$query .= $var;
+				else
+					$query .= urldecode($var);
+			}
+		}
+
+		if(!empty($fragment))
+			$fragment = urldecode(ltrim($fragment, '#'));
+
+		return implode('', array($scheme, $user, $pass, $host, $port, $path, $query, $fragment));
+	}
+	else
+		return $url;
+
+}
+
+function PersonalizedBBC_uri($url, $rfc)
+{
+	if ($rfc === 'rfc3986')
+	{
+		$parts = explode('/', $url);
+		$oldParts = explode('?', $parts[count($parts)-1], 2);
+		$oldPart = count($oldParts) > 1 ? rawurlencode($oldParts[0]) . '?' . urlencode($oldParts[1]) : urlencode($oldParts[0]);
+
+		$newParts = array_pop($parts);
+		$parts[count($parts)] = $oldPart;
+		$newUrl = !empty($parts) ? implode('/', $parts) : $url;
+
+		return $newUrl;
+	}
+	elseif ($rfc === 'rfc3986x')
+	{
+		$uparts = parse_url($url);
+		$scheme = array_key_exists('scheme', $uparts) ? $uparts['scheme'] : '';
+		$pass = array_key_exists('pass', $uparts) ? $uparts['pass']  : '';
+		$user = array_key_exists('user', $uparts) ? $uparts['user']  : '';
+		$port = array_key_exists('port', $uparts) ? $uparts['port']  : '';
+		$host = array_key_exists('host', $uparts) ? $uparts['host']  : '';
+		$path = array_key_exists('path', $uparts) ? $uparts['path']  : '';
+		$query = array_key_exists('query', $uparts) ? $uparts['query']  : '';
+		$fragment = array_key_exists('fragment', $uparts) ? $uparts['fragment']  : '';
+
+		if (!empty($scheme))
+			$scheme .= '://';
+
+		if (!empty($pass) && !empty($user))
+		{
+			$user = rawurlencode($user) . ':';
+			$pass = rawurlencode($pass) . '@';
+		}
+		elseif (!empty($user))
+			$user .= '@';
+
+		if (!empty($port) && !empty($host))
+			$host .= ':';
+
+		if (!empty($path))
+		{
+			$arr = preg_split("/([\/;=])/", $path, -1, PREG_SPLIT_DELIM_CAPTURE);
+			$path = "";
+			foreach($arr as $var)
+			{
+				switch($var)
+				{
+					case "/":
+					case ";":
+					case "=":
+						$path .= $var;
+						break;
+					default:
+						$path .= rawurlencode($var);
+				}
+			}
+
+			// legacy patch
+			$path = str_replace("/%7E","/~", $path);
+		}
+
+		if (!empty($query))
+		{
+			$arr = preg_split("/([&=])/", $query, -1, PREG_SPLIT_DELIM_CAPTURE);
+			$query = "?";
+			foreach($arr as $var)
+			{
+				if ("&" == $var || "=" == $var)
+					$query .= $var;
+				else
+					$query .= urlencode($var);
+			}
+		}
+
+		if(!empty($fragment))
+			$fragment = '#' . urlencode($fragment);
+
+		return implode('', array($scheme, $user, $pass, $host, $port, $path, $query, $fragment));
+	}
+	else
+		return $url;
+}
+
 function PersonalizedBBC_load_membergroups()
 {
 	global $smcFunc, $txt;
@@ -273,7 +483,7 @@ function PersonalizedBBC_images()
 		$imagesDir = @opendir($settings['default_theme_dir'] . '/images/bbc/personalizedBBC');
 
 
-	if ($imagesDir)
+	if (!empty($imagesDir))
 	{
 		while (($file = readdir($imagesDir)) !== false)
 		{

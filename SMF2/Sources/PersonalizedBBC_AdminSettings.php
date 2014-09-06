@@ -2,7 +2,7 @@
 /*
 	<id>underdog:PersonalizedBBC</id>
 	<name>Personalized BBC</name>
-	<version>1.5</version>
+	<version>1.6</version>
 	<type>modification</type>
 */
 
@@ -51,6 +51,7 @@ function SettingsPersonalizedBBC()
 			'after' => array('code', true, 'after'),
 			'parse' => array('int', true, 'parse'),
 			'trim' => array('int', true, 'trim'),
+			'url_fix' => array('url', true, 'url_fix'),
 			'type' => array('enable_int', true, 'type'),
 			'block_lvl' => array('int', true, 'block_lvl'),
 			'view_source' => array('int', true, 'view_source'),
@@ -68,6 +69,8 @@ function SettingsPersonalizedBBC()
 		$_SESSION['personalizedBBC_skip'] = false;
 		foreach ($bbcTags as $thisName => $context['personalizedBBC'])
 		{
+			$rfc = !empty($_REQUEST['url_fix']) ? cleanPersonalizedBBC_String($_REQUEST['url_fix']) : 'rfc0';
+			$rfc = $rfc !== 'rfc3986x' && $rfc !== 'rfc3986' ? 'rfc0' : $rfc;
 			$name = $smcFunc['strtolower'](!empty($context['current_name']) ? cleanPersonalizedBBC_String($context['current_name']) : (!empty($context['personalizedBBC']['name']) ? cleanPersonalizedBBC_String($context['personalizedBBC']['name']) : cleanPersonalizedBBC_String($context['personalizedBBC']['current_name'])));
 			list($thisName, $name, $checkName) = array($smcFunc['strtolower'](trim($thisName)), $smcFunc['strtolower']($name), false);
 			$context['current_name'] = !empty($context['current_name']) ? $smcFunc['strtolower'](trim($context['current_name'])) : $name;
@@ -78,6 +81,7 @@ function SettingsPersonalizedBBC()
 			$block_lvl = !empty($context['personalizedBBC']['block_lvl']) ? 1 : 0;
 			$view_source = !empty($context['personalizedBBC']['view_source']) ? 1 : 0;
 			$context['personalizedBBC']['code'] = !empty($context['personalizedBBC']['code']) ? $context['personalizedBBC']['code'] : '';
+			$context['personalizedBBC']['code'] = $rfc !== 'rfc0' ? cleanPersonalizedBBC_Url('encode', false, $rfc, $context['personalizedBBC']['code']) : $context['personalizedBBC']['code'];
 			foreach ($listArray as $comm)
 				$$comm = isset($context['personalizedBBC'][$comm]) ? 1 : 0;
 
@@ -128,13 +132,13 @@ function SettingsPersonalizedBBC()
 					$pos = stripos($text, '{content}');
 					if ($pos === false)
 					{
-						$context['personalizedBBC']['prior'] = $text;
+						$context['personalizedBBC']['prior'] = empty($context['url_fix']) ? $text : cleanPersonalizedBBC_Url('encode', 'prior', $rfc, $text);
 						$context['personalizedBBC']['after'] = '';
 					}
 					else
 					{
-						$context['personalizedBBC']['prior'] = substr($text, 0, $pos);
-						$context['personalizedBBC']['after'] = substr($text, $pos + 9);
+						$context['personalizedBBC']['prior'] = empty($context['url_fix']) ? substr($text, 0, $pos) : cleanPersonalizedBBC_Url('encode', 'prior', $rfc, substr($text, 0, $pos));
+						$context['personalizedBBC']['after'] = empty($context['url_fix']) ? substr($text, $pos + 9) : cleanPersonalizedBBC_Url('encode', 'after', $rfc, substr($text, $pos + 9));
 					}
 
 					$context['personalizedBBC']['code'] = preg_replace(array('#\{content\}#si', '#\{option\}#si', '#\{option1\}#si', '#\{option2\}#si'),  array('\$1', '\$2', '\$2', '\$3'), $context['personalizedBBC']['code']);
@@ -201,8 +205,8 @@ function SettingsPersonalizedBBC()
 			{
 				$request = $smcFunc['db_insert']('insert', "
 					{db_prefix}personalized_bbc",
-					array('name' => 'string', 'code' => 'string', 'description' => 'string', 'image' => 'string', 'prior' => 'string', 'after' => 'string', 'parse' => 'int', 'trim' => 'int', 'type' => 'int', 'block_lvl' => 'int', 'enable' => 'int', 'display' => 'int', 'view_source' => 'int'),
-					array($name, '', '', '', '', '', 0, 0, 0, 0, 1, 1, 0),
+					array('name' => 'string', 'code' => 'string', 'description' => 'string', 'image' => 'string', 'prior' => 'string', 'after' => 'string', 'url_fix' => 'string', 'parse' => 'int', 'trim' => 'int', 'type' => 'int', 'block_lvl' => 'int', 'enable' => 'int', 'display' => 'int', 'view_source' => 'int'),
+					array($name, '', '', '', '', '', 'rfc0', 0, 0, 0, 0, 1, 1, 0),
 					array('name')
 				);
 			}
@@ -255,6 +259,9 @@ function SettingsPersonalizedBBC()
 				{
 					case 'string':
 						createPersonalizedBBC_setting('personalized_bbc', $key, $value, $name);
+						continue 2;
+					case 'url':
+						createPersonalizedBBC_setting('personalized_bbc', $key, $rfc, $name);
 						continue 2;
 					case 'int':
 						$val = (int)$value > 0 ? (int)$value : ($value === 'on' ? 1 : 0);
@@ -361,6 +368,9 @@ function SettingsPersonalizedBBC()
 					array('id_group', 'permission')
 				);
 			}
+
+			// Clean the entire cache for permission changes to immediately take affect
+			clean_cache();
 		}
 	}
 
@@ -443,8 +453,8 @@ function EntryPersonalizedBBC()
 	$context['robot_no_index'] = true;
 	$context['current_name'] = !empty($_REQUEST['name']) ? $smcFunc['strtolower'](trim($_REQUEST['name'])) : '';
 	$context['PersonalizedBBC_Images'] = PersonalizedBBC_images();
-	$setting_types = array('name', 'description', 'code', 'image', 'prior', 'after', 'parse', 'trim', 'type', 'block_lvl', 'enable', 'display', 'delete', 'current_name', 'view_source');
-	$imageType = version_compare((!empty($modSettings['smfVersion']) ? substr($modSettings['smfVersion'], 0, 3) : '2.0'), '2.1', '<') ? '.gif' : '.png';
+	$setting_types = array('name', 'description', 'code', 'image', 'prior', 'after', 'parse', 'trim', 'type', 'block_lvl', 'enable', 'display', 'delete', 'current_name', 'view_source', 'url_fix');
+	$context['PersonalizedBBC_imageType'] = version_compare((!empty($modSettings['smfVersion']) ? substr($modSettings['smfVersion'], 0, 3) : '2.0'), '2.1', '<') ? '.gif' : '.png';
 
 	foreach ($setting_types as $setting_type)
 		$context['personalizedBBC'][$setting_type] = '';
@@ -461,7 +471,12 @@ function EntryPersonalizedBBC()
 		);
 		while ($val = $smcFunc['db_fetch_assoc']($result))
 		{
-			$val['image'] = !empty($val['image']) ? str_replace(array('personalizedBBC/', $imageType), '', $val['image']) . $imageType : $context['PersonalizedBBC_Images'][0];
+			$rfc = !empty($val['url_fix']) ? $val['url_fix'] : 'rfc0';
+			$val['url_fix'] = $rfc !== 'rfc3986x' && $rfc !== 'rfc3986' ? 'rfc0' : $rfc;
+			$val['image'] = !empty($val['image']) ? str_replace(array('personalizedBBC/', $context['PersonalizedBBC_imageType']), '', $val['image']) . $context['PersonalizedBBC_imageType'] : $context['PersonalizedBBC_Images'][0];
+			$val['code'] = !empty($val['code']) ? cleanPersonalizedBBC_Url('decode', false, $rfc, $val['code']) : '';
+			$val['prior'] = !empty($val['prior']) ? cleanPersonalizedBBC_Url('decode', false, $rfc, $val['prior']) : '';
+			$val['after'] = !empty($val['after']) ? cleanPersonalizedBBC_Url('decode', false, $rfc, $val['after']) : '';
 
 			foreach ($setting_types as $setting_type)
 				$context['personalizedBBC'][$setting_type] = isset($val[$setting_type]) ? $val[$setting_type] : '';

@@ -2,7 +2,7 @@
 /*
 	<id>underdog:PersonalizedBBC</id>
 	<name>Personalized BBC</name>
-	<version>1.5</version>
+	<version>1.6</version>
 	<type>modification</type>
 */
 
@@ -44,6 +44,10 @@ $txt['personalizedBBC_membergroups_check'] = 'Check/Uncheck All';
 $txt['PersonalizedBBC_page'] = 'Page';
 $txt['PersonalizedBBC_Override'] = 'Override:';
 $txt['personalizedBBC_viewSource'] = 'View Source';
+$txt['PersonalizedBBC_UrlCheck'] = 'Adjust Url';
+$txt['PersonalizedBBC_UrlCheckDisable'] = 'N/A';
+$txt['PersonalizedBBC_UrlCheck3986x'] = 'RFC-3986-A';
+$txt['PersonalizedBBC_UrlCheck3986'] = 'RFC-3986-B';
 
 // drop-down options
 $txt['personalizedBBC_type_options'] = array('[tag]content[/tag]', '[tag=option]content[/tag]', '[tag=option1,option2]content[/tag]', '[tag]');
@@ -74,7 +78,7 @@ $helptxt['personalizedBBC_tagType'] = 'Select the BBC type that will be used whe
 $helptxt['personalizedBBC_tagParse'] = 'Select the type of parsing to be used which will determine this BB Code\'s behavior.<br /><br />no parsing: User input between tags will be ignored (Only HTML entered in code setting will be displayed).<br /><br />{content} only: {content} will be replaced by what a user enters between bbc tags.<br /><br />{content} and {option}: {content} will be replaced by what a user enters between bbc tags. {option} will be replaced by what a user enters after `=` within an initial bbc tag.';
 $helptxt['personalizedBBC_tagTrim'] = 'Select how any whitespace will be trimmed from the BB Code text output.<br /><br />This option will edit your bbc code when saved within admin.<br /><br />none: Will not trim your code.<br /><br />inside: Trim any whitespace between HTML tags.<br /><br />outside: Trim any whitespace outside any HTML tags.<br /><br />both: Trim all whitespace.';
 $helptxt['personalizedBBC_tagBlockLvl'] = 'Opt whether a block level display will be implemented.';
-$helptxt['personalizedBBC_tagCode'] = 'The HTML to be used for the BBC.<br />ie. &lt;tag&gt;{content}&lt;/tag&gt; or &lt;tag alt={option}&gt;{content}&lt;/tag&gt;';
+$helptxt['personalizedBBC_tagCode'] = 'The HTML to be used for the BBC.<br />ie. &lt;tag&gt;{content}&lt;/tag&gt; or &lt;tag alt={option}&gt;{content}&lt;/tag&gt;<br /><br />You have the option to enable/check the [Adjust Url] setting.<br />This will apply when a Url is entered within this input and you wish its fragments to be filtered to conform to <a href="http://tools.ietf.org/html/rfc1738">RFC 3986</a> standards.<br />This should only be used when necessary/required as it may render your URL\'s usless if used incorrectly.<br />The option in disabled by default.';
 $helptxt['personalizedBBC_tagImage'] = 'Select the image to be used for this BBC.  Default images are included with this modification, however custom images can be added to the following directory: ../Themes/default/images/bbc/PersonalizedBBC. Only &@!%@ file types are acceptable.';
 $helptxt['personalizedBBC_membergroups'] = 'The membergroup permission settings allow control over viewing and usage.<br /><br />[Viewing]<br />Membergroups that are enabled/checked will have permission to view this BB Code within posts. The unchecked/disabled membergroups will not be able to view this BB Code content.<br /><br />[Usage]<br />Membergroups that are enabled/checked will have permission to use this BB Code within posts. The unchecked/disabled membergroups will not be able to use this BB Code & it will be parsed from their post prior to saving to the database.';
 $helptxt['personalizedBBC_tagViewSource'] = 'Opt whether the user will have the option to view the source code of the BBC when the WYSIWYG editor is enabled.';

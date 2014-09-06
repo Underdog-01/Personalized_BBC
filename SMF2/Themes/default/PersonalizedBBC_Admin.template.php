@@ -2,7 +2,7 @@
 /*
 	<id>underdog:PersonalizedBBC</id>
 	<name>Personalized BBC</name>
-	<version>1.5</version>
+	<version>1.6</version>
 	<type>modification</type>
 */
 
@@ -150,6 +150,40 @@ function template_PersonalizedBBC_Edit()
 	global $txt, $scripturl, $context, $settings;
 
 	echo '
+				<script type="text/javascript"><!-- // --><![CDATA[
+					var zUpdateStatus = function (personalized_bbc)
+					{
+						var check = false;
+						var currentVal = "', $context['personalizedBBC']['url_fix'], '";
+						for (i=0; i<3; i++)
+						{
+							if (i == personalized_bbc)
+								document.getElementById("url_fix" + i).checked = true;
+							else
+								document.getElementById("url_fix" + i).checked = false;
+
+							if (document.getElementById("url_fix" + i).checked == true)
+								check = true;
+						}
+
+						if (!check)
+						{
+							var currentArray = ["rfc0", "rfc3986x", "rfc3986"];
+							check = true;
+							for (i=0; i<3; i++)
+							{
+								if (currentArray[i] === currentVal)
+								{
+									document.getElementById("url_fix" + i).checked = true;
+									check = false;
+								}
+							}
+						}
+						if (check)
+							document.getElementById("url_fix0").checked = true;
+					}
+					addLoadEvent(zUpdateStatus);
+				// ]]></script>
 				<form action="', $context['post_url'], '" method="post" accept-charset="', $context['character_set'], '">
 					<table width="80%" border="0" cellspacing="0" cellpadding="0" class="tborder" align="center">
 						<tr>
@@ -308,19 +342,21 @@ function template_PersonalizedBBC_Edit()
 											<input type="checkbox" name="block_lvl[', $context['personalizedBBC']['current_name'],']" value="1"', (!empty($context['personalizedBBC']['block_lvl']) ? ' checked="checked"' : ''),' />
 										</td>
 									</tr>
-									<tr style="visbility: hidden;display: none;">
+									', ((!empty($context['PersonalizedBBC_imageType'])) && $context['PersonalizedBBC_imageType'] === '.png' ? '
+									<tr>
 										<td width="2%">
-											<a href="', $scripturl, '?action=helpadmin;help=personalizedBBC_tagViewSource" onclick="return reqWin(this.href);" style="text-decoration:none;">
+											<a href="' . $scripturl . '?action=helpadmin;help=personalizedBBC_tagViewSource" onclick="return reqWin(this.href);" style="text-decoration:none;">
 												<img style="vertical-align:middle;position:relative;bottom:1px;width:12px;height:12px;" src="' . $settings['default_theme_url'] . '/images/admin/personalizedBBC-help.gif" alt="?" />
 											</a>
 										</td>
 										<td width="20%">
-											', $txt['personalizedBBC_viewSource'], '
+											' . $txt['personalizedBBC_viewSource'] . '
 										</td>
 										<td width="70%">
-											<input type="checkbox" name="view_source[', $context['personalizedBBC']['current_name'],']" value="1"', (!empty($context['personalizedBBC']['view_source']) ? ' checked="checked"' : ''),' />
+											<input type="checkbox" name="view_source[' . $context['personalizedBBC']['current_name'] . ']" value="1"' . (!empty($context['personalizedBBC']['view_source']) ? ' checked="checked"' : '') . ' />
 										</td>
 									</tr>
+									' : ''), '
 									<tr>
 										<td colspan="3"><hr /></td>
 									</tr>
@@ -335,6 +371,12 @@ function template_PersonalizedBBC_Edit()
 										</td>
 										<td>
 											<textarea name="code[', $context['personalizedBBC']['current_name'],']" rows="4" cols="50" tabindex="5">', $context['personalizedBBC']['code'], '</textarea>
+											<span style="float:right;padding-left:2px;">
+												<span style="position:relative;bottom:3px;">', $txt['PersonalizedBBC_UrlCheck'], '&nbsp;</span><br />
+												<input type="radio" name="url_fix" id="url_fix0" value="rfc0" onclick="zUpdateStatus("0");" class="input_radio"', ($context['personalizedBBC']['url_fix'] !== 'rfc1736' && $context['personalizedBBC']['url_fix'] !== 'rfc3986' ? ' checked="checked"' : ''), ' /> <label style="position:relative; bottom: 2px;" for="url_fix0">', $txt['PersonalizedBBC_UrlCheckDisable'], '</label><br />
+												<input type="radio" name="url_fix" id="url_fix1" value="rfc3986x" onclick="zUpdateStatus("1");" class="input_radio"', ($context['personalizedBBC']['url_fix'] === 'rfc3986x' ? ' checked="checked"' : ''), ' /> <label style="position:relative; bottom: 2px;" for="url_fix1">', $txt['PersonalizedBBC_UrlCheck3986x'], '</label><br />
+												<input type="radio" name="url_fix" id="url_fix2" value="rfc3986" onclick="zUpdateStatus("2");" class="input_radio"', ($context['personalizedBBC']['url_fix'] === 'rfc3986' ? ' checked="checked"' : ''), ' /> <label style="position:relative; bottom: 2px;" for="url_fix2">', $txt['PersonalizedBBC_UrlCheck3986'], '</label>
+											</span>
 										</td>
 									</tr>
 									<tr>

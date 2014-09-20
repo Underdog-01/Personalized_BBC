@@ -20,6 +20,11 @@ if (!defined('SMF'))
 	void function createPersonalizedBBC_setting($tableName, $columnName, $value, $name)
 		- Standard function to update a specified db column
 
+	void function PersonalizedBBC_CheckUpload($name, $file)
+		- Ensures the bbc image file being uploaded is the appropriate file type
+		- Transfers qualifying tmp file to the Persoanlized BBCode image directory
+		- Failure results in no action
+
 	void function PersonalizedBBC_CheckImage($imageArray)
 		- Ensures the bbc image file is transferred to the appropriate theme directory
 		- Failure defaults to: bbc-name(.gif/.png)
@@ -63,6 +68,9 @@ if (!defined('SMF'))
 
 	void function PersonalizedBBC_checkDefaults()
 		- returns array of existing SMF default BBC's
+
+	void function PersonalizedBBC_imageResize($source, $dest, $width, $height, $crop)
+		- resizes uploaded images to 20x20 dimensions
 */
 
 function createPersonalizedBBC_setting($tableName, $columnName, $value, $name)
@@ -81,6 +89,34 @@ function createPersonalizedBBC_setting($tableName, $columnName, $value, $name)
 		LIMIT {int:limit}",
 		array('name' => $name, 'limit' => 1, 'tableName' => $tableName, 'columnName' => $columnName, 'value' => $value)
 	);
+}
+
+function PersonalizedBBC_CheckUpload($name, $file)
+{
+	global $settings, $modSettings, $smcFunc, $scripturl;
+
+	$imageType = version_compare((!empty($modSettings['smfVersion']) ? substr($modSettings['smfVersion'], 0, 3) : '2.0'), '2.1', '<') ? 'gif' : 'png';
+	$temp = explode('.', $file["name"]);
+	$extension = end($temp);
+
+	if ($file["error"] > 0)
+		return false;
+
+	$newFile = $smcFunc['strtolower']($file["name"]);
+	if ((($file["type"] == "image/gif") || ($file["type"] == "image/png")) && ($file["size"] < 20000) && $extension === $imageType)
+	{
+		if (file_exists($settings['default_theme_dir'] . '/images/bbc/personalizedBBC/' . $newFile))
+			return false;
+
+		move_uploaded_file($file["tmp_name"], $settings['default_theme_dir'] . '/images/bbc/personalizedBBC/' . $newFile);
+		PersonalizedBBC_imageResize($settings['default_theme_dir'] . '/images/bbc/personalizedBBC/' . $newFile, $settings['default_theme_dir'] . '/images/bbc/personalizedBBC/' . $newFile, 20, 20, 1);
+		$val = PersonalizedBBC_CheckImage(array($name => trim($newFile)));
+		$val = preg_replace('/\.[^.]*$/', '', $val);
+		createPersonalizedBBC_setting('personalized_bbc', 'image', $val, $name);
+		redirectexit($scripturl . '?action=admin;area=PersonalizedBBC;sa=personalizedBBC_Entry;name=' . $name . ';#persoanlized_bbc_settings');
+	}
+
+	redirectexit($scripturl . '?action=admin;area=PersonalizedBBC;sa=personalizedBBC_Entry;name=' . $name . ';#persoanlized_bbc_settings');
 }
 
 function PersonalizedBBC_CheckImage($image = array('bbc' => 'bbc'))
@@ -638,5 +674,73 @@ function PersonalizedBBC_checkDefaults()
 	$val = array_merge($val, $disabledBBC);
 	$val = array_diff($val, $personalizedBBC);
 	return $val;
+}
+
+function PersonalizedBBC_imageResize($src, $dst, $width, $height, $crop=0)
+{
+	if(!list($w, $h) = getimagesize($src))
+		return false;
+
+	$type = strtolower(substr(strrchr($src,"."),1));
+	if($type == 'jpeg')
+		$type = 'jpg';
+
+	switch($type)
+	{
+		case 'bmp':
+			$img = imagecreatefromwbmp($src);
+			break;
+		case 'gif':
+			$img = imagecreatefromgif($src);
+			break;
+		case 'jpg':
+		$img = imagecreatefromjpeg($src);
+		break;
+		case 'png':
+		$img = imagecreatefrompng($src);
+		break;
+		default:
+			return false;
+	}
+
+	if($crop)
+	{
+		if($w < $width or $h < $height)
+			return false;
+		$ratio = max($width/$w, $height/$h);
+		$h = $height / $ratio;
+		$x = ($w - $width / $ratio) / 2;
+		$w = $width / $ratio;
+	}
+	else
+	{
+		if($w < $width and $h < $height)
+			return false;
+		$ratio = min($width/$w, $height/$h);
+		$width = $w * $ratio;
+		$height = $h * $ratio;
+		$x = 0;
+	}
+
+	$new = imagecreatetruecolor($width, $height);
+
+	if($type == "gif" || $type == "png")
+	{
+		imagecolortransparent($new, imagecolorallocatealpha($new, 0, 0, 0, 127));
+		imagealphablending($new, false);
+		imagesavealpha($new, true);
+	}
+
+	imagecopyresampled($new, $img, 0, 0, $x, 0, $width, $height, $w, $h);
+
+	switch($type)
+	{
+		case 'gif':
+			imagegif($new, $dst); break;
+		case 'png':
+			imagepng($new, $dst); break;
+	}
+
+	return true;
 }
 ?>

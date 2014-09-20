@@ -2,7 +2,7 @@
 /*
 	<id>underdog:PersonalizedBBC</id>
 	<name>Personalized BBC</name>
-	<version>1.6</version>
+	<version>1.7</version>
 	<type>modification</type>
 */
 
@@ -184,8 +184,8 @@ function template_PersonalizedBBC_Edit()
 					}
 					addLoadEvent(zUpdateStatus);
 				// ]]></script>
-				<form action="', $context['post_url'], '" method="post" accept-charset="', $context['character_set'], '">
-					<table width="80%" border="0" cellspacing="0" cellpadding="0" class="tborder" align="center">
+				<form action="', $context['post_url'], '" method="post" accept-charset="', $context['character_set'], '" enctype="multipart/form-data">
+					<table width="80%" border="0" cellspacing="0" cellpadding="0" class="tborder" align="center" id="persoanlized_bbc_settings">
 						<tr>
 							<td>
 								<table border="0" cellspacing="0" cellpadding="4" width="100%">
@@ -403,6 +403,19 @@ function template_PersonalizedBBC_Edit()
 											<span style="position:relative;text-align:left;bottom:1.6em;">
 												<img id="icon" src="', $settings['default_theme_url'], '/images/bbc/personalizedBBC/', $context['personalizedBBC']['image'], '" border="1" style="max-height:20px;max-width:20px;" alt="" />
 											</span>
+										</td>
+									</tr>
+									<tr>
+										<td style="width:2%;">
+											<a href="', $scripturl, '?action=helpadmin;help=personalizedBBC_tagImageUpload" onclick="return reqWin(this.href);" style="text-decoration:none;">
+												<img style="vertical-align:middle;position:relative;bottom:1px;width:12px;height:12px;" src="' . $settings['default_theme_url'] . '/images/admin/personalizedBBC-help.gif" alt="?" />
+											</a>
+										</td>
+										<td width="20%">
+											', $txt['personalizedBBC_imageUpload'], '
+										</td>
+										<td>
+											<input type="file" name="file" id="file" accept="image/' . (str_replace('.', '', $context['PersonalizedBBC_imageType'])) . '" />
 										</td>
 									</tr>
 									<tr>

@@ -2,7 +2,7 @@
 /*
 	<id>underdog:PersonalizedBBC</id>
 	<name>Personalized BBC</name>
-	<version>1.6</version>
+	<version>1.7</version>
 	<type>modification</type>
 */
 
@@ -52,6 +52,7 @@ function SettingsPersonalizedBBC()
 			'parse' => array('int', true, 'parse'),
 			'trim' => array('int', true, 'trim'),
 			'url_fix' => array('url', true, 'url_fix'),
+			'file' => array('upload', true, 'file'),
 			'type' => array('enable_int', true, 'type'),
 			'block_lvl' => array('int', true, 'block_lvl'),
 			'view_source' => array('int', true, 'view_source'),
@@ -290,6 +291,10 @@ function SettingsPersonalizedBBC()
 						$val = PersonalizedBBC_CheckImage(array($name => trim($value)));
 						$val = preg_replace('/\.[^.]*$/', '', $val);
 						createPersonalizedBBC_setting('personalized_bbc', $key, $val, $name);
+						continue 2;
+					case 'upload':
+						$val = $_FILES["file"];
+						PersonalizedBBC_CheckUpload($name, $val);
 						continue 2;
 					case 'code':
 						$val = cleanPersonalizedBBC_Code($value, $trim);

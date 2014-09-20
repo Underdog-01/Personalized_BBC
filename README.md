@@ -31,6 +31,10 @@ Features:
 
 Changelog:
 
+[Version 1.7]
++ added option to upload images within tag settings
++ uploaded images resized to 20px x 20px dimensions
+
 [Version 1.6]
 + mod now filters restricted bbcodes outside of posts/pm's
 + added option to allow filtering of Url entered within code input (option to conform to RFC 3986 standards)

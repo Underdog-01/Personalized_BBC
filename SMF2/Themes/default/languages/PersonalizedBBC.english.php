@@ -2,7 +2,7 @@
 /*
 	<id>underdog:PersonalizedBBC</id>
 	<name>Personalized BBC</name>
-	<version>1.6</version>
+	<version>1.7</version>
 	<type>modification</type>
 */
 
@@ -37,6 +37,7 @@ $txt['personalizedBBC_allow'] = 'Allow';
 $txt['personalizedBBC_deny'] = 'Deny';
 $txt['personalizedBBC_submit'] = 'Submit';
 $txt['personalizedBBC_image'] = 'BBC Icon';
+$txt['personalizedBBC_imageUpload'] = 'Upload An Image';
 $txt['personalizedBBC_membergroups'] = 'Membergroup Permissions';
 $txt['personalizedBBC_membergroups_view'] = 'Viewing';
 $txt['personalizedBBC_membergroups_use'] = 'Usage';
@@ -80,6 +81,7 @@ $helptxt['personalizedBBC_tagTrim'] = 'Select how any whitespace will be trimmed
 $helptxt['personalizedBBC_tagBlockLvl'] = 'Opt whether a block level display will be implemented.';
 $helptxt['personalizedBBC_tagCode'] = 'The HTML to be used for the BBC.<br />ie. &lt;tag&gt;{content}&lt;/tag&gt; or &lt;tag alt={option}&gt;{content}&lt;/tag&gt;<br /><br />You have the option to enable/check the [Adjust Url] setting.<br />This will apply when a Url is entered within this input and you wish its fragments to be filtered to conform to <a href="http://tools.ietf.org/html/rfc1738">RFC 3986</a> standards.<br />This should only be used when necessary/required as it may render your URL\'s usless if used incorrectly.<br />The option in disabled by default.';
 $helptxt['personalizedBBC_tagImage'] = 'Select the image to be used for this BBC.  Default images are included with this modification, however custom images can be added to the following directory: ../Themes/default/images/bbc/PersonalizedBBC. Only &@!%@ file types are acceptable.';
+$helptxt['personalizedBBC_tagImageUpload'] = 'Upload an image to the Personalized BBCode images folder.';
 $helptxt['personalizedBBC_membergroups'] = 'The membergroup permission settings allow control over viewing and usage.<br /><br />[Viewing]<br />Membergroups that are enabled/checked will have permission to view this BB Code within posts. The unchecked/disabled membergroups will not be able to view this BB Code content.<br /><br />[Usage]<br />Membergroups that are enabled/checked will have permission to use this BB Code within posts. The unchecked/disabled membergroups will not be able to use this BB Code & it will be parsed from their post prior to saving to the database.';
 $helptxt['personalizedBBC_tagViewSource'] = 'Opt whether the user will have the option to view the source code of the BBC when the WYSIWYG editor is enabled.';
 ?>

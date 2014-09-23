@@ -36,8 +36,7 @@
 		<remove-file name="$imagesdir/admin/PersonalizedBBC_settings.png" />
 		<remove-file name="$imagesdir/admin/personalizedBBC-help.gif" />
 		<remove-file name="$imagesdir/admin/personalizedBBC_add.png" />
-		<remove-file error="skip" name="$imagesdir/admin/PersonalizedBBC_Settings.png" />
-		<remove-dir name="$imagesdir/bbc/personalizedBBC" />
+		<remove-file error="skip" name="$imagesdir/admin/PersonalizedBBC_Settings.png" />		
 	</uninstall>
 
 	<!-- ####################      SMF 2.1.X     #################### -->
@@ -67,7 +66,6 @@
 		<remove-file name="$imagesdir/admin/personalizedBBC-help.gif" />
 		<remove-file name="$imagesdir/admin/personalizedBBC_add.png" />
 		<remove-file error="skip" name="$imagesdir/admin/PersonalizedBBC_Settings.png" />
-		<remove-file error="skip" name="$imagesdir/admin/big/PersonalizedBBC_settings.png" />
-		<remove-dir name="$imagesdir/bbc/personalizedBBC" />
+		<remove-file error="skip" name="$imagesdir/admin/big/PersonalizedBBC_settings.png" />		
 	</uninstall>
 </package-info>

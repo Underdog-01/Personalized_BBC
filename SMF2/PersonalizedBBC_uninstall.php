@@ -21,10 +21,10 @@ elseif (!defined('SMF'))
 	die('<b>Error:</b> Cannot install - please verify you put this in the same place as SMF\'s index.php.');
 
 /* Remove integration hooks */
-remove_integration_function('integrate_pre_include', '$sourcedir/PersonalizedBBC_Hooks.php');
+remove_integration_function('integrate_pre_include', '$sourcedir/PersonalizedBBC.php');
 remove_integration_function('integrate_pre_load', 'PersonalizedBBC_load');
-remove_integration_function('integrate_pre_load', 'Personalized_BBC');
 remove_integration_function('integrate_load_permissions', 'PersonalizedBBC_load_permissions');
 remove_integration_function('integrate_admin_areas', 'PersonalizedBBC_admin_areas');
-remove_integration_function('integrate_bbc_codes','PersonalizedBBC_codes',true);
+remove_integration_function('integrate_bbc_codes','PersonalizedBBC_codes');
+remove_integration_function('integrate_bbc_buttons','PersonalizedBBC_buttons');
 ?>

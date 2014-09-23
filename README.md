@@ -34,6 +34,8 @@ Changelog:
 [Version 1.7]
 + added option to upload images within tag settings
 + uploaded images resized to 20px x 20px dimensions
++ ../images/bbc/personalizedBBC folder not removed during uninstall to preserve uploaded images
++ adjusted installer for minor issues/discrepancies
 
 [Version 1.6]
 + mod now filters restricted bbcodes outside of posts/pm's

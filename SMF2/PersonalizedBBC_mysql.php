@@ -139,7 +139,7 @@ $columns = array(
 	    'null' => false,
 	    'unsigned' => true,
 	    'auto' => false,
-            'default' => "rfc0",
+	    'default' => "rfc0",
 	)
 );
 $indexes = array(

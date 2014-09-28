@@ -19,8 +19,9 @@ elseif (!defined('SMF'))
     die('<b>Error:</b> Cannot install - please verify you put this in the same place as SMF\'s index.php.');
 
 /*  This file is for mysql setup */
-global $smcFunc;
+global $smcFunc, $modSettings;
 db_extend('packages');
+$bbc_hook = version_compare((!empty($modSettings['smfVersion']) ? substr($modSettings['smfVersion'], 0, 3) : '2.0'), '2.1', '<') ? 'PersonalizedBBC_codes' : '$sourcedir/PersonalizedBBC.php|PersonalizedBBC_codes';
 
 // Create table and columns if they do not exist
 $columns = array(
@@ -192,6 +193,6 @@ add_integration_function('integrate_pre_include', '$sourcedir/PersonalizedBBC.ph
 add_integration_function('integrate_pre_load', 'PersonalizedBBC_load');
 add_integration_function('integrate_load_permissions', 'PersonalizedBBC_load_permissions');
 add_integration_function('integrate_admin_areas', 'PersonalizedBBC_admin_areas');
-add_integration_function('integrate_bbc_codes','PersonalizedBBC_codes', true);
-add_integration_function('integrate_bbc_buttons','PersonalizedBBC_buttons', true);
+add_integration_function('integrate_bbc_codes', $bbc_hook);
+add_integration_function('integrate_bbc_buttons','PersonalizedBBC_buttons');
 ?>

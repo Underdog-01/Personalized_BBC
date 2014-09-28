@@ -52,6 +52,7 @@ Changelog:
 + uploaded images resized to 20px x 20px dimensions
 + ../images/bbc/personalizedBBC folder not removed during uninstall to preserve uploaded images
 ! adjusted installer for minor issues/discrepancies
+! fixed SMF 2.1 installation discrepancies
 
 [Version 1.6]
 + mod now filters restricted bbcodes outside of posts/pm's

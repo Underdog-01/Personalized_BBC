@@ -1,6 +1,0 @@
-<div style="padding-top: 0.5em; line-height: 1.5em;">
-	<div style="border-bottom: 1px dashed; padding-bottom: 0.5em; width: 500px; font-weight: bold; font-size: 130%;">Installation Complete</div>
-	<p style="padding-top: 0.5em;">Personalized BBC installation has been successfully completed. Thank you for installing this SMF application.</p>
-	<p>You can visit <a href="http://web-develop.ca/" title="Personalized BBC Support">web-develop.ca</a> for feedback and support.</p>
-	<p>- Underdog -</a></p>
-</div>

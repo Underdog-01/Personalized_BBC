@@ -2,7 +2,7 @@
 /*
 	<id>underdog:PersonalizedBBC</id>
 	<name>Personalized BBC</name>
-	<version>1.7</version>
+	<version>1.8</version>
 	<type>modification</type>
 */
 
@@ -46,33 +46,27 @@ function template_PersonalizedBBC_List()
 					}
 				// ]]></script>
 				<form action="', $context['post_url'], '" method="post" accept-charset="', $context['character_set'], '">
-					<table width="80%" border="0" cellspacing="0" cellpadding="0" class="tborder" align="center">
+					<table style="width: 80%;border: 0px;border-spacing: 0px;padding: 0px;margin-left: auto;margin-right: auto;" class="tborder">
 						<tr>
 							<td>
-								<table border="0" cellspacing="0" cellpadding="4" width="100%">
-									<tr class="titlebg" style="width:100%;">
-										<td colspan="5">
-											', $context['settings_title'], '
-											<a href="#" id="page_top"></a>
-										</td>
-									</tr>
-									<tr class="windowbg2" align="center">
+								<table style="border: 0px;padding: 4px;border-spacing: 0px;width: 100%;">
+									<tr class="windowbg2 centertext">
 										<td>', $txt['PersonalizedBBC_tabtitle_list'], '</td>
 									</tr>
 									<tr>
 										<td>&nbsp;</td>
 									</tr>
 									<tr>
-										<td colspan="5"><hr /></td>
+										<td><hr /></td>
 									</tr>
 								</table>
-								<table border="1" cellspacing="0" cellpadding="4" width="100%">
+								<table style="border: 1px;border-spacing: 1px solid;padding: 4px;width: 100%;">
 									<tr class="catbg2">
-										<td width="19%"><u>' , $txt['personalizedBBC_name'] , '</u></td>
-										<td width="51%"><u>' , $txt['personalizedBBC_bbc'] , '</u></td>
-										<td width="10%" align="center"><u>' , $txt['personalizedBBC_enable'] , '</u></td>
-										<td width="10%" align="center"><u>' , $txt['personalizedBBC_display'] , '</u></td>
-										<td width="10%" align="center"><u>' , $txt['personalizedBBC_delete'] , '</u></td>
+										<td style="width: 19%;padding-left: 6px;"><u>' , $txt['personalizedBBC_name'] , '</u></td>
+										<td style="width: 51%;padding-left: 6px;"><u>' , $txt['personalizedBBC_bbc'] , '</u></td>
+										<td style="width: 10%;" class="centertext"><u>' , $txt['personalizedBBC_enable'] , '</u></td>
+										<td style="width: 10%;" class="centertext"><u>' , $txt['personalizedBBC_display'] , '</u></td>
+										<td style="width: 10%;" class="centertext"><u>' , $txt['personalizedBBC_delete'] , '</u></td>
 									</tr>';
 
 	foreach ($context['personalizedBBC'] as $i => $tag)
@@ -82,13 +76,20 @@ function template_PersonalizedBBC_List()
 
 		echo '
 									<tr>
-										<td class="windowbg">
-											<a href="' , $scripturl , '?action=admin;area=PersonalizedBBC;sa=personalizedBBC_Entry;' , $context['session_var'] , '=' , $context['session_id'] , ';name=', $context['personalizedBBC'][$i]['name'], ';">' , $context['personalizedBBC'][$i]['name'] , '</a>
+										<td class="windowbg" style="padding-left: 6px;">
+											<div class="pbbc_bubbleInfo">
+												<a href="' , $scripturl , '?action=admin;area=PersonalizedBBC;sa=personalizedBBC_Entry;' , $context['session_var'] , '=' , $context['session_id'] , ';name=', $context['personalizedBBC'][$i]['name'], ';">' , $context['personalizedBBC'][$i]['name'] , '</a>
+											</div>
 										</td>
-										<td class="windowbg">
-											', str_replace('#%^@!', $context['personalizedBBC'][$i]['name'], $txt['personalizedBBC_type_display'][$context['personalizedBBC'][$i]['type']]), '
+										<td class="windowbg" style="padding-left: 6px;" onmouseout="pbbc_hide(\'xx' . $context['personalizedBBC'][$i]['name'] . '\');" onmouseover="pbbc_show(\'xx' . $context['personalizedBBC'][$i]['name'] . '\');">
+											<span>
+												', str_replace('#%^@!', $context['personalizedBBC'][$i]['name'], $txt['personalizedBBC_type_display'][$context['personalizedBBC'][$i]['type']]), '
+											</span>
+											<div class="pbbc_popup windowbg2" id="xx' . $context['personalizedBBC'][$i]['name'] . '" style="display: none;">
+												<span style="padding: 8px;">', str_replace('*&#@', '<img style="vertical-align: middle;position: relative;bottom: 1px;width: 20px;height: 22px;padding: 10px;" src="' . $settings['theme_url'] . '/images/bbc/' . $context['personalizedBBC'][$i]['image'] . $context['PersonalizedBBC_imageType'] . '" alt="" />', $txt['PersonalizedBBC_viewBBC']), '</span>
+											</div>
 										</td>
-										<td class="windowbg" align="center">
+										<td class="windowbg centertext">
 											<input type="checkbox" name="enable[', $context['personalizedBBC'][$i]['name'], ']" id="enable_', $context['personalizedBBC'][$i]['name'], '" class="check"';
 
 		if (!empty($context['personalizedBBC'][$i]['enable']))
@@ -99,7 +100,7 @@ function template_PersonalizedBBC_List()
 
 		echo '
 										</td>
-										<td class="windowbg" align="center">
+										<td class="windowbg centertext">
 											<input type="checkbox" name="display[', $context['personalizedBBC'][$i]['name'], ']" id="display_', $context['personalizedBBC'][$i]['name'], '" class="check"';
 
 		if (!empty($context['personalizedBBC'][$i]['display']))
@@ -110,7 +111,7 @@ function template_PersonalizedBBC_List()
 
 		echo '
 										</td>
-										<td class="windowbg" align="center">
+										<td class="windowbg centertext">
 											<span style="display:none;">
 												<input type="text" name="current_name[', $context['personalizedBBC'][$i]['name'], ']" value="', $context['personalizedBBC'][$i]['name'], '" />
 												<input type="text" name="list[', $context['personalizedBBC'][$i]['name'], ']" value="1" />
@@ -122,17 +123,17 @@ function template_PersonalizedBBC_List()
 
 	echo '
 								</table>
-								<table border="0" cellspacing="0" cellpadding="4" width="100%">
+								<table style="border: 1px;padding: 4px;width: 100%;border-spacing: 0px;">
 									<tr>
-										<td colspan="5"><hr /></td>
+										<td><hr /></td>
 									</tr>
 									<tr>
-										<td colspan="1" style="float:left;">
+										<td style="float:left;">
 											<a href="' , $scripturl , '?action=admin;area=PersonalizedBBC;sa=personalizedBBC_Entry;' , $context['session_var'] , '=' , $context['session_id'] , ';"><img style="position:relative;bottom:-2.05em;" src="', $settings['default_theme_url'],'/images/admin/personalizedBBC_add.png" alt="' , $txt['PersonalizedBBC_add'], '" title="' , $txt['PersonalizedBBC_add'], '" /></a>
 										</td>
 									</tr>
 									<tr>
-										<td colspan="4" style="float:right;">
+										<td style="float:right;">
 											<input class="button_submit" type="submit" value="', $txt['personalizedBBC_submit'], '"', (!empty($context['save_disabled']) ? ' disabled="disabled"' : ''), ' onclick="check=confirmSubmit();if(!check){return false;}" />
 										</td>
 									</tr>
@@ -184,87 +185,84 @@ function template_PersonalizedBBC_Edit()
 					}
 					addLoadEvent(zUpdateStatus);
 				// ]]></script>
-				<form action="', $context['post_url'], '" method="post" accept-charset="', $context['character_set'], '" enctype="multipart/form-data">
-					<table width="80%" border="0" cellspacing="0" cellpadding="0" class="tborder" align="center" id="persoanlized_bbc_settings">
+				<form action="', $context['post_url'], '" method="post" accept-charset="', $context['character_set'], '" enctype="multipart/form-data" name="PersonalizedBBC_spec">
+					<table style="width: 80%;border: 0px;border-spacing: 0px;padding: 0px;margin-left: auto;margin-right: auto;" class="tborder" id="persoanlized_bbc_settings">
 						<tr>
 							<td>
-								<table border="0" cellspacing="0" cellpadding="4" width="100%">
-									<tr class="titlebg" style="width:100%;">
-										<td colspan="3">', $context['settings_title'], '</td>
-									</tr>
-									<tr class="windowbg2" align="center">
-										<td colspan="3">', $txt['PersonalizedBBC_tabtitle_rev'], '</td>
+								<table style="border: 0px;border-spacing: 0px;padding: 4px;width: 100%;">
+									<tr class="windowbg2 centertext">
+										<td>', $txt['PersonalizedBBC_tabtitle_rev'], '</td>
 									</tr>
 									<tr>
-										<td colspan="3"><hr /></td>
+										<td><hr /></td>
 									</tr>
 								</table>
-								<table border="0" cellspacing="0" cellpadding="4" width="100%">
+								<table style="border: 0px;border-spacing: 0px;padding: 4px;width: 100%;">
 									', (!empty($_SESSION['personalizedBBC_duplicate_error']) ? '
 									<tr>
-										<td width="2%">&nbsp;</td>
-										<td colspan="2" style="width:90%;">
+										<td style="width: 2%;">&nbsp;</td>
+										<td colspan="3" style="width:90%;">
 											' . $txt['PersonalizedBBC_DuplicateErrorMessage'] . '
 										</td>
 									</tr>' : ''), '
 									', (!empty($_SESSION['personalizedBBC_length_error']) ? '
 									<tr>
-										<td width="2%">&nbsp;</td>
-										<td colspan="2" style="width:90%;">
+										<td style="width: 2%">&nbsp;</td>
+										<td colspan="3" style="width:90%;">
 											' . $txt['PersonalizedBBC_LengthErrorMessage'] . '
 										</td>
 									</tr>' : ''), '
 									', (!empty($_SESSION['personalizedBBC_illegal_error']) ? '
 									<tr>
-										<td width="2%">&nbsp;</td>
-										<td colspan="2" style="width:90%;">
+										<td style="width: 2%;">&nbsp;</td>
+										<td colspan="3" style="width:90%;">
 											' . $txt['PersonalizedBBC_IllegalErrorMessage'] . '
 										</td>
 									</tr>' : ''), '
 									<tr>
-										<td width="2%">
+										<td style="width: 2%;">
 											<a href="', $scripturl, '?action=helpadmin;help=personalizedBBC_tagHelp" onclick="return reqWin(this.href);" style="text-decoration:none;">
 												<img style="vertical-align:middle;position:relative;bottom:1px;width:12px;height:12px;" src="' . $settings['default_theme_url'] . '/images/admin/personalizedBBC-help.gif" alt="?" />
 											</a>
 										</td>
-										<td width="20%">
+										<td style="width: 20%">
 											', $txt['personalizedBBC_name'], '
 										</td>
-										<td width="70%">
+										<td colspan="2" style="width: 70%;">
 											<input type="text" size="50" name="name[', $context['current_name'],']" value="', $context['current_name'] ,'" />
-											<span style="float:right;">
-												<span style="position:relative;bottom:3px;">', $txt['PersonalizedBBC_Override'], '&nbsp;</span>
-												<input type="checkbox" name="override" value="1" />
+											<span style="float:right;display: inline-block;vertical-align: middle;" title="', $txt['PersonalizedBBC_disabledFeature'] ,'">
+												<span style="position:relative;vertical-align: bottom;">', $txt['PersonalizedBBC_Override'], '&nbsp;</span>
+												<input style="position: relative;vertical-align: middle;display: inline-block;" type="checkbox" name="override" value="1" disabled="disabled" />
 											</span>
 										</td>
 									</tr>
 									<tr>
-										<td width="2%">
+										<td style="width: 2%;">
 											<a href="', $scripturl, '?action=helpadmin;help=personalizedBBC_tagDescription" onclick="return reqWin(this.href);" style="text-decoration:none;">
 												<img style="vertical-align:middle;position:relative;bottom:1px;width:12px;height:12px;" src="' . $settings['default_theme_url'] . '/images/admin/personalizedBBC-help.gif" alt="?" />
 											</a>
 										</td>
-										<td width="20%">
+										<td style="width: 20%;">
 											', $txt['personalizedBBC_description'], '
 										</td>
-										<td width="70%">
+										<td colspan="2" style="width: 70%;">
 											<input type="text" size="50" name="description[', $context['personalizedBBC']['current_name'],']" value="', $context['personalizedBBC']['description'],'" />
 										</td>
 									</tr>
 									<tr>
-										<td colspan="3"><hr /></td>
+										<td colspan="4"><hr /></td>
 									</tr>
 									<tr>
-										<td width="2%">
+										<td style="width: 2%;">
 											<a href="', $scripturl, '?action=helpadmin;help=personalizedBBC_tagType" onclick="return reqWin(this.href);" style="text-decoration:none;">
 												<img style="vertical-align:middle;position:relative;bottom:1px;width:12px;height:12px;" src="' . $settings['default_theme_url'] . '/images/admin/personalizedBBC-help.gif" alt="?" />
 											</a>
 										</td>
-										<td width="20%">
+										<td style="width: 20%;">
 											', $txt['personalizedBBC_type'], '
 										</td>
-										<td width="70%">
-											<select name="type[', $context['personalizedBBC']['current_name'],']">
+										<td colspan="2" style="width: 70%;">
+											<select name="type[', $context['personalizedBBC']['current_name'],']" id="personalizedBBC_test_type" onchange="pbbc_test(this.value);">
 												<option value="0" ', ($context['personalizedBBC']['type'] == 0 ? 'selected="selected"' : ''), '>
 													', $txt['personalizedBBC_type_options'][0], '
 												</option>
@@ -281,15 +279,15 @@ function template_PersonalizedBBC_Edit()
 										</td>
 									</tr>
 									<tr>
-										<td width="2%">
+										<td style="width: 2%;">
 											<a href="', $scripturl, '?action=helpadmin;help=personalizedBBC_tagParse" onclick="return reqWin(this.href);" style="text-decoration:none;">
 												<img style="vertical-align:middle;position:relative;bottom:1px;width:12px;height:12px;" src="' . $settings['default_theme_url'] . '/images/admin/personalizedBBC-help.gif" alt="?" />
 											</a>
 										</td>
-										<td width="20%">
+										<td style="width: 20%;">
 											', $txt['personalizedBBC_parse'], '
 										</td>
-										<td width="70%">
+										<td colspan="2" style="width: 70%;">
 											<select name="parse[', $context['personalizedBBC']['current_name'],']">
 												<option value="0" ', ($context['personalizedBBC']['parse'] == 0 ? 'selected="selected"' : ''), '>
 													', $txt['personalizedBBC_parse_options'][0], '
@@ -304,15 +302,15 @@ function template_PersonalizedBBC_Edit()
 										</td>
 									</tr>
 									<tr>
-										<td width="2%">
+										<td style="width: 2%;">
 											<a href="', $scripturl, '?action=helpadmin;help=personalizedBBC_tagTrim" onclick="return reqWin(this.href);" style="text-decoration:none;">
 												<img style="vertical-align:middle;position:relative;bottom:1px;width:12px;height:12px;" src="' . $settings['default_theme_url'] . '/images/admin/personalizedBBC-help.gif" alt="?" />
 											</a>
 										</td>
-										<td width="20%">
+										<td style="width: 20%;">
 											', $txt['personalizedBBC_trim'], '
 										</td>
-										<td width="70%">
+										<td colspan="2" style="width: 70%;">
 											<select name="trim[', $context['personalizedBBC']['current_name'],']">
 												<option value="0" ', ($context['personalizedBBC']['trim'] == 0 ? 'selected="selected"' : ''), '>
 													', $txt['personalizedBBC_trim_options'][0], '
@@ -330,52 +328,51 @@ function template_PersonalizedBBC_Edit()
 										</td>
 									</tr>
 									<tr>
-										<td width="2%">
+										<td style="width: 2%;">
 											<a href="', $scripturl, '?action=helpadmin;help=personalizedBBC_tagBlockLvl" onclick="return reqWin(this.href);" style="text-decoration:none;">
 												<img style="vertical-align:middle;position:relative;bottom:1px;width:12px;height:12px;" src="' . $settings['default_theme_url'] . '/images/admin/personalizedBBC-help.gif" alt="?" />
 											</a>
 										</td>
-										<td width="20%">
+										<td style="width: 20%;">
 											', $txt['personalizedBBC_blockLvl'], '
 										</td>
-										<td width="70%">
+										<td colspan="2" style="width: 70%;">
 											<input type="checkbox" name="block_lvl[', $context['personalizedBBC']['current_name'],']" value="1"', (!empty($context['personalizedBBC']['block_lvl']) ? ' checked="checked"' : ''),' />
 										</td>
 									</tr>
-									', ((!empty($context['PersonalizedBBC_imageType'])) && $context['PersonalizedBBC_imageType'] === '.png' ? '
 									<tr>
-										<td width="2%">
+										<td style="width: 2%;">
 											<a href="' . $scripturl . '?action=helpadmin;help=personalizedBBC_tagViewSource" onclick="return reqWin(this.href);" style="text-decoration:none;">
 												<img style="vertical-align:middle;position:relative;bottom:1px;width:12px;height:12px;" src="' . $settings['default_theme_url'] . '/images/admin/personalizedBBC-help.gif" alt="?" />
 											</a>
 										</td>
-										<td width="20%">
+										<td style="width: 20%;">
 											' . $txt['personalizedBBC_viewSource'] . '
 										</td>
-										<td width="70%">
+										<td style="width: 70%;">
 											<input type="checkbox" name="view_source[' . $context['personalizedBBC']['current_name'] . ']" value="1"' . (!empty($context['personalizedBBC']['view_source']) ? ' checked="checked"' : '') . ' />
 										</td>
-									</tr>
-									' : ''), '
-									<tr>
-										<td colspan="3"><hr /></td>
+										<td style="width: 40%;">&nbsp;</td>
 									</tr>
 									<tr>
-										<td width="2%">
+										<td colspan="4"><hr /></td>
+									</tr>
+									<tr>
+										<td style="width: 2%;">
 											<a href="', $scripturl, '?action=helpadmin;help=personalizedBBC_tagCode" onclick="return reqWin(this.href);" style="text-decoration:none;">
 												<img style="vertical-align:middle;position:relative;bottom:1px;width:12px;height:12px;" src="' . $settings['default_theme_url'] . '/images/admin/personalizedBBC-help.gif" alt="?" />
 											</a>
 										</td>
-										<td width="20%">
+										<td style="width: 20%;">
 											', $txt['personalizedBBC_code'], '
 										</td>
-										<td>
+										<td colspan="2">
 											<textarea name="code[', $context['personalizedBBC']['current_name'],']" rows="4" cols="50" tabindex="5">', $context['personalizedBBC']['code'], '</textarea>
 											<span style="float:right;padding-left:2px;">
 												<span style="position:relative;bottom:3px;">', $txt['PersonalizedBBC_UrlCheck'], '&nbsp;</span><br />
-												<input type="radio" name="url_fix" id="url_fix0" value="rfc0" onclick="zUpdateStatus("0");" class="input_radio"', ($context['personalizedBBC']['url_fix'] !== 'rfc1736' && $context['personalizedBBC']['url_fix'] !== 'rfc3986' ? ' checked="checked"' : ''), ' /> <label style="position:relative; bottom: 2px;" for="url_fix0">', $txt['PersonalizedBBC_UrlCheckDisable'], '</label><br />
-												<input type="radio" name="url_fix" id="url_fix1" value="rfc3986x" onclick="zUpdateStatus("1");" class="input_radio"', ($context['personalizedBBC']['url_fix'] === 'rfc3986x' ? ' checked="checked"' : ''), ' /> <label style="position:relative; bottom: 2px;" for="url_fix1">', $txt['PersonalizedBBC_UrlCheck3986x'], '</label><br />
-												<input type="radio" name="url_fix" id="url_fix2" value="rfc3986" onclick="zUpdateStatus("2");" class="input_radio"', ($context['personalizedBBC']['url_fix'] === 'rfc3986' ? ' checked="checked"' : ''), ' /> <label style="position:relative; bottom: 2px;" for="url_fix2">', $txt['PersonalizedBBC_UrlCheck3986'], '</label>
+												<input type="radio" name="url_fix" id="url_fix0" value="rfc0" onclick="zUpdateStatus(\'0\');" class="input_radio"', ($context['personalizedBBC']['url_fix'] !== 'rfc1736' && $context['personalizedBBC']['url_fix'] !== 'rfc3986' ? ' checked="checked"' : ''), ' /> <label style="position:relative; bottom: 2px;" for="url_fix0">', $txt['PersonalizedBBC_UrlCheckDisable'], '</label><br />
+												<input type="radio" name="url_fix" id="url_fix1" value="rfc3986x" onclick="zUpdateStatus(\'1\');" class="input_radio"', ($context['personalizedBBC']['url_fix'] === 'rfc3986x' ? ' checked="checked"' : ''), ' /> <label style="position:relative; bottom: 2px;" for="url_fix1">', $txt['PersonalizedBBC_UrlCheck3986x'], '</label><br />
+												<input type="radio" name="url_fix" id="url_fix2" value="rfc3986" onclick="zUpdateStatus(\'2\');" class="input_radio"', ($context['personalizedBBC']['url_fix'] === 'rfc3986' ? ' checked="checked"' : ''), ' /> <label style="position:relative; bottom: 2px;" for="url_fix2">', $txt['PersonalizedBBC_UrlCheck3986'], '</label>
 											</span>
 										</td>
 									</tr>
@@ -385,10 +382,10 @@ function template_PersonalizedBBC_Edit()
 												<img style="vertical-align:middle;position:relative;bottom:1px;width:12px;height:12px;" src="' . $settings['default_theme_url'] . '/images/admin/personalizedBBC-help.gif" alt="?" />
 											</a>
 										</td>
-										<td width="20%">
+										<td style="width: 20%;">
 											', $txt['personalizedBBC_image'], '
 										</td>
-										<td class="centertext" style="top:0.5em;;position:relative;">
+										<td style="position:relative;padding-top: 1em;padding-bottom: 1em;vertical-align: bottom;">
 											<select name="image[', $context['personalizedBBC']['current_name'], ']" id="opt" onchange="show_image()" style="display:block;position:relative;">';
 
 	// Get all images for the dropdown list
@@ -400,8 +397,10 @@ function template_PersonalizedBBC_Edit()
 
 	echo '
 											</select>
-											<span style="position:relative;text-align:left;bottom:1.6em;">
-												<img id="icon" src="', $settings['default_theme_url'], '/images/bbc/personalizedBBC/', $context['personalizedBBC']['image'], '" border="1" style="max-height:20px;max-width:20px;" alt="" />
+										</td>
+										<td style="padding-top: 1em;padding-bottom: 1em;left: 45%;position: absolute;">
+											<span>
+												<img id="icon" src="', $settings['default_theme_url'], '/images/bbc/personalizedBBC/', $context['personalizedBBC']['image'], '" style="max-height: 20px;max-width: 20px;border: 1px;position: relative;vertical-align: bottom;" alt="" />
 											</span>
 										</td>
 									</tr>
@@ -411,15 +410,15 @@ function template_PersonalizedBBC_Edit()
 												<img style="vertical-align:middle;position:relative;bottom:1px;width:12px;height:12px;" src="' . $settings['default_theme_url'] . '/images/admin/personalizedBBC-help.gif" alt="?" />
 											</a>
 										</td>
-										<td width="20%">
+										<td style="width: 20%;">
 											', $txt['personalizedBBC_imageUpload'], '
 										</td>
-										<td>
+										<td colspan="2">
 											<input type="file" name="file" id="file" accept="image/' . (str_replace('.', '', $context['PersonalizedBBC_imageType'])) . '" />
 										</td>
 									</tr>
 									<tr>
-										<td colspan="3"><hr /></td>
+										<td colspan="4"><hr /></td>
 									</tr>
 								</table>
 								<table>
@@ -429,12 +428,17 @@ function template_PersonalizedBBC_Edit()
 												<img style="vertical-align:middle;position:relative;bottom:1px;width:12px;height:12px;" src="' . $settings['default_theme_url'] . '/images/admin/personalizedBBC-help.gif" alt="?" />
 											</a>
 										</td>
-										<td colspan="3" style="float:left;">
+										<td style="float: left;">
 											&nbsp;&nbsp;', $txt['personalizedBBC_membergroups'], '
 										</td>
 									</tr>
+								</table>
+								<table style="width: 100%;margin-left: auto;margin-right: auto;">
 									<tr>
-										<td colpsan="4">&nbsp;</td>
+										<td>&nbsp;</td>
+										<td>&nbsp;</td>
+										<td>&nbsp;</td>
+										<td>&nbsp;</td>
 									</tr>
 									<tr>
 										<td>&nbsp;</td>
@@ -472,13 +476,60 @@ function template_PersonalizedBBC_Edit()
 											<span style="left:1em;bottom:0.2em;position:relative;">', $txt['personalizedBBC_membergroups_check'], '</span>
 										</td>
 									</tr>
-								</table>
-								<table border="0" cellspacing="0" cellpadding="4" width="100%">
 									<tr>
-										<td colspan="3"><hr /></td>
+										<td colspan="4" style="width: 100%;"><hr /></td>
+									</tr>
+								</table>
+								<table>
+									<tr>
+										<td style="width:2%;">
+											<a href="', $scripturl, '?action=helpadmin;help=personalizedBBC_testBBC" onclick="return reqWin(this.href);" style="text-decoration:none;">
+												<img style="vertical-align:middle;position:relative;bottom:1px;width:12px;height:12px;" src="' . $settings['default_theme_url'] . '/images/admin/personalizedBBC-help.gif" alt="?" />
+											</a>
+										</td>
+										<td style="float:left;">
+											&nbsp;&nbsp;', $txt['personalizedBBC_testBBC'], '
+										</td>
+									</tr>
+								</table>
+								<table style="border-spacing: 3em;margin-left: auto;margin-right: auto;">
+									<tr>
+										<td id="personalizedBBC_test_content" style="display: ', ((int)$context['personalizedBBC']['type'] == 3) ? 'none' : 'inline', ';">
+											<span>', $txt['personalizedBBC_test_content'], '</span>
+											<input type="text" name="bbcode_test_content" value="'. (!empty($_SESSION['bbcode_test_content']) ? $_SESSION['bbcode_test_content'] : '') .'" />
+										</td>
+										<td id="personalizedBBC_test_option1" style="display: ', ((int)$context['personalizedBBC']['type'] == 0 || (int)$context['personalizedBBC']['type'] == 3) ? 'none' : 'inline', ';">
+											<span style="display: ', ((int)$context['personalizedBBC']['type'] == 2) ? 'none' : 'inline', ';" id="personalizedBBC_test_option_num">', $txt['personalizedBBC_test_option'], '</span>
+											<span style="display: ', ((int)$context['personalizedBBC']['type'] == 1) ? 'none' : 'inline', ';" id="personalizedBBC_test_option_num1">', $txt['personalizedBBC_test_option1'], '</span>
+											<input type="text" name="bbcode_test_option1" value="'. (!empty($_SESSION['bbcode_test_option1']) ? $_SESSION['bbcode_test_option1'] : '') .'" />
+										</td>
+										<td id="personalizedBBC_test_option2" style="display: ', ((int)$context['personalizedBBC']['type'] != 2) ? 'none' : 'inline', ';">
+											<span>', $txt['personalizedBBC_test_option2'], '</span>
+											<input type="text" name="bbcode_test_option2" value="'. (!empty($_SESSION['bbcode_test_option2']) ? $_SESSION['bbcode_test_option2'] : '') .'" />
+										</td>
+										<td style="width: 5%;float: right;" id="personalizedBBC_index">
+											<input style="padding: 0.3em;" name="test_bbc" class="button_submit" type="submit" value="', $txt['personalizedBBC_test_button'], '" />
+										</td>
+									</tr>
+								</table>
+								<table>
+									<tr>
+										<td style="width: 100%;">&nbsp;</td>
 									</tr>
 									<tr>
-										<td colspan="3">
+										<td style="width: 100%;overflow: hidden;width: 100%;">
+											<span style="display: ', (!empty($_SESSION['bbcode_test_string']) ? 'inline' : 'none') ,';">
+												', (!empty($_SESSION['bbcode_test_string']) ? $_SESSION['bbcode_test_string'] : ''), '
+											</span>
+										</td>
+									</tr>
+								</table>
+								<table style="border: 0px;border-spacing: 0px;padding: 4px;width: 100%;">
+									<tr>
+										<td style="width: 100%;"><hr /></td>
+									</tr>
+									<tr>
+										<td style="width: 100%;">
 											<input class="button_submit" type="submit" value="', $txt['personalizedBBC_submit'], '"', (!empty($context['save_disabled']) ? ' disabled="disabled"' : ''), ' />
 										</td>
 									</tr>
@@ -492,7 +543,7 @@ function template_PersonalizedBBC_Edit()
 					</span>
 					<input type="hidden" name="sc" value="', $context['session_id'], '" />
 				</form>
-				<script type="text/javascript" language="javascript"><!-- // --><![CDATA[
+				<script type="text/javascript"><!-- // --><![CDATA[
 					function show_image()
 					{
 						var myopt = document.getElementById("opt");

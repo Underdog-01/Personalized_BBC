@@ -2,7 +2,7 @@
 /*
 	<id>underdog:PersonalizedBBC</id>
 	<name>Personalized BBC</name>
-	<version>1.7</version>
+	<version>1.8</version>
 	<type>modification</type>
 */
 
@@ -44,11 +44,19 @@ $txt['personalizedBBC_membergroups_use'] = 'Usage';
 $txt['personalizedBBC_membergroups_check'] = 'Check/Uncheck All';
 $txt['PersonalizedBBC_page'] = 'Page';
 $txt['PersonalizedBBC_Override'] = 'Override:';
-$txt['personalizedBBC_viewSource'] = 'View Source';
+$txt['personalizedBBC_viewSource'] = 'Disable Autolink';
 $txt['PersonalizedBBC_UrlCheck'] = 'Adjust Url';
 $txt['PersonalizedBBC_UrlCheckDisable'] = 'N/A';
 $txt['PersonalizedBBC_UrlCheck3986x'] = 'RFC-3986-A';
 $txt['PersonalizedBBC_UrlCheck3986'] = 'RFC-3986-B';
+$txt['personalizedBBC_test_button'] = 'Test';
+$txt['PersonalizedBBC_viewBBC'] = 'Display Icon: *&#@';
+$txt['personalizedBBC_testBBC'] = 'BBCode Testing';
+$txt['personalizedBBC_test_content'] = 'Content:';
+$txt['personalizedBBC_test_option'] = 'Option:';
+$txt['personalizedBBC_test_option1'] = 'Option1:';
+$txt['personalizedBBC_test_option2'] = 'Option2:';
+$txt['PersonalizedBBC_disabledFeature'] = 'This feature is currently disabled for this version.';
 
 // drop-down options
 $txt['personalizedBBC_type_options'] = array('[tag]content[/tag]', '[tag=option]content[/tag]', '[tag=option1,option2]content[/tag]', '[tag]');
@@ -83,5 +91,6 @@ $helptxt['personalizedBBC_tagCode'] = 'The HTML to be used for the BBC.<br />ie.
 $helptxt['personalizedBBC_tagImage'] = 'Select the image to be used for this BBC.  Default images are included with this modification, however custom images can be added to the following directory: ../Themes/default/images/bbc/PersonalizedBBC. Only &@!%@ file types are acceptable.';
 $helptxt['personalizedBBC_tagImageUpload'] = 'Upload an image to the Personalized BBCode images folder.';
 $helptxt['personalizedBBC_membergroups'] = 'The membergroup permission settings allow control over viewing and usage.<br /><br />[Viewing]<br />Membergroups that are enabled/checked will have permission to view this BB Code within posts. The unchecked/disabled membergroups will not be able to view this BB Code content.<br /><br />[Usage]<br />Membergroups that are enabled/checked will have permission to use this BB Code within posts. The unchecked/disabled membergroups will not be able to use this BB Code & it will be parsed from their post prior to saving to the database.';
-$helptxt['personalizedBBC_tagViewSource'] = 'Opt whether the user will have the option to view the source code of the BBC when the WYSIWYG editor is enabled.';
+$helptxt['personalizedBBC_tagViewSource'] = 'Opt whether the autolink feature will be disabled while using this bbcode.  Enabling this will disallow the bbcode parser from changing your links to the url or ftp bbcode.<br /><br />Note: Autolinks are automatically disabled when parsing itself is disabled notwithstanding this option.';
+$helptxt['personalizedBBC_testBBC'] = 'Enter the appropriate data into the input areas and then press the [test] button to test your BBCode.<br /><br />The result will appear under the inputs at the bottom of this template.<br /><br />Please note that testing a bbcode also saves it to the database,<br />therefore if you do not wish to use it after testing you will have to adjust or delete it within the bbcode list.';
 ?>

@@ -31,6 +31,16 @@ Features:
 
 Changelog:
 
+[Version 1.8]
++ added option to test bbcode within revision template
++ added onmouseover/onmouseout display events for icons in the bbcode list
++ js and css files added for use with the above additions
++ added option to enable/disable autolink
++ added index.php files for the SMF 2.1 directories
++ newly created bbcodes default to all allowed permissions
++ disabled override for this version
++ adjusted css within admin templates
+
 [Version 1.7]
 + added option to upload images within tag settings
 + uploaded images resized to 20px x 20px dimensions

@@ -29,6 +29,9 @@ if (!defined('SMF'))
 	void function PersonalizedBBC_buttons()
 		- Adds Personalized BBCs to the message editor bbc array
 
+	void function PersonalizedBBC_message(&$message, &$smileys, &$cache_id, &$parse_tags)
+		- edit $message variable to remove restricted bbcodes
+
 	void function PersonalizedBBC_load()
 		- Loads necessary language file
 		- Adds varying permission data to the language array
@@ -38,9 +41,6 @@ if (!defined('SMF'))
 
 	void function PersonalizedBBC_redact($string)
 		- Parses string for BBCodes being used outside of posts/pm's
-
-	void function PersonalizedBBC_AutoLinks($array)
-		- add selected bbcodes to the $no_autolink_tags array
 */
 
 function PersonalizedBBC_load_permissions(&$permissionGroups, &$permissionList, &$leftPermissionGroups, &$hiddenPermissions, &$relabelPermissions)
@@ -114,14 +114,14 @@ function PersonalizedBBC_admin_areas(&$admin_areas)
 	$admin_areas['layout']['areas'] += $PersonalizedBBC;
 }
 
-function PersonalizedBBC_codes(&$codes)
+function PersonalizedBBC_codes(&$codes, &$no_autolink_tags)
 {
 	global $smcFunc, $txt;
 	loadLanguage('PersonalizedBBC');
 	$key = 0;
 
 	$request = $smcFunc['db_query']('', '
-			SELECT name, description, image, code, prior, after, parse, trim, type, block_lvl, enable, display
+			SELECT name, description, image, code, prior, after, parse, trim, type, block_lvl, enable, display, view_source
 			FROM {db_prefix}personalized_bbc
 			ORDER BY name'
 		);
@@ -173,6 +173,10 @@ function PersonalizedBBC_codes(&$codes)
 				'enable' => !empty($row['enable']) ? true : false,
 				'show' => !empty($row['display']) ? true : false,
 			);
+
+			// add to the no link array if it was opted
+			if (!empty($row['view_source']) && !in_array($tag, $no_autolink_tags))
+				$no_autolink_tags[] = trim($tag);
 		}
 	}
 	$smcFunc['db_free_result']($request);
@@ -272,6 +276,12 @@ function PersonalizedBBC_buttons(&$bbc_buttons)
 	}
 }
 
+function PersonalizedBBC_message(&$message, &$smileys, &$cache_id, &$parse_tags)
+{
+	// Remove any Personalized BBC where the user does not have permission to view it
+	$message = PersonalizedBBC_redact($message);
+}
+
 function PersonalizedBBC_load()
 {
 	global $smcFunc, $txt, $helptxt, $modSettings, $personalized_BBC;
@@ -346,27 +356,5 @@ function PersonalizedBBC_redact($string)
 	}
 
 	return $string;
-}
-
-function PersonalizedBBC_AutoLinks($array)
-{
-	global $smcFunc;
-
-	$request = $smcFunc['db_query']('', '
-		SELECT name, view_source
-		FROM {db_prefix}personalized_bbc
-		WHERE view_source = {int:source}',
-		array('source' => 1)
-	);
-
-	while ($row = $smcFunc['db_fetch_assoc']($request))
-	{
-		$name = !empty($row['name']) ? trim($row['name']) : '';
-		if ($name)
-			$array[] = $name;
-	}
-	$smcFunc['db_free_result']($request);
-
-	return $array;
 }
 ?>

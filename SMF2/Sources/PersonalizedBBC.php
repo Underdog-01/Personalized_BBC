@@ -130,7 +130,7 @@ function PersonalizedBBC_codes(&$codes)
 	{
 		$key++;
 		$tag = !empty($row['name']) ? $smcFunc['strtolower'](trim($row['name'])) : 'personalized_bbc_' . (string)$key;
-		if (!empty($row['enable']) && !empty($row['code']) && allowedTo('personalized_bbc_' . $tag . '_use'))
+		if (!empty($row['enable']) && !empty($row['code']) && allowedTo('personalized_bbc_' . $tag . '_view'))
 		{
 			$parsed = !empty($row['parse']) ? (int)$row['parse'] : 0;
 			$tagType = !empty($row['type']) ? (int)$row['type'] : 0;

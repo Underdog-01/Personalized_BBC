@@ -16,23 +16,21 @@
 	<install for="2.0 - 2.0.98">
 		<readme parsebbc="true">shared/readme_PersonalizedBBC.txt</readme>
 		<require-dir name="shared/Sources" destination="$boarddir" />
-		<require-dir name="smf2/Sources" destination="$boarddir" />
+		<require-dir name="SMF2/Sources" destination="$boarddir" />
 		<require-dir name="SMF2/Themes" destination="$boarddir" />
 		<require-file name="SMF2/Themes/default/images/admin/PersonalizedBBC_settings.png" destination="$imagesdir/admin" />
-		<require-dir name="smf2/Themes/default/images/bbc" destination="$imagesdir" />
+		<require-dir name="SMF2/Themes/default/images/bbc" destination="$imagesdir" />
 		<require-dir name="shared/Themes/default/css" destination="$themedir" />
 		<require-dir name="shared/Themes/default/scripts" destination="$themedir" />
 		<database>shared/PersonalizedBBC_mysql.php</database>
-		<modification format="xml" type="file">shared/personalizedBBC_install.xml</modification>
-		<modification format="xml" type="file">smf2/personalizedBBC_install.xml</modification>
+		<modification format="xml" type="file">SMF2/personalizedBBC_install.xml</modification>
 		<redirect url="$scripturl?action=admin;area=PersonalizedBBC;" timeout="5000">shared/redirect.txt</redirect>
 	</install>
 
 	<uninstall for="2.0 - 2.0.98">
 		<readme parsebbc="true">shared/PersonalizedBBC_uninstall_readme.txt</readme>
 		<code>shared/PersonalizedBBC_uninstall.php</code>
-		<modification reverse="true">smf2/personalizedBBC_install.xml</modification>
-		<modification reverse="true">shared/personalizedBBC_install.xml</modification>
+		<modification reverse="true">SMF2/personalizedBBC_install.xml</modification>
 		<remove-file name="$sourcedir/PersonalizedBBC.php" />
 		<remove-file name="$sourcedir/PersonalizedBBC_AdminSettings.php" />
 		<remove-file name="$sourcedir/PersonalizedBBC_Admin.php" />
@@ -52,22 +50,22 @@
 	<install for="2.0.99 - 2.1.99">
 		<readme parsebbc="true">shared/readme_PersonalizedBBC.txt</readme>
 		<require-dir name="shared/Sources" destination="$boarddir" />
-		<require-dir name="smf2.1/Sources" destination="$boarddir" />
+		<require-dir name="SMF2.1/Sources" destination="$boarddir" />
 		<require-dir name="SMF2.1/Themes" destination="$boarddir" />
 		<require-dir name="SMF2.1/Themes/default/images/admin/big" destination="$imagesdir/admin" />
-		<require-dir name="smf2.1/Themes/default/images/bbc" destination="$imagesdir" />
+		<require-dir name="SMF2.1/Themes/default/images/bbc" destination="$imagesdir" />
 		<require-file name="SMF2.1/Themes/default/images/admin/PersonalizedBBC_settings.png" destination="$imagesdir/admin" />
 		<require-dir name="shared/Themes/default/css" destination="$themedir" />
 		<require-dir name="shared/Themes/default/scripts" destination="$themedir" />
 		<database>shared/PersonalizedBBC_mysql.php</database>
-		<modification format="xml" type="file">shared/personalizedBBC_install.xml</modification>
+		<modification format="xml" type="file">SMF2.1/personalizedBBC_install.xml</modification>
 		<redirect url="$scripturl?action=admin;area=PersonalizedBBC;" timeout="5000">shared/redirect.txt</redirect>
 	</install>
 
 	<uninstall for="2.0.99 - 2.1.99">
 		<readme parsebbc="true">shared/PersonalizedBBC_uninstall_readme.txt</readme>
 		<code>shared/PersonalizedBBC_uninstall.php</code>
-		<modification reverse="true">shared/personalizedBBC_install.xml</modification>
+		<modification reverse="true">SMF2.1/personalizedBBC_install.xml</modification>
 		<remove-file name="$sourcedir/PersonalizedBBC.php" />
 		<remove-file name="$sourcedir/PersonalizedBBC_AdminSettings.php" />
 		<remove-file name="$sourcedir/PersonalizedBBC_Admin.php" />

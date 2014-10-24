@@ -9,22 +9,6 @@
 	<id>underdog:PersonalizedBBC</id>
 	<name>Personalized BBC</name>
 	<version>1.8</version>
-	<file name="$sourcedir/Subs.php">
-		<operation>
-			<search position="after"><![CDATA[	// Never show smileys for wireless clients.  More bytes, can't see it anyway :P.]]></search>
-			<add><![CDATA[	// Remove any Personalized BBC where the user does not have permission to view it
-	$message = PersonalizedBBC_redact($message);
-
-]]></add>
-		</operation>
-		<operation>
-			<search position="after"><![CDATA[		// Shhhh!]]></search>
-			<add><![CDATA[		// Add opted Personalized BBC tags to the no links array
-		$no_autolink_tags = PersonalizedBBC_AutoLinks($no_autolink_tags);
-
-]]></add>
-		</operation>
-	</file>
 	<file name="$sourcedir/Load.php">
 		<operation>
 			<search position="before"><![CDATA[	static $censor_vulgar = null, $censor_proper;]]></search>

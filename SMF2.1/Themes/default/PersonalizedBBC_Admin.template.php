@@ -517,7 +517,7 @@ function template_PersonalizedBBC_Edit()
 										<td style="width: 100%;">&nbsp;</td>
 									</tr>
 									<tr>
-										<td style="width: 100%;overflow: hidden;width: 100%;">
+										<td style="overflow: hidden;width: 100%;height: 100%;padding-bottom: 15px;">
 											<span style="display: ', (!empty($_SESSION['bbcode_test_string']) ? 'inline' : 'none') ,';">
 												', (!empty($_SESSION['bbcode_test_string']) ? $_SESSION['bbcode_test_string'] : ''), '
 											</span>

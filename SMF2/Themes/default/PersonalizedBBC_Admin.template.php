@@ -398,7 +398,7 @@ function template_PersonalizedBBC_Edit()
 	echo '
 											</select>
 										</td>
-										<td style="padding-top: 1em;padding-bottom: 1em;left: 45%;position: absolute;">
+										<td style="padding-top: 1em;padding-bottom: 1em;left: 50%;position: absolute;">
 											<span>
 												<img id="icon" src="', $settings['default_theme_url'], '/images/bbc/personalizedBBC/', $context['personalizedBBC']['image'], '" style="max-height: 20px;max-width: 20px;border: 1px;position: relative;vertical-align: bottom;" alt="" />
 											</span>

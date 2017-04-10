@@ -2,7 +2,7 @@
 /*
 	<id>underdog:PersonalizedBBC</id>
 	<name>Personalized BBC</name>
-	<version>1.8</version>
+	<version>1.9</version>
 	<type>modification</type>
 */
 
@@ -36,7 +36,7 @@ function PersonalizedBBC_Admin()
 	}
 
 	// Fill $context with name, page and possible input data
-	$personalizedBBC_settings = array('name', 'description', 'code', 'image', 'prior', 'after', 'parse', 'trim', 'type', 'block_lvl', 'enable', 'display', 'delete', 'current_name', 'list', 'view_source', 'url_fix', 'url_fix', 'file');
+	$personalizedBBC_settings = array('name', 'description', 'code', 'image', 'prior', 'after', 'parse', 'trim', 'type', 'block_lvl', 'enable', 'display', 'delete', 'current_name', 'list', 'view_source', 'url_fix', 'url_fix', 'file', 'jQueryEnable');
 	$context['current_name'] = (!empty($_REQUEST['name'])) && !is_array($_REQUEST['name']) ? $smcFunc['strtolower'](trim(cleanPersonalizedBBC_String($_REQUEST['name']))) : '';
 	$context['current_page'] = !empty($context['current_page']) ? (int)$context['current_page'] : 1;
 	$context['current_page'] = (!empty($_REQUEST['current_page']) ? (int)$_REQUEST['current_page'] : $context['current_page']) -1;

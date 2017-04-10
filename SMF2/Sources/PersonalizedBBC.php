@@ -2,7 +2,7 @@
 /*
 	<id>underdog:PersonalizedBBC</id>
 	<name>Personalized BBC</name>
-	<version>1.8</version>
+	<version>1.9</version>
 	<type>modification</type>
 */
 
@@ -281,6 +281,7 @@ function PersonalizedBBC_load()
 	$imageType = version_compare((!empty($modSettings['smfVersion']) ? substr($modSettings['smfVersion'], 0, 3) : '2.0'), '2.1', '<') ? 'gif' : 'png';
 
 	$helptxt['personalizedBBC_tagImage'] = str_replace('&@!%@', $imageType, $helptxt['personalizedBBC_tagImage']);
+
 	// BB Code permissions are varying
 	$request = $smcFunc['db_query']('', '
 			SELECT name, type
@@ -332,7 +333,18 @@ function PersonalizedBBC_parser($content, $intent = 'view')
 
 function PersonalizedBBC_redact($string)
 {
-	global $personalized_BBC;
+	global $personalized_BBC, $modSettings, $context, $settings;
+
+	// Has jQuery support been opted?
+	if (!empty($modSettings['personalizedBBC_jQuery']) && strpos($context['html_headers'], '/jquery.min.js') === false)
+		$context['html_headers'] .= '
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" type="text/javascript"></script>
+	<script src="' . $settings['default_theme_url'] . '/scripts/personalizedBBC_frames.js?v191" type="text/javascript"></script>
+	<script type="text/javascript">addPbbcEvent("load", "window", "pbbc_containers(\'iframe\')");</script>';
+	else
+		$context['html_headers'] .= '
+	<script src="' . $settings['default_theme_url'] . '/scripts/personalizedBBC_frames.js?v191" type="text/javascript"></script>
+	<script type="text/javascript">addPbbcEvent("load", "window", "pbbc_containers(\'iframe\')");</script>';
 
 	foreach ($personalized_BBC as $parseBBC)
 	{

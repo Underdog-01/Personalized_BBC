@@ -8,7 +8,7 @@
 <package-info xmlns="http://www.simplemachines.org/xml/package-info" xmlns:smf="http://www.simplemachines.org/">
 	<id>underdog:PersonalizedBBC</id>
 	<name>Personalized BBC</name>
-	<version>1.8</version>
+	<version>1.91</version>
 	<type>modification</type>
 
 	<!-- ####################      SMF 2.0.X     #################### -->
@@ -41,6 +41,7 @@
 		<remove-file name="$imagesdir/admin/personalizedBBC-help.gif" />
 		<remove-file name="$imagesdir/admin/personalizedBBC_add.png" />
 		<remove-file name="$themedir/scripts/personalizedBBC.js" />
+		<remove-file name="$themedir/scripts/personalizedBBC_frames.js" />
 		<remove-file name="$themedir/css/personalizedBBC.css" />
 		<remove-file error="skip" name="$imagesdir/admin/PersonalizedBBC_Settings.png" />
 	</uninstall>
@@ -76,6 +77,7 @@
 		<remove-file name="$imagesdir/admin/personalizedBBC-help.gif" />
 		<remove-file name="$imagesdir/admin/personalizedBBC_add.png" />
 		<remove-file name="$themedir/scripts/personalizedBBC.js" />
+		<remove-file name="$themedir/scripts/personalizedBBC_frames.js" />
 		<remove-file name="$themedir/css/personalizedBBC.css" />
 		<remove-file error="skip" name="$imagesdir/admin/PersonalizedBBC_Settings.png" />
 		<remove-file error="skip" name="$imagesdir/admin/big/PersonalizedBBC_settings.png" />

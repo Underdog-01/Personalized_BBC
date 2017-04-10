@@ -57,6 +57,7 @@ $txt['personalizedBBC_test_option'] = 'Option:';
 $txt['personalizedBBC_test_option1'] = 'Option1:';
 $txt['personalizedBBC_test_option2'] = 'Option2:';
 $txt['PersonalizedBBC_disabledFeature'] = 'This feature is currently disabled for this version.';
+$txt['personalizedBBC_jQuery'] = 'Enable External jQuery Support?';
 
 // drop-down options
 $txt['personalizedBBC_type_options'] = array('[tag]content[/tag]', '[tag=option]content[/tag]', '[tag=option1,option2]content[/tag]', '[tag]');

@@ -2,7 +2,7 @@
 /*
 	<id>underdog:PersonalizedBBC</id>
 	<name>Personalized BBC</name>
-	<version>1.8</version>
+	<version>1.9</version>
 	<type>modification</type>
 */
 

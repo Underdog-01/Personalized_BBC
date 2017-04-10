@@ -2,7 +2,7 @@
 /*
 	<id>underdog:PersonalizedBBC</id>
 	<name>Personalized BBC</name>
-	<version>1.8</version>
+	<version>1.9</version>
 	<type>modification</type>
 */
 
@@ -124,6 +124,17 @@ function template_PersonalizedBBC_List()
 	echo '
 								</table>
 								<table style="border: 1px;padding: 4px;width: 100%;border-spacing: 0px;">
+									<tr>
+										<td><hr /></td>
+									</tr>
+									<tr>
+										<td>
+											<span style="float: right;">
+												', $txt['personalizedBBC_jQuery'],'
+												<input type="checkbox" name="jQueryEnable" class="check" ', ($context['personalizedBBC_jQuery'] ? 'checked="checked" ' : ''),'/>
+											</span>
+										</td>
+									</tr>
 									<tr>
 										<td><hr /></td>
 									</tr>

@@ -2,7 +2,7 @@
 /*
 	<id>underdog:PersonalizedBBC</id>
 	<name>Personalized BBC</name>
-	<version>1.8</version>
+	<version>1.9</version>
 	<type>modification</type>
 */
 
@@ -40,7 +40,7 @@ function SettingsPersonalizedBBC()
 
 	$context['robot_no_index'] = true;
 	list($_SESSION['personalizedBBC_duplicate_error'], $_SESSION['personalizedBBC_length_error'], $_SESSION['personalizedBBC_illegal_error']) = array(false, false, false);
-	$listArray = array('enable', 'display', 'delete');
+	$listArray = array('enable', 'display', 'delete', 'jQueryEnable');
 	$context['personalizedBBC_membergroups_view'] = !empty($context['personalizedBBC_membergroups_view']) ? $context['personalizedBBC_membergroups_view'] : array();
 	$context['personalizedBBC_membergroups_use'] = !empty($context['personalizedBBC_membergroups_use']) ? $context['personalizedBBC_membergroups_use'] : array();
 	$context['PersonalizedBBC_display'] = array('page' => false, 'pages' => '0');
@@ -68,6 +68,7 @@ function SettingsPersonalizedBBC()
 			'enable' => array('checkbox', true, 'enable'),
 			'display' => array('checkbox', true, 'display'),
 			'delete' => array('del', false, 'del'),
+			'jQueryEnable' => array('jquery', false, 'jquery'),
 		);
 
 	/*  Check for new settings values and save to database if necessary */
@@ -301,7 +302,7 @@ function SettingsPersonalizedBBC()
 						createPersonalizedBBC_setting('personalized_bbc', $key, $val, $name);
 						continue 2;
 					case 'upload':
-						$val = $_FILES["file"];
+						$val = !empty($_FILES["file"]) ? $_FILES["file"] : '';
 						PersonalizedBBC_CheckUpload($name, $val);
 						continue 2;
 					case 'code':
@@ -340,6 +341,12 @@ function SettingsPersonalizedBBC()
 							);
 							$_SESSION['personalizedBBC_skip'] = true;
 						}
+						continue 2;
+					case 'jquery':
+						$val = !empty($_REQUEST['jQueryEnable']) ? 1 : 0;
+						$setArray['personalizedBBC_jQuery'] = $val;
+						updateSettings($setArray);
+						$modSettings['personalizedBBC_jQuery'] = $val;
 						continue 2;
 				}
 			}
@@ -462,6 +469,7 @@ function SettingsPersonalizedBBC()
 	}
 
 	// Set the $context for the display template
+	$context['personalizedBBC_jQuery'] = !empty($modSettings['personalizedBBC_jQuery']) ? (int)$modSettings['personalizedBBC_jQuery'] : 0;
 	$context['settings_title'] = $txt['PersonalizedBBC_Settings'];
 	$context['post_url'] = $scripturl . '?action=admin;area=PersonalizedBBC;sa=personalizedBBC_Settings;current_page=' . ($context['current_page']+1) . ';' . $context['session_var'] . '=' . $context['session_id'] . ';save';
 	$context['personalizedBBC'] = PersonalizedBBC_pagination($context['personalizedBBC_list'], $scripturl . '?action=admin;area=PersonalizedBBC;', 10);

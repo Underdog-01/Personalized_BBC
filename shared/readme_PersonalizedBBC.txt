@@ -47,6 +47,12 @@ Features:
 
 Changelog:
 
+[version 1.91]
++ added javascript for optional BBCode parameters
+
+[Version 1.9]
++ added option to enable external jQuery support (SMF 2.0.X only)
+
 [Version 1.8]
 + added option to test bbcode within revision template
 + added onmouseover/onmouseout display events for icons in the bbcode list

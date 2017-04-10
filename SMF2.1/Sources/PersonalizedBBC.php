@@ -2,13 +2,13 @@
 /*
 	<id>underdog:PersonalizedBBC</id>
 	<name>Personalized BBC</name>
-	<version>1.9</version>
+	<version>1.92</version>
 	<type>modification</type>
 */
 
 /*
- * Personalized BBC was developed for SMF forums c/o Underdog @ http://web-develop.ca
- * Copyright 2014 underdog@web-develop.ca
+ * Personalized BBC was developed for SMF forums c/o Chen Zhen @ http://web-develop.ca
+ * Copyright 2014 - 2017  noreply@web-develop.ca
  * Distributed under the CC BY-ND 4.0 License (http://creativecommons.org/licenses/by-nd/4.0/)
 */
 
@@ -349,11 +349,11 @@ function PersonalizedBBC_redact($string)
 		$context['html_headers'] .= '
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" type="text/javascript"></script>
 	<script src="' . $settings['default_theme_url'] . '/scripts/personalizedBBC_frames.js?v191" type="text/javascript"></script>
-	<script type="text/javascript">window.onload = function() {pbbc_containers("iframe");};</script>';
+	<script type="text/javascript">addPbbcEvent("load", "window", "pbbc_containers(\'iframe\')");</script>';
 	else
 		$context['html_headers'] .= '
 	<script src="' . $settings['default_theme_url'] . '/scripts/personalizedBBC_frames.js?v191" type="text/javascript"></script>
-	<script type="text/javascript">window.onload = function() {pbbc_containers("iframe");};</script>';
+	<script type="text/javascript">addPbbcEvent("load", "window", "pbbc_containers(\'iframe\')");</script>';
 
 	foreach ($personalized_BBC as $parseBBC)
 	{

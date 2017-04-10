@@ -2,13 +2,13 @@
 /*
 	<id>underdog:PersonalizedBBC</id>
 	<name>Personalized BBC</name>
-	<version>1.9</version>
+	<version>1.92</version>
 	<type>modification</type>
 */
 
 /*
- * Personalized BBC was developed for SMF forums c/o Underdog @ http://web-develop.ca
- * Copyright 2014 underdog@web-develop.ca
+ * Personalized BBC was developed for SMF forums c/o Chen Zhen @ http://web-develop.ca
+ * Copyright 2014 - 2017  noreply@web-develop.ca
  * Distributed under the CC BY-ND 4.0 License (http://creativecommons.org/licenses/by-nd/4.0/)
 */
 function template_PersonalizedBBC_Admin_above()

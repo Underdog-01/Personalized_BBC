@@ -25,8 +25,8 @@ Recommended minimal requirements:
 
 [hr]
 
-Developed for SMF forums c/o Underdog @ [url=http://web-develop.ca]web-develop.ca[/url]
-Copyright 2014 Underdog@web-develop.ca
+Developed for SMF forums c/o Chen Zhen @ [url=http://web-develop.ca]web-develop.ca[/url]
+Copyright 2014 - 2017  noreply@web-develop.ca
 Distributed under the [url=http://creativecommons.org/licenses/by-nd/4.0/]CC BY-ND 4.0 License[/url]
 
 If you commend this software package and/or any other contributions that underdog@web-develop.ca develops for the SMF community,
@@ -46,6 +46,10 @@ Features:
 [hr]
 
 Changelog:
+
+[version 1.92]
+! fixed IE compatibilty for DOM style elements
+! changed window.onload to addEventListener/attachEvent
 
 [version 1.91]
 + added javascript for optional BBCode parameters

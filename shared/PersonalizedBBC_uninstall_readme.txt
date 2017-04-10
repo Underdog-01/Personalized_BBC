@@ -1,6 +1,6 @@
 Personalized BBC
-Developed for SMF forums c/o Underdog @ http://web-develop.ca
-Copyright 2014 underdog@web-develop.ca
+Developed for SMF forums c/o Chen Zhen @ http://web-develop.ca
+Copyright 2014 - 2017  noreply@web-develop.ca
 Distributed under the [url=http://creativecommons.org/licenses/by-nd/4.0/]CC BY-ND 4.0 License[/url]
 
 

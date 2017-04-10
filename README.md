@@ -14,8 +14,8 @@ The purpose of this application is to allow an administrator the option to add p
 
 Recommended minimal requirements:
 
-Server:  PHP 5.3+
-	 MYSQL 5.0+ using MyISAM or InnoDB engine
+Server:  PHP 5.3+ 
+Database: MYSQL 5.0+ using MyISAM or InnoDB engine
 Browser: HTML5 capability
 SMF Version: 2.0.X - 2.1.X
 
@@ -30,6 +30,10 @@ Features:
 
 
 Changelog:
+
+[version 1.92]
+- fixed IE compatibilty for DOM style elements
+- changed window.onload to addEventListener/attachEvent
 
 [version 1.91]
 + added javascript for optional BBCode parameters

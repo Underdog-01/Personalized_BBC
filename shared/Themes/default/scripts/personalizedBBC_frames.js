@@ -1,11 +1,11 @@
-// Version 1.91; personalizedBBC.js
+// Version 1.92; personalizedBBC.js
 function pbbc_containers(container)
 {
 	var conts = document.getElementsByTagName(container);
-    	for(i=0; i < conts.length; i++){
-        	conts[i].id = conts[i].id || "pbbc_" + container + i;
+    for(i=0; i < conts.length; i++){
+        conts[i].id = conts[i].id || "pbbc_" + container + i;
 		conts[i].name = conts[i].name || "pbbc_" + container + i;
-    	}
+    }
 }
 
 function pbbcHttpRequest(objectx)
@@ -15,9 +15,9 @@ function pbbcHttpRequest(objectx)
 	if (!youtube_url)
 		return '';
 
-	var youtube_style = objectx;	
+	var youtube_style = objectx;
 	if (objectx.display && objectx.display == 'none')
-	{		
+	{
 		youtube_style.width = '560px';
 		youtube_style.height = '350px';
 		youtube_style.border = '0px';

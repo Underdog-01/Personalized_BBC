@@ -14,15 +14,14 @@ function pbbcHttpRequest(objectx)
 	var youtube_url = objectx.innerHTML || false;
 	if (!youtube_url)
 		return '';
-	if (objectx.display && objectx.display !== 'none')
-		var youtube_style = objectx;
-	else
-	{
-		var youtube_style = objectx;
+
+	var youtube_style = objectx;	
+	if (objectx.display && objectx.display == 'none')
+	{		
 		youtube_style.width = '560px';
 		youtube_style.height = '350px';
 		youtube_style.border = '0px';
-		youtube_style.display = youtube_style.display || 'block';
+		youtube_style.display = 'block';
 	}
 
 	var youtube_index = pbbc_strpos(youtube_url, 'v=') !== false ? youtube_url.indexOf("v=") + 2 : youtube_url;

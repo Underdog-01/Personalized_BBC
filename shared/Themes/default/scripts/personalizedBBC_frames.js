@@ -18,6 +18,7 @@ function pbbcHttpRequest(objectx)
 		var youtube_style = objectx;
 	else
 	{
+		var youtube_style = objectx;
 		youtube_style.width = '560px';
 		youtube_style.height = '350px';
 		youtube_style.border = '0px';

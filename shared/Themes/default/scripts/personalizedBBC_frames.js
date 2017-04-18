@@ -46,21 +46,8 @@ function pbbc_strpos(haystack, needle, offset)
 
 function addPbbcEvent(evnt, elem, func)
 {
-   if (elem.addEventListener)
-      elem.addEventListener(evnt, func, false);
-   else if (elem.attachEvent) {
+	if (elem.attachEvent)
       elem.attachEvent("on"+evnt, func);
-   }
-   else {
-		var oldonload = window.onload;
-		if (typeof window.onload != 'function')
-			window.onload = func;
-		else {
-			window.onload = function() {
-				if (oldonload)
-					oldonload();
-				func();
-			}
-		}
-   }
+	else
+      elem.addEventListener(evnt, func, false);
 }

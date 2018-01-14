@@ -2,13 +2,13 @@
 /*
 	<id>underdog:PersonalizedBBC</id>
 	<name>Personalized BBC</name>
-	<version>1.92</version>
+	<version>1.93</version>
 	<type>modification</type>
 */
 
 /*
- * Personalized BBC was developed for SMF forums c/o Chen Zhen @ http://web-develop.ca
- * Copyright 2014 - 2017  noreply@web-develop.ca
+ * Personalized BBC was developed for SMF forums c/o Chen Zhen @ https://web-develop.ca
+ * Copyright 2014 - 2018  noreply@web-develop.ca
  * Distributed under the CC BY-ND 4.0 License (http://creativecommons.org/licenses/by-nd/4.0/)
 */
 
@@ -333,18 +333,7 @@ function PersonalizedBBC_parser($content, $intent = 'view')
 
 function PersonalizedBBC_redact($string)
 {
-	global $personalized_BBC, $modSettings, $context, $settings;
-
-	// Has jQuery support been opted?
-	if (!empty($modSettings['personalizedBBC_jQuery']) && strpos($context['html_headers'], '/jquery.min.js') === false)
-		$context['html_headers'] .= '
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" type="text/javascript"></script>
-	<script src="' . $settings['default_theme_url'] . '/scripts/personalizedBBC_frames.js?v191" type="text/javascript"></script>
-	<script type="text/javascript">addPbbcEvent("load", "window", "pbbc_containers(\'iframe\')");</script>';
-	else
-		$context['html_headers'] .= '
-	<script src="' . $settings['default_theme_url'] . '/scripts/personalizedBBC_frames.js?v191" type="text/javascript"></script>
-	<script type="text/javascript">addPbbcEvent("load", "window", "pbbc_containers(\'iframe\')");</script>';
+	global $personalized_BBC;
 
 	foreach ($personalized_BBC as $parseBBC)
 	{
@@ -381,4 +370,30 @@ function PersonalizedBBC_AutoLinks($array)
 
 	return $array;
 }
+
+function PersonalizedBBC_load_theme()
+{
+	global $modSettings, $settings, $context;
+
+	$event = '<script type="text/javascript">
+		if(window.attachEvent) {
+			window.attachEvent("onload", function() {pbbc_containers("iframe");});
+		}
+		else {
+			window.addEventListener("load", function() {pbbc_containers("iframe");}, false);
+		}
+	</script>';
+
+	// Has jQuery support been opted?
+	if (!empty($modSettings['personalizedBBC_jQuery']) && strpos($context['html_headers'], '/jquery.min.js') === false)
+		$context['html_headers'] .= '
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" type="text/javascript"></script>
+	<script src="' . $settings['default_theme_url'] . '/scripts/personalizedBBC_frames.js?v191" type="text/javascript"></script>
+	' . $event;
+	else
+		$context['html_headers'] .= '
+	<script src="' . $settings['default_theme_url'] . '/scripts/personalizedBBC_frames.js?v191" type="text/javascript"></script>
+	' . $event;
+}
+
 ?>

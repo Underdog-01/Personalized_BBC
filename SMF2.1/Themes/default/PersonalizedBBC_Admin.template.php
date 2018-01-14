@@ -2,13 +2,13 @@
 /*
 	<id>underdog:PersonalizedBBC</id>
 	<name>Personalized BBC</name>
-	<version>1.92</version>
+	<version>1.93</version>
 	<type>modification</type>
 */
 
 /*
- * Personalized BBC was developed for SMF forums c/o Chen Zhen @ http://web-develop.ca
- * Copyright 2014 - 2017  noreply@web-develop.ca
+ * Personalized BBC was developed for SMF forums c/o Chen Zhen @ https://web-develop.ca
+ * Copyright 2014 - 2018  noreply@web-develop.ca
  * Distributed under the CC BY-ND 4.0 License (http://creativecommons.org/licenses/by-nd/4.0/)
 */
 function template_PersonalizedBBC_Admin_above()
@@ -86,7 +86,7 @@ function template_PersonalizedBBC_List()
 												', str_replace('#%^@!', $context['personalizedBBC'][$i]['name'], $txt['personalizedBBC_type_display'][$context['personalizedBBC'][$i]['type']]), '
 											</span>
 											<div class="pbbc_popup windowbg2" id="xx' . $context['personalizedBBC'][$i]['name'] . '" style="display: none;">
-												<span style="padding: 8px;">', str_replace('*&#@', '<img style="vertical-align: middle;position: relative;bottom: 1px;width: 20px;height: 22px;padding: 10px;" src="' . $settings['theme_url'] . '/images/bbc/' . $context['personalizedBBC'][$i]['image'] . $context['PersonalizedBBC_imageType'] . '" alt="" />', $txt['PersonalizedBBC_viewBBC']), '</span>
+												<span style="padding: 8px;display: inline;">', sprintf($txt['PersonalizedBBC_viewBBC'], '<img style="vertical-align: middle;position: relative;bottom: 1px;width: 20px;height: 22px;" src="' . $settings['theme_url'] . '/images/bbc/' . $context['personalizedBBC'][$i]['image'] . $context['PersonalizedBBC_imageType'] . '" alt="' . $txt['PersonalizedBBC_viewNoBBC'] . '" />'), '</span>
 											</div>
 										</td>
 										<td class="windowbg centertext">

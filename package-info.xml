@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <!--
- * Developed for SMF forums c/o Chen Zhen @ http://web-develop.ca
- * Copyright 2014 - 2017 noreply@web-develop.ca
+ * Developed for SMF forums c/o Chen Zhen @ https://web-develop.ca
+ * Copyright 2014 - 2018 noreply@web-develop.ca
  * Distributed under the CC BY-ND 4.0 License (http://creativecommons.org/licenses/by-nd/4.0/)
 -->
 <!DOCTYPE package-info SYSTEM "http://www.simplemachines.org/xml/package-info">
 <package-info xmlns="http://www.simplemachines.org/xml/package-info" xmlns:smf="http://www.simplemachines.org/">
 	<id>underdog:PersonalizedBBC</id>
 	<name>Personalized BBC</name>
-	<version>1.92</version>
+	<version>1.93</version>
 	<type>modification</type>
 
 	<!-- ####################      SMF 2.0.X     #################### -->
@@ -79,7 +79,7 @@
 		<remove-file name="$themedir/scripts/personalizedBBC.js" />
 		<remove-file name="$themedir/scripts/personalizedBBC_frames.js" />
 		<remove-file name="$themedir/css/personalizedBBC.css" />
-		<remove-file error="skip" name="$imagesdir/admin/PersonalizedBBC_Settings.png" />
+		<remove-file error="skip" name="$imagesdir/admin/PersonalizedBBC_settings.png" />
 		<remove-file error="skip" name="$imagesdir/admin/big/PersonalizedBBC_settings.png" />
 	</uninstall>
 </package-info>

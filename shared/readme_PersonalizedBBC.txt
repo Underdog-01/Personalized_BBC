@@ -4,6 +4,7 @@ Purpose and/or usage of this software package:
 
 The purpose of this application is to allow an administrator the option to add personalized BBCs to a SMF forum installation.
 These BBC additions have individual permission settings to allow or restrict their usage and visibility.
+The added BBCodes can be of general use if permission settings regarding viewing and usage are enabled for all membergroups. 
 
 [color=red]Important Notation[/color]:
   This modification will only hide Personalized BBC content to specified membergroups when it is installed.
@@ -25,8 +26,8 @@ Recommended minimal requirements:
 
 [hr]
 
-Developed for SMF forums c/o Chen Zhen @ [url=http://web-develop.ca]web-develop.ca[/url]
-Copyright 2014 - 2017  noreply@web-develop.ca
+Developed for SMF forums c/o Chen Zhen @ [url=https://web-develop.ca]web-develop.ca[/url]
+Copyright 2014 - 2018  noreply@web-develop.ca
 Distributed under the [url=http://creativecommons.org/licenses/by-nd/4.0/]CC BY-ND 4.0 License[/url]
 
 If you commend this software package and/or any other contributions that underdog@web-develop.ca develops for the SMF community,
@@ -46,6 +47,13 @@ Features:
 [hr]
 
 Changelog:
+
+[version 1.93]
+! fixed javascript/DOM regarding addEventListener/attachEvent
+! fixed improper filename for SMF 2.1 uninstall
+! fixed variable variable ambiguity issue for saving BBCodes
+! fixed display icons for admin list
+? adjusted support website & copyright
 
 [version 1.92]
 ! fixed IE compatibilty for DOM style elements
@@ -124,8 +132,15 @@ Changelog:
 + Initial release
 [hr]
 
-Disclaimers:
+Legend:
+--------------------------------------------------------------------------------
+ ! Minor change or bugfix. (don't bother to log typos except between releases.)
+ ? Version and/or copyright changes including file comments
+ & Change that affects a language file. (make two if it affects templates too.)
+ + Feature addition or improvement.
+ - Feature or option removal.
 
+Disclaimers:
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
 INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
 IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,

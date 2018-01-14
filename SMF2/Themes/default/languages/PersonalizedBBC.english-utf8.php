@@ -2,13 +2,13 @@
 /*
 	<id>underdog:PersonalizedBBC</id>
 	<name>Personalized BBC</name>
-	<version>1.92</version>
+	<version>1.93</version>
 	<type>modification</type>
 */
 
 /*
- * Personalized BBC was developed for SMF forums c/o Chen Zhen @ http://web-develop.ca
- * Copyright 2014 - 2017  noreply@web-develop.ca
+ * Personalized BBC was developed for SMF forums c/o Chen Zhen @ https://web-develop.ca
+ * Copyright 2014 - 2018  noreply@web-develop.ca
  * Distributed under the CC BY-ND 4.0 License (http://creativecommons.org/licenses/by-nd/4.0/)
 */
 global $helptxt;
@@ -50,7 +50,8 @@ $txt['PersonalizedBBC_UrlCheckDisable'] = 'N/A';
 $txt['PersonalizedBBC_UrlCheck3986x'] = 'RFC-3986-A';
 $txt['PersonalizedBBC_UrlCheck3986'] = 'RFC-3986-B';
 $txt['personalizedBBC_test_button'] = 'Test';
-$txt['PersonalizedBBC_viewBBC'] = 'Display Icon: *&#@';
+$txt['PersonalizedBBC_viewBBC'] = 'Display Icon: %s';
+$txt['PersonalizedBBC_viewNoBBC'] = '[n/a]';
 $txt['personalizedBBC_testBBC'] = 'BBCode Testing';
 $txt['personalizedBBC_test_content'] = 'Content:';
 $txt['personalizedBBC_test_option'] = 'Option:';

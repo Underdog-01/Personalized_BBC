@@ -2,7 +2,9 @@ Personalized BBC
 
 Purpose and/or usage of this software package:
 
-The purpose of this application is to allow an administrator the option to add personalized BBCs to a SMF forum installation.  These BBC additions have individual permission settings to allow or restrict their usage and visibility.
+The purpose of this application is to allow an administrator the option to add personalized BBCs to a SMF forum installation.  
+These BBC additions have individual permission settings to allow or restrict their usage and visibility.
+The added BBCodes can be of general use if permission settings regarding viewing and usage are enabled for all membergroups. 
 
 [Important Notation]:
   This modification will only hide Personalized BBC content to specified membergroups when it is installed.
@@ -30,6 +32,13 @@ Features:
 
 
 Changelog:
+
+[version 1.93]
+! fixed javascript/DOM regarding addEventListener/attachEvent
+! fixed improper filename for SMF 2.1 uninstall
+! fixed variable variable ambiguity issue for saving BBCodes
+! fixed display icons for admin list
+? adjusted support website & copyright
 
 [version 1.92]
 - fixed IE compatibilty for DOM style elements
@@ -107,8 +116,15 @@ Changelog:
 [Version 1.0]
 + Initial release
 
+Legend:
+--------------------------------------------------------------------------------
+ ! Minor change or bugfix. (don't bother to log typos except between releases.)
+ ? Version and/or copyright changes including file comments
+ & Change that affects a language file. (make two if it affects templates too.)
+ + Feature addition or improvement.
+ - Feature or option removal.
+ 
 Disclaimers:
-
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
 INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
 IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,

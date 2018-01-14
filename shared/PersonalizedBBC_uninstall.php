@@ -2,13 +2,13 @@
 /*
 	<id>underdog:PersonalizedBBC</id>
 	<name>Personalized BBC</name>
-	<version>1.92</version>
+	<version>1.93</version>
 	<type>modification</type>
 */
 
 /*
- * Personalized BBC was developed for SMF forums c/o Chen Zhen @ http://web-develop.ca
- * Copyright 2014 - 2017 noreply@web-develop.ca
+ * Personalized BBC was developed for SMF forums c/o Chen Zhen @ https://web-develop.ca
+ * Copyright 2014 - 2018 noreply@web-develop.ca
  * Distributed under the CC BY-ND 4.0 License (http://creativecommons.org/licenses/by-nd/4.0/)
 */
 
@@ -29,6 +29,7 @@ remove_integration_function('integrate_load_permissions', 'PersonalizedBBC_load_
 remove_integration_function('integrate_admin_areas', 'PersonalizedBBC_admin_areas');
 remove_integration_function('integrate_bbc_codes', $bbc_hook);
 remove_integration_function('integrate_bbc_buttons','PersonalizedBBC_buttons');
+remove_integration_function('integrate_load_theme', 'PersonalizedBBC_load_theme');
 
 if ($bbc_hook === '$sourcedir/PersonalizedBBC.php|PersonalizedBBC_codes')
     remove_integration_function('integrate_pre_parsebbc', '$sourcedir/PersonalizedBBC.php|PersonalizedBBC_message');

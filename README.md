@@ -4,6 +4,7 @@ Purpose and/or usage of this software package:
 
 The purpose of this application is to allow an administrator the option to add personalized BBCs to a SMF forum installation.
 These BBC additions have individual permission settings to allow or restrict their usage and visibility.
+
 The added BBCodes can be of general use if permission settings regarding viewing and usage are enabled for all membergroups.
 
 [Important Notation]:
@@ -116,13 +117,6 @@ Changelog:
 [Version 1.0]
 + Initial release
 
-Legend:
---------------------------------------------------------------------------------
- ! Minor change or bugfix. (don't bother to log typos except between releases.)
- ? Version and/or copyright changes including file comments
- & Change that affects a language file. (make two if it affects templates too.)
- + Feature addition or improvement.
- - Feature or option removal.
 
 Disclaimers:
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
